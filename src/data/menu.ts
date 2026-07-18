@@ -13,6 +13,8 @@
  * - Add dietary labels from the `DietaryLabel` list to any dish.
  * - Set `featured: true` (and optionally an `image`) to highlight a dish
  *   with a photo — used on the home page and at the top of the menu.
+ * 
+ * 
  */
 
 import { siteImages, type SiteImage } from "@/data/images";
