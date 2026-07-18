@@ -1,0 +1,161 @@
+/**
+ * ZENTRUM CAFÉ RESTAURANT — CENTRAL CONFIGURATION
+ * ================================================
+ * This is the single source of truth for all business information used
+ * across the website (header, footer, contact page, SEO metadata and
+ * JSON-LD structured data).
+ *
+ * HOW TO EDIT:
+ * Replace every value wrapped in square brackets — e.g. "[PHONE_NUMBER]" —
+ * with the real information for Zentrum Café Restaurant. Values in
+ * brackets are treated as "not yet provided": they are shown as visible
+ * placeholders in the UI and are automatically EXCLUDED from structured
+ * data so no fake business details are ever published to search engines.
+ */
+
+export const restaurantConfig = {
+  name: "Zentrum Café Restaurant",
+  shortName: "Zentrum",
+  city: "Ramsau am Dachstein",
+  region: "Styria",
+  country: "Austria",
+
+  description:
+    "A welcoming café and restaurant in Ramsau am Dachstein offering flavourful food, quality coffee, homemade desserts and warm Alpine hospitality in the heart of the Dachstein region.",
+
+  /** Real telephone number, e.g. "+43 3687 000000" */
+  phone: "[PHONE_NUMBER]",
+  /** Real email address, e.g. "info@zentrum-cafe.at" */
+  email: "[EMAIL_ADDRESS]",
+
+  address: {
+    street: "[STREET_ADDRESS]",
+    postalCode: "[POSTAL_CODE]",
+    city: "Ramsau am Dachstein",
+    country: "Austria",
+  },
+
+  /**
+   * The production domain, e.g. "www.zentrum-cafe.at".
+   * Used for canonical URLs, the sitemap, robots.txt and Open Graph tags.
+   * Until it is set, the reserved example domain below is used so that
+   * builds and metadata remain valid.
+   */
+  domain: "[DOMAIN]",
+
+  /**
+   * A Google Maps link to the restaurant, e.g. a "share" link from
+   * Google Maps. Used by every "Get Directions" button. Until it is set,
+   * a generic Google Maps directions search for the restaurant name and
+   * town is used as a sensible fallback.
+   */
+  mapUrl: "[GOOGLE_MAPS_URL]",
+
+  /**
+   * Geographic coordinates for local SEO (schema.org "geo").
+   * Example: latitude "47.4216", longitude "13.6553".
+   * Left as placeholders they are excluded from structured data.
+   */
+  geo: {
+    latitude: "[LATITUDE]",
+    longitude: "[LONGITUDE]",
+  },
+
+  cuisineTypes: ["Austrian", "European", "Café"],
+
+  /** Schema.org price range, e.g. "€€" */
+  priceRange: "[PRICE_RANGE]",
+
+  /**
+   * SOCIAL MEDIA LINKS
+   * Paste full profile URLs here when they are available, e.g.
+   *   instagram: "https://www.instagram.com/your-profile"
+   * Any link left as an empty string is automatically hidden
+   * everywhere on the website.
+   */
+  socialLinks: {
+    instagram: "",
+    facebook: "",
+    tiktok: "",
+    tripadvisor: "",
+  },
+
+  /**
+   * Opening hours as displayed to visitors.
+   * Replace "[OPENING_HOURS]" with e.g. "8:00 – 22:00".
+   */
+  openingHours: [
+    { days: "Monday – Friday", hours: "[OPENING_HOURS]" },
+    { days: "Saturday – Sunday", hours: "[OPENING_HOURS]" },
+  ],
+
+  /**
+   * Machine-readable opening hours for JSON-LD structured data,
+   * e.g. ["Mo-Fr 08:00-22:00", "Sa-Su 09:00-22:00"].
+   * Leave empty until the real hours are confirmed — empty entries are
+   * excluded from structured data.
+   */
+  structuredOpeningHours: [] as string[],
+};
+
+export type RestaurantConfig = typeof restaurantConfig;
+export type SocialPlatform = keyof typeof restaurantConfig.socialLinks;
+
+/* ------------------------------------------------------------------ */
+/*  Helpers                                                            */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A value is considered a placeholder while it still contains
+ * square brackets (e.g. "[PHONE_NUMBER]") or is empty.
+ */
+export function isPlaceholder(value: string): boolean {
+  return value.trim() === "" || value.includes("[");
+}
+
+/**
+ * Canonical site origin. Falls back to a reserved ".example" domain
+ * (never a real website) until `domain` is configured.
+ */
+export function getSiteUrl(): string {
+  if (isPlaceholder(restaurantConfig.domain)) {
+    return "https://zentrum-cafe.example";
+  }
+  const domain = restaurantConfig.domain.replace(/^https?:\/\//, "");
+  return `https://${domain}`;
+}
+
+/** `tel:` link target — strips spaces and separators from the number. */
+export function getPhoneHref(): string {
+  return `tel:${restaurantConfig.phone.replace(/[\s()/-]/g, "")}`;
+}
+
+/** `mailto:` link target. */
+export function getEmailHref(): string {
+  return `mailto:${restaurantConfig.email}`;
+}
+
+/**
+ * Directions link used by every "Get Directions" button.
+ * Uses the configured Google Maps URL when available; otherwise falls
+ * back to a Google Maps directions search by name and town so the
+ * button keeps working out of the box.
+ */
+export function getDirectionsUrl(): string {
+  if (!isPlaceholder(restaurantConfig.mapUrl)) {
+    return restaurantConfig.mapUrl;
+  }
+  const destination = encodeURIComponent(
+    `${restaurantConfig.name}, ${restaurantConfig.city}, ${restaurantConfig.country}`
+  );
+  return `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
+}
+
+/** Social links that actually have a URL configured. */
+export function getActiveSocialLinks(): { platform: SocialPlatform; url: string }[] {
+  return (
+    Object.entries(restaurantConfig.socialLinks) as [SocialPlatform, string][]
+  )
+    .filter(([, url]) => url.trim() !== "")
+    .map(([platform, url]) => ({ platform, url }));
+}

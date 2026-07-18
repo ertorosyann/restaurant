@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Zentrum Café Restaurant — design tokens                            */
+/*  Warm cream · deep charcoal · alpine pine green · coffee · copper   */
+/* ------------------------------------------------------------------ */
+
+@theme {
+  /* Warm cream backgrounds */
+  --color-cream-50: #fcfaf6;
+  --color-cream-100: #f7f2e9;
+  --color-cream-200: #efe6d7;
+  --color-cream-300: #e3d5be;
+
+  /* Deep charcoal text */
+  --color-charcoal-950: #1c1915;
+  --color-charcoal-900: #26221d;
+  --color-charcoal-800: #322d26;
+  --color-charcoal-700: #453e34;
+  --color-charcoal-600: #5a5245;
+  --color-charcoal-500: #6e6557;
+  --color-charcoal-400: #8b8172;
+
+  /* Alpine pine green accents */
+  --color-pine-50: #f1f5f0;
+  --color-pine-100: #e2eae2;
+  --color-pine-200: #c4d5c6;
+  --color-pine-500: #4c7663;
+  --color-pine-600: #3a614f;
+  --color-pine-700: #2e5040;
+  --color-pine-800: #254033;
+  --color-pine-900: #1d3026;
+  --color-pine-950: #16241c;
+
+  /* Soft coffee browns */
+  --color-coffee-100: #ebdfd0;
+  --color-coffee-300: #b79b7d;
+  --color-coffee-500: #826449;
+  --color-coffee-600: #6b5138;
+  --color-coffee-700: #55402d;
+
+  /* Warm copper / gold details */
+  --color-copper-100: #f3e8d4;
+  --color-copper-200: #e9d6b8;
+  --color-copper-300: #d9b98d;
+  --color-copper-400: #cba26e;
+  --color-copper-500: #bc8d57;
+  --color-copper-600: #aa7a48;
+  --color-copper-700: #8f6538;
+  --color-copper-800: #6f4e2c;
+
+  /* Typography */
+  --font-display: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-jost), "Jost", "Avenir Next", system-ui, sans-serif;
+
+  /* Soft, premium shadows */
+  --shadow-soft: 0 2px 16px -4px rgb(38 34 29 / 0.08), 0 1px 4px rgb(38 34 29 / 0.04);
+  --shadow-lifted: 0 14px 40px -12px rgb(38 34 29 / 0.18), 0 4px 12px -4px rgb(38 34 29 / 0.06);
+
+  /* Entrance / ambient animations */
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.9s ease-out both;
+  --animate-slow-zoom: slow-zoom 22s ease-out both;
+  --animate-float-in: float-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Very gentle "Ken Burns" movement for hero imagery */
+  @keyframes slow-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.94);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
+  /* Keep anchored menu sections clear of the sticky header + category bar */
+  scroll-padding-top: 8.5rem;
+}
+
+body {
+  background-color: var(--color-cream-50);
+  color: var(--color-charcoal-900);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background-color: var(--color-pine-700);
+  color: var(--color-cream-50);
+}
+
+/* Visible, consistent focus for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--color-copper-600);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scroll-reveal helpers (used by <Reveal />)                         */
+/*  Content is fully visible by default — JavaScript only *adds*      */
+/*  the hidden state for elements still below the viewport, so the    */
+/*  site works perfectly without JS and without animations.           */
+/* ------------------------------------------------------------------ */
+
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Decorative divider used between editorial sections.
+   Note: no `color` is set here — each usage sets its own text-copper-*
+   utility (an unlayered color here would override those utilities and
+   break contrast). The flanking lines follow via currentColor. */
+.ornament-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+.ornament-rule::before,
+.ornament-rule::after {
+  content: "";
+  height: 1px;
+  width: 2.5rem;
+  background-color: currentColor;
+  opacity: 0.6;
+}
+
+/* While the full-screen mobile navigation is open (it sets this attribute
+   on <html>), the floating contact widget yields to it. */
+html[data-mobile-nav-open] [data-floating-contact] {
+  display: none;
+}
+
+/* Hide scrollbars on the horizontal menu-category strip (scrolling still works) */
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reduced motion: the site must remain fully usable and readable    */
+/*  with all animation effectively disabled.                          */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal-hidden {
+    opacity: 1;
+    transform: none;
+  }
+}
