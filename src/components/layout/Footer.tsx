@@ -1,17 +1,23 @@
 import Link from "next/link";
-import { navLinks } from "@/components/layout/nav-links";
+import { getNavLinks } from "@/components/layout/nav-links";
 import { CurrentYear } from "@/components/shared/CurrentYear";
 import { OpeningHours } from "@/components/shared/OpeningHours";
 import { SocialLinks } from "@/components/shared/SocialLinks";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import {
   restaurantConfig,
   getEmailHref,
   getPhoneHref,
   isPlaceholder,
 } from "@/config/restaurant";
+import { localize, type Locale } from "@/i18n/config";
 
-export function Footer() {
+interface FooterProps {
+  locale: Locale;
+}
+
+export function Footer({ locale }: FooterProps) {
+  const content = getSiteContent(locale);
   const { address } = restaurantConfig;
 
   return (
@@ -24,20 +30,20 @@ export function Footer() {
               {restaurantConfig.shortName}
             </p>
             <p className="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.3em] text-copper-300">
-              {siteContent.common.brandTagline}
+              {content.common.brandTagline}
             </p>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream-100/70">
-              {restaurantConfig.description}
+              {content.meta.siteDescription}
             </p>
           </div>
 
           {/* Navigation */}
           <nav aria-label="Footer">
             <h2 className="text-xs font-medium uppercase tracking-[0.22em] text-copper-300">
-              {siteContent.footer.navigationTitle}
+              {content.footer.navigationTitle}
             </h2>
             <ul className="mt-5 space-y-3">
-              {navLinks.map((link) => (
+              {getNavLinks(locale).map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -53,7 +59,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h2 className="text-xs font-medium uppercase tracking-[0.22em] text-copper-300">
-              {siteContent.footer.contactTitle}
+              {content.footer.contactTitle}
             </h2>
             <address className="mt-5 space-y-3 text-sm not-italic text-cream-100/85">
               <p>
@@ -66,7 +72,7 @@ export function Footer() {
                 {!isPlaceholder(address.postalCode) && `${address.postalCode} `}
                 {address.city}
                 <br />
-                {address.country}
+                {localize(address.country, locale)}
               </p>
               <p>
                 <a
@@ -90,17 +96,17 @@ export function Footer() {
           {/* Hours + social */}
           <div>
             <h2 className="text-xs font-medium uppercase tracking-[0.22em] text-copper-300">
-              {siteContent.footer.hoursTitle}
+              {content.footer.hoursTitle}
             </h2>
-            <OpeningHours tone="dark" className="mt-5" />
+            <OpeningHours locale={locale} tone="dark" className="mt-5" />
             <div className="mt-6">
               <h2 className="text-xs font-medium uppercase tracking-[0.22em] text-copper-300">
-                {siteContent.common.followUs}
+                {content.common.followUs}
               </h2>
               <SocialLinks
                 tone="dark"
                 className="mt-4"
-                emptyNote={siteContent.footer.socialNote}
+                emptyNote={content.footer.socialNote}
               />
             </div>
           </div>
@@ -109,9 +115,9 @@ export function Footer() {
         <div className="mt-14 border-t border-cream-50/15 pt-7 text-xs leading-relaxed text-cream-100/55">
           <p>
             © <CurrentYear initialYear={new Date().getFullYear()} />{" "}
-            {siteContent.footer.copyright}
+            {content.footer.copyright}
           </p>
-          <p className="mt-1.5">{siteContent.footer.placeholderImagesNote}</p>
+          <p className="mt-1.5">{content.footer.placeholderImagesNote}</p>
         </div>
       </div>
     </footer>

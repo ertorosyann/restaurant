@@ -1,18 +1,24 @@
 import { OpeningHours } from "@/components/shared/OpeningHours";
 import { SocialLinks } from "@/components/shared/SocialLinks";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import {
   restaurantConfig,
   getEmailHref,
   getPhoneHref,
   isPlaceholder,
 } from "@/config/restaurant";
+import { localize, type Locale } from "@/i18n/config";
+
+interface ContactDetailsProps {
+  locale: Locale;
+}
 
 /**
  * All essential contact information in one card — driven entirely by
  * src/config/restaurant.ts.
  */
-export function ContactDetails() {
+export function ContactDetails({ locale }: ContactDetailsProps) {
+  const siteContent = getSiteContent(locale);
   const content = siteContent.contact;
   const { address } = restaurantConfig;
 
@@ -22,7 +28,7 @@ export function ContactDetails() {
         {content.detailsTitle}
       </h2>
       <p className="mt-1 text-sm text-charcoal-500">
-        {restaurantConfig.city}, {restaurantConfig.country}
+        {restaurantConfig.city}, {localize(restaurantConfig.country, locale)}
       </p>
 
       <dl className="mt-8 space-y-6">
@@ -39,7 +45,7 @@ export function ContactDetails() {
                 : "[POSTAL_CODE]"}{" "}
               {address.city}
               <br />
-              {address.country}
+              {localize(address.country, locale)}
             </address>
           </dd>
         </div>
@@ -77,7 +83,7 @@ export function ContactDetails() {
             {siteContent.common.openingHours}
           </dt>
           <dd className="mt-3">
-            <OpeningHours />
+            <OpeningHours locale={locale} />
             <p className="mt-3 text-xs text-charcoal-500">{content.hoursNote}</p>
           </dd>
         </div>

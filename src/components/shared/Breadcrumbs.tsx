@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { siteUrl } from "@/lib/seo";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
+import { localeHref, type Locale } from "@/i18n/config";
 
 export interface BreadcrumbItem {
   name: string;
@@ -9,17 +10,19 @@ export interface BreadcrumbItem {
 }
 
 interface BreadcrumbsProps {
+  locale: Locale;
   items: BreadcrumbItem[];
   className?: string;
 }
 
 /**
  * Accessible breadcrumb trail with matching schema.org BreadcrumbList
- * structured data. The "Home" crumb is added automatically.
+ * structured data. The localized "Home" crumb is added automatically.
  */
-export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
+export function Breadcrumbs({ locale, items, className = "" }: BreadcrumbsProps) {
+  const content = getSiteContent(locale);
   const allItems: BreadcrumbItem[] = [
-    { name: siteContent.common.breadcrumbHome, href: "/" },
+    { name: content.common.breadcrumbHome, href: localeHref(locale) },
     ...items,
   ];
 
@@ -30,7 +33,7 @@ export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      ...(item.href ? { item: `${siteUrl}${item.href === "/" ? "" : item.href}` } : {}),
+      ...(item.href ? { item: `${siteUrl}${item.href}` } : {}),
     })),
   };
 

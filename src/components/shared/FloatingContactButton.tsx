@@ -1,12 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import {
   getDirectionsUrl,
   getEmailHref,
   getPhoneHref,
 } from "@/config/restaurant";
+import type { Locale } from "@/i18n/config";
+
+interface FloatingContactButtonProps {
+  locale: Locale;
+}
 
 /**
  * Floating contact button — fixed to the bottom-right corner on every
@@ -17,7 +22,8 @@ import {
  * outside click, on the close button and after selecting an option;
  * focus returns to the toggle when the panel closes.
  */
-export function FloatingContactButton() {
+export function FloatingContactButton({ locale }: FloatingContactButtonProps) {
+  const siteContent = getSiteContent(locale);
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);

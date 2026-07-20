@@ -2,15 +2,21 @@ import Image from "next/image";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import { getDirectionsUrl } from "@/config/restaurant";
 import { siteImages } from "@/data/images";
+import type { Locale } from "@/i18n/config";
+
+interface LocationSectionProps {
+  locale: Locale;
+}
 
 /**
  * Alpine location section: full-bleed Dachstein scenery with the
  * village facts and a directions action.
  */
-export function LocationSection() {
+export function LocationSection({ locale }: LocationSectionProps) {
+  const siteContent = getSiteContent(locale);
   const { location } = siteContent.home;
 
   return (

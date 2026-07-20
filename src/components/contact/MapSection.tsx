@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import { restaurantConfig, isPlaceholder } from "@/config/restaurant";
+import { localize, type Locale } from "@/i18n/config";
 
 /**
  * Performance-friendly map: a lightweight styled placeholder is rendered
@@ -13,10 +14,14 @@ import { restaurantConfig, isPlaceholder } from "@/config/restaurant";
  * For a precise pin, set `mapUrl` in src/config/restaurant.ts — if it is
  * a Google Maps *embed* URL (contains "/maps/embed"), it is used directly.
  */
-export function MapSection() {
+interface MapSectionProps {
+  locale: Locale;
+}
+
+export function MapSection({ locale }: MapSectionProps) {
   const [loaded, setLoaded] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const content = siteContent.contact.map;
+  const content = getSiteContent(locale).contact.map;
 
   /* The load button unmounts when the map appears — move keyboard focus
      to the iframe so the focus position is not lost. */
@@ -25,7 +30,7 @@ export function MapSection() {
   }, [loaded]);
 
   const query = encodeURIComponent(
-    `${restaurantConfig.name}, ${restaurantConfig.city}, ${restaurantConfig.country}`
+    `${restaurantConfig.name}, ${restaurantConfig.city}, ${localize(restaurantConfig.country, "en")}`
   );
   const embedUrl =
     !isPlaceholder(restaurantConfig.mapUrl) &&
@@ -68,7 +73,7 @@ export function MapSection() {
           </span>
           <div className="relative">
             <p className="font-display text-xl text-charcoal-900">
-              {restaurantConfig.city}, {restaurantConfig.country}
+              {restaurantConfig.city}, {localize(restaurantConfig.country, locale)}
             </p>
             <p className="mt-1 text-sm text-charcoal-600">{content.loadNote}</p>
           </div>

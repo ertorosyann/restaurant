@@ -1,9 +1,11 @@
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { Reveal } from "@/components/shared/Reveal";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import { getEmailHref, getPhoneHref } from "@/config/restaurant";
+import { localeHref, type Locale } from "@/i18n/config";
 
 interface CallToActionProps {
+  locale: Locale;
   title: string;
   description?: string;
   /** Adds a "View Menu" button next to the contact actions. */
@@ -14,7 +16,13 @@ interface CallToActionProps {
  * Closing call-to-action panel used at the bottom of pages:
  * deep alpine green, warm copper accents, direct call/email actions.
  */
-export function CallToAction({ title, description, showMenuLink = false }: CallToActionProps) {
+export function CallToAction({
+  locale,
+  title,
+  description,
+  showMenuLink = false,
+}: CallToActionProps) {
+  const siteContent = getSiteContent(locale);
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">
       <Reveal className="mx-auto max-w-6xl">
@@ -52,7 +60,7 @@ export function CallToAction({ title, description, showMenuLink = false }: CallT
                 {siteContent.common.sendEmail}
               </ButtonLink>
               {showMenuLink && (
-                <ButtonLink href="/menu" variant="light-outline">
+                <ButtonLink href={localeHref(locale, "/menu")} variant="light-outline">
                   {siteContent.common.viewMenu}
                 </ButtonLink>
               )}

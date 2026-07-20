@@ -1,18 +1,22 @@
 import Link from "next/link";
-import { navLinks } from "@/components/layout/nav-links";
-import { siteContent } from "@/content/site";
+import { getNavLinks } from "@/components/layout/nav-links";
+import { getSiteContent } from "@/content/site";
+import { localeHref, type Locale } from "@/i18n/config";
 
 interface DesktopNavigationProps {
   pathname: string;
   /** True while the header floats transparently over the page hero. */
   overHero: boolean;
+  locale: Locale;
 }
 
-export function DesktopNavigation({ pathname, overHero }: DesktopNavigationProps) {
+export function DesktopNavigation({ pathname, overHero, locale }: DesktopNavigationProps) {
+  const content = getSiteContent(locale);
+
   return (
     <div className="hidden items-center gap-8 lg:flex">
       <ul className="flex items-center gap-7">
-        {navLinks.map((link) => {
+        {getNavLinks(locale).map((link) => {
           const isActive = pathname === link.href;
           return (
             <li key={link.href}>
@@ -34,14 +38,14 @@ export function DesktopNavigation({ pathname, overHero }: DesktopNavigationProps
         })}
       </ul>
       <Link
-        href="/contact"
+        href={localeHref(locale, "/contact")}
         className={`inline-flex min-h-11 items-center justify-center rounded-md px-5 py-2.5 text-sm font-medium uppercase tracking-[0.12em] transition-colors ${
           overHero
             ? "border border-white/50 text-white hover:border-white hover:bg-white/10"
             : "bg-pine-800 text-cream-50 hover:bg-pine-900"
         }`}
       >
-        {siteContent.common.contactUs}
+        {content.common.contactUs}
       </Link>
     </div>
   );

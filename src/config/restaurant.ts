@@ -13,15 +13,20 @@
  * data so no fake business details are ever published to search engines.
  */
 
+import { localize, type LocalizedText } from "@/i18n/config";
+
 export const restaurantConfig = {
   name: "Zentrum Café Restaurant",
   shortName: "Zentrum",
   city: "Ramsau am Dachstein",
   region: "Styria",
-  country: "Austria",
-
-  description:
-    "A welcoming café and restaurant in Ramsau am Dachstein offering flavourful food, quality coffee, homemade desserts and warm Alpine hospitality in the heart of the Dachstein region.",
+  /** Displayed country name per language (see src/i18n/config.ts). */
+  country: {
+    de: "Österreich",
+    cs: "Rakousko",
+    en: "Austria",
+    pl: "Austria",
+  } as LocalizedText,
 
   /** Real telephone number, e.g. "+43 3687 000000" */
   phone: "[PHONE_NUMBER]",
@@ -32,7 +37,12 @@ export const restaurantConfig = {
     street: "[STREET_ADDRESS]",
     postalCode: "[POSTAL_CODE]",
     city: "Ramsau am Dachstein",
-    country: "Austria",
+    country: {
+      de: "Österreich",
+      cs: "Rakousko",
+      en: "Austria",
+      pl: "Austria",
+    } as LocalizedText,
   },
 
   /**
@@ -83,10 +93,27 @@ export const restaurantConfig = {
   /**
    * Opening hours as displayed to visitors.
    * Replace "[OPENING_HOURS]" with e.g. "8:00 – 22:00".
+   * Day labels carry one entry per website language.
    */
   openingHours: [
-    { days: "Monday – Friday", hours: "[OPENING_HOURS]" },
-    { days: "Saturday – Sunday", hours: "[OPENING_HOURS]" },
+    {
+      days: {
+        de: "Montag – Freitag",
+        cs: "Pondělí – pátek",
+        en: "Monday – Friday",
+        pl: "Poniedziałek – piątek",
+      } as LocalizedText,
+      hours: "[OPENING_HOURS]",
+    },
+    {
+      days: {
+        de: "Samstag – Sonntag",
+        cs: "Sobota – neděle",
+        en: "Saturday – Sunday",
+        pl: "Sobota – niedziela",
+      } as LocalizedText,
+      hours: "[OPENING_HOURS]",
+    },
   ],
 
   /**
@@ -146,7 +173,7 @@ export function getDirectionsUrl(): string {
     return restaurantConfig.mapUrl;
   }
   const destination = encodeURIComponent(
-    `${restaurantConfig.name}, ${restaurantConfig.city}, ${restaurantConfig.country}`
+    `${restaurantConfig.name}, ${restaurantConfig.city}, ${localize(restaurantConfig.country, "en")}`
   );
   return `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
 }

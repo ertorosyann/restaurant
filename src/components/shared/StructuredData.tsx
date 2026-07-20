@@ -3,11 +3,18 @@ import {
   getActiveSocialLinks,
   isPlaceholder,
 } from "@/config/restaurant";
+import { getSiteContent } from "@/content/site";
+import type { Locale } from "@/i18n/config";
 import { siteUrl } from "@/lib/seo";
 import { ogImage } from "@/data/images";
 
+interface StructuredDataProps {
+  locale: Locale;
+}
+
 /**
- * JSON-LD structured data (schema.org "Restaurant") for local SEO.
+ * JSON-LD structured data (schema.org "Restaurant") for local SEO,
+ * emitted in the language of the current page.
  *
  * Every field is driven by src/config/restaurant.ts. Fields still set to
  * "[PLACEHOLDER]" values are automatically omitted, so incomplete or fake
@@ -15,7 +22,7 @@ import { ogImage } from "@/data/images";
  * phone number, address, price range, coordinates and opening hours are
  * configured, they appear here automatically.
  */
-export function StructuredData() {
+export function StructuredData({ locale }: StructuredDataProps) {
   const { address, geo } = restaurantConfig;
   const socialUrls = getActiveSocialLinks().map((link) => link.url);
 
@@ -31,11 +38,11 @@ export function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Restaurant",
     name: restaurantConfig.name,
-    description: restaurantConfig.description,
+    description: getSiteContent(locale).meta.siteDescription,
     url: siteUrl,
     servesCuisine: restaurantConfig.cuisineTypes,
     address: postalAddress,
-    hasMenu: `${siteUrl}/menu`,
+    hasMenu: `${siteUrl}/${locale}/menu`,
   };
 
   /* The image is only published once it no longer points at placeholder

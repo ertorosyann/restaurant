@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
+import type { Locale } from "@/i18n/config";
 
 /**
  * Contact form — FRONTEND DEMONSTRATION ONLY.
@@ -44,8 +45,12 @@ type FormStatus = "idle" | "submitting" | "success";
 
 const initialValues: FormValues = { name: "", email: "", phone: "", message: "" };
 
-export function ContactForm() {
-  const content = siteContent.contact.form;
+interface ContactFormProps {
+  locale: Locale;
+}
+
+export function ContactForm({ locale }: ContactFormProps) {
+  const content = getSiteContent(locale).contact.form;
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
   const [status, setStatus] = useState<FormStatus>("idle");

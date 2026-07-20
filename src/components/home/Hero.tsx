@@ -1,14 +1,20 @@
 import Image from "next/image";
 import { ButtonLink } from "@/components/shared/ButtonLink";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import { siteImages } from "@/data/images";
+import { localeHref, type Locale } from "@/i18n/config";
+
+interface HeroProps {
+  locale: Locale;
+}
 
 /**
  * Full-screen home hero. Server component — all entrance motion is
  * lightweight CSS (fade-up stagger + a very gentle image zoom), disabled
  * automatically for visitors who prefer reduced motion.
  */
-export function Hero() {
+export function Hero({ locale }: HeroProps) {
+  const siteContent = getSiteContent(locale);
   const { hero } = siteContent.home;
 
   return (
@@ -45,11 +51,15 @@ export function Hero() {
           {hero.description}
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3.5 sm:flex-row motion-safe:animate-fade-up motion-safe:[animation-delay:420ms]">
-          <ButtonLink href="/menu" variant="light" className="w-full sm:w-auto">
+          <ButtonLink
+            href={localeHref(locale, "/menu")}
+            variant="light"
+            className="w-full sm:w-auto"
+          >
             {siteContent.common.viewMenu}
           </ButtonLink>
           <ButtonLink
-            href="/contact"
+            href={localeHref(locale, "/contact")}
             variant="light-outline"
             className="w-full sm:w-auto"
           >

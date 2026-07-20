@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { siteContent } from "@/content/site";
 
 interface MenuCategoryNavigationProps {
   categories: { id: string; title: string }[];
+  ariaLabel: string;
 }
 
 /**
@@ -15,7 +15,7 @@ interface MenuCategoryNavigationProps {
  * `scroll-padding-top`, both of which respect reduced motion. JS adds
  * scroll-spy highlighting and keeps the active chip in view.
  */
-export function MenuCategoryNavigation({ categories }: MenuCategoryNavigationProps) {
+export function MenuCategoryNavigation({ categories, ariaLabel }: MenuCategoryNavigationProps) {
   const [activeId, setActiveId] = useState<string>(categories[0]?.id ?? "");
   const stripRef = useRef<HTMLUListElement>(null);
 
@@ -62,7 +62,7 @@ export function MenuCategoryNavigation({ categories }: MenuCategoryNavigationPro
 
   return (
     <nav
-      aria-label={siteContent.menu.categoriesAriaLabel}
+      aria-label={ariaLabel}
       className="sticky top-16 z-30 border-y border-charcoal-900/8 bg-cream-50/95 backdrop-blur-sm"
     >
       <ul

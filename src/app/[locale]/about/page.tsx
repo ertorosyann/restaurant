@@ -8,18 +8,29 @@ import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { SplitSection } from "@/components/shared/SplitSection";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import { siteImages } from "@/data/images";
 import { buildPageMetadata } from "@/lib/seo";
+import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "About Us | Zentrum Café Restaurant Ramsau am Dachstein",
-  description:
-    "Learn about Zentrum Café Restaurant in Ramsau am Dachstein: our concept, our love of Austrian cuisine, quality ingredients, homemade desserts and warm Alpine hospitality near the Dachstein.",
-  path: "/about",
-});
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function AboutPage() {
+async function resolveLocale({ params }: PageProps): Promise<Locale> {
+  const { locale } = await params;
+  return isLocale(locale) ? locale : defaultLocale;
+}
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const locale = await resolveLocale(props);
+  const { meta } = getSiteContent(locale);
+  return buildPageMetadata({ ...meta.about, path: "/about", locale });
+}
+
+export default async function AboutPage(props: PageProps) {
+  const locale = await resolveLocale(props);
+  const siteContent = getSiteContent(locale);
   const content = siteContent.about;
 
   return (
@@ -32,7 +43,7 @@ export default function AboutPage() {
       />
 
       <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ name: siteContent.nav.about }]} />
+        <Breadcrumbs locale={locale} items={[{ name: siteContent.nav.about }]} />
       </div>
 
       {/* ---------- Story ---------- */}
@@ -186,6 +197,7 @@ export default function AboutPage() {
       {/* ---------- Final call-to-action ---------- */}
       <div className="pt-20">
         <CallToAction
+          locale={locale}
           title={content.cta.title}
           description={content.cta.description}
           showMenuLink

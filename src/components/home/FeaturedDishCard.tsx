@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { dietaryLabelText, type MenuItemData } from "@/data/menu";
+import { getDietaryLabelText, type MenuItemData } from "@/data/menu";
+import type { Locale } from "@/i18n/config";
 
 interface FeaturedDishCardProps {
   item: MenuItemData;
+  locale: Locale;
 }
 
 /**
@@ -10,7 +12,8 @@ interface FeaturedDishCardProps {
  * Which dishes appear here is controlled by `featured: true` in
  * src/data/menu.ts.
  */
-export function FeaturedDishCard({ item }: FeaturedDishCardProps) {
+export function FeaturedDishCard({ item, locale }: FeaturedDishCardProps) {
+  const dietaryLabelText = getDietaryLabelText(locale);
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-charcoal-900/8 bg-white shadow-soft transition-all duration-300 hover:shadow-lifted motion-safe:hover:-translate-y-1.5">
       {item.image && (

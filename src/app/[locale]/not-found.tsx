@@ -1,17 +1,20 @@
-import type { Metadata } from "next";
+"use client";
+
+import { usePathname } from "next/navigation";
 import { ButtonLink } from "@/components/shared/ButtonLink";
-import { siteContent } from "@/content/site";
-import { restaurantConfig } from "@/config/restaurant";
+import { getSiteContent } from "@/content/site";
+import { defaultLocale, isLocale, localeHref } from "@/i18n/config";
 
-export const metadata: Metadata = {
-  title: `Page Not Found | ${restaurantConfig.name}`,
-  description:
-    "The page you are looking for could not be found. Return to Zentrum Café Restaurant in Ramsau am Dachstein.",
-  robots: { index: false },
-};
-
+/**
+ * Localized 404 page. `not-found.tsx` receives no route params, so the
+ * language is derived from the URL's first path segment on the client
+ * (falling back to German).
+ */
 export default function NotFound() {
-  const content = siteContent.notFound;
+  const pathname = usePathname();
+  const segment = pathname.split("/")[1] ?? "";
+  const locale = isLocale(segment) ? segment : defaultLocale;
+  const content = getSiteContent(locale).notFound;
 
   return (
     <section className="flex min-h-svh items-center justify-center bg-pine-950 px-4 py-32 sm:px-6">
@@ -26,10 +29,10 @@ export default function NotFound() {
           {content.description}
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3.5 sm:flex-row motion-safe:animate-fade-up motion-safe:[animation-delay:360ms]">
-          <ButtonLink href="/" variant="copper">
+          <ButtonLink href={localeHref(locale)} variant="copper">
             {content.backHome}
           </ButtonLink>
-          <ButtonLink href="/menu" variant="light-outline">
+          <ButtonLink href={localeHref(locale, "/menu")} variant="light-outline">
             {content.viewMenu}
           </ButtonLink>
         </div>

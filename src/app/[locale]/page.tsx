@@ -10,30 +10,48 @@ import { Gallery } from "@/components/shared/Gallery";
 import { OpeningHours } from "@/components/shared/OpeningHours";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import {
   restaurantConfig,
   getDirectionsUrl,
   isPlaceholder,
 } from "@/config/restaurant";
-import { featuredDishes } from "@/data/menu";
+import { getFeaturedDishes } from "@/data/menu";
 import { siteImages } from "@/data/images";
 import { buildPageMetadata } from "@/lib/seo";
+import {
+  defaultLocale,
+  isLocale,
+  localeHref,
+  localize,
+  type Locale,
+} from "@/i18n/config";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "Zentrum Café Restaurant | Ramsau am Dachstein",
-  description:
-    "Discover Zentrum Café Restaurant in Ramsau am Dachstein. Enjoy welcoming Alpine hospitality, delicious dishes, quality coffee and homemade desserts in the heart of the Dachstein region.",
-  path: "/",
-});
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function HomePage() {
+async function resolveLocale({ params }: PageProps): Promise<Locale> {
+  const { locale } = await params;
+  return isLocale(locale) ? locale : defaultLocale;
+}
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const locale = await resolveLocale(props);
+  const { meta } = getSiteContent(locale);
+  return buildPageMetadata({ ...meta.home, path: "/", locale });
+}
+
+export default async function HomePage(props: PageProps) {
+  const locale = await resolveLocale(props);
+  const siteContent = getSiteContent(locale);
   const content = siteContent.home;
+  const featuredDishes = getFeaturedDishes(locale);
   const { address } = restaurantConfig;
 
   return (
     <>
-      <Hero />
+      <Hero locale={locale} />
 
       {/* ---------- Introduction ---------- */}
       <section className="px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -49,7 +67,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="mt-9">
-              <ButtonLink href="/about" variant="outline">
+              <ButtonLink href={localeHref(locale, "/about")} variant="outline">
                 {siteContent.nav.about}
               </ButtonLink>
             </div>
@@ -90,7 +108,7 @@ export default function HomePage() {
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featuredDishes.map((dish, index) => (
               <Reveal key={dish.name} delay={index * 110}>
-                <FeaturedDishCard item={dish} />
+                <FeaturedDishCard item={dish} locale={locale} />
               </Reveal>
             ))}
           </div>
@@ -99,7 +117,7 @@ export default function HomePage() {
               {content.featured.note}
             </p>
             <div className="mt-6 text-center">
-              <ButtonLink href="/menu" variant="primary">
+              <ButtonLink href={localeHref(locale, "/menu")} variant="primary">
                 {siteContent.common.viewMenu}
               </ButtonLink>
             </div>
@@ -147,7 +165,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="mt-9">
-              <ButtonLink href="/menu#coffee" variant="outline">
+              <ButtonLink href={localeHref(locale, "/menu#coffee")} variant="outline">
                 {siteContent.common.viewMenu}
               </ButtonLink>
             </div>
@@ -183,7 +201,7 @@ export default function HomePage() {
       </section>
 
       {/* ---------- Alpine location ---------- */}
-      <LocationSection />
+      <LocationSection locale={locale} />
 
       {/* ---------- Food philosophy ---------- */}
       <section className="px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
@@ -233,7 +251,7 @@ export default function HomePage() {
                 <h3 className="font-display text-xl text-charcoal-900">
                   {siteContent.common.openingHours}
                 </h3>
-                <OpeningHours className="mt-6" />
+                <OpeningHours locale={locale} className="mt-6" />
                 <p className="mt-5 text-xs leading-relaxed text-charcoal-500">
                   {content.hours.note}
                 </p>
@@ -254,7 +272,7 @@ export default function HomePage() {
                   {!isPlaceholder(address.postalCode) && `${address.postalCode} `}
                   {address.city}
                   <br />
-                  {address.country}
+                  {localize(address.country, locale)}
                 </address>
                 <div className="mt-7">
                   <ButtonLink
@@ -275,6 +293,7 @@ export default function HomePage() {
       {/* ---------- Final call-to-action ---------- */}
       <div className="bg-cream-100 pt-0">
         <CallToAction
+          locale={locale}
           title={content.cta.title}
           description={content.cta.description}
         />

@@ -4,20 +4,28 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { DesktopNavigation } from "@/components/layout/DesktopNavigation";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { MobileNavigation } from "@/components/layout/MobileNavigation";
 import { restaurantConfig } from "@/config/restaurant";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
+import { localeHref, type Locale } from "@/i18n/config";
+
+interface HeaderProps {
+  locale: Locale;
+}
 
 /**
  * Sticky site header. It starts transparent, blending into each page's
  * photographic hero, and condenses into a solid cream bar with dark text
- * once the visitor scrolls.
+ * once the visitor scrolls. The language switcher sits at its right edge
+ * on every breakpoint, so it is always one tap away.
  */
-export function Header() {
+export function Header({ locale }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const content = getSiteContent(locale);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -53,9 +61,9 @@ export function Header() {
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link
-            href="/"
+            href={localeHref(locale)}
             className="group flex flex-col leading-none"
-            aria-label={`${restaurantConfig.name} — ${siteContent.nav.home}`}
+            aria-label={`${restaurantConfig.name} — ${content.nav.home}`}
           >
             <span
               className={`font-display text-[1.6rem] tracking-wide transition-colors ${
@@ -69,46 +77,57 @@ export function Header() {
                 overHero ? "text-copper-300" : "text-copper-700"
               }`}
             >
-              {siteContent.common.brandTagline}
+              {content.common.brandTagline}
             </span>
           </Link>
 
-          <DesktopNavigation pathname={pathname} overHero={overHero} />
+          <div className="flex items-center gap-1 lg:gap-5">
+            <DesktopNavigation pathname={pathname} overHero={overHero} locale={locale} />
 
-          {/* Mobile menu toggle */}
-          <button
-            ref={toggleRef}
-            type="button"
-            onClick={() => setMobileOpen((value) => !value)}
-            aria-expanded={mobileOpen}
-            aria-controls={mobileOpen ? "mobile-navigation" : undefined}
-            aria-label={mobileOpen ? siteContent.nav.closeMenu : siteContent.nav.openMenu}
-            className={`relative z-50 flex h-12 w-12 items-center justify-center rounded-md transition-colors lg:hidden ${
-              overHero ? "text-cream-50 hover:bg-white/10" : "text-charcoal-900 hover:bg-charcoal-900/5"
-            }`}
-          >
-            <span className="relative block h-4 w-6" aria-hidden="true">
-              <span
-                className={`absolute left-0 top-0 h-0.5 w-6 bg-current transition-all duration-300 ${
-                  mobileOpen ? "top-1/2 -translate-y-1/2 rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-1/2 h-0.5 w-6 -translate-y-1/2 bg-current transition-opacity duration-200 ${
-                  mobileOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`absolute bottom-0 left-0 h-0.5 w-6 bg-current transition-all duration-300 ${
-                  mobileOpen ? "bottom-1/2 translate-y-1/2 -rotate-45" : ""
-                }`}
-              />
-            </span>
-          </button>
+            {/* Language switcher — always visible, next to the menu button
+                on mobile and at the far right on desktop. */}
+            <LanguageSwitcher locale={locale} overHero={overHero} />
+
+            {/* Mobile menu toggle */}
+            <button
+              ref={toggleRef}
+              type="button"
+              onClick={() => setMobileOpen((value) => !value)}
+              aria-expanded={mobileOpen}
+              aria-controls={mobileOpen ? "mobile-navigation" : undefined}
+              aria-label={mobileOpen ? content.nav.closeMenu : content.nav.openMenu}
+              className={`relative z-50 flex h-12 w-12 items-center justify-center rounded-md transition-colors lg:hidden ${
+                overHero ? "text-cream-50 hover:bg-white/10" : "text-charcoal-900 hover:bg-charcoal-900/5"
+              }`}
+            >
+              <span className="relative block h-4 w-6" aria-hidden="true">
+                <span
+                  className={`absolute left-0 top-0 h-0.5 w-6 bg-current transition-all duration-300 ${
+                    mobileOpen ? "top-1/2 -translate-y-1/2 rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 top-1/2 h-0.5 w-6 -translate-y-1/2 bg-current transition-opacity duration-200 ${
+                    mobileOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 w-6 bg-current transition-all duration-300 ${
+                    mobileOpen ? "bottom-1/2 translate-y-1/2 -rotate-45" : ""
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
         </div>
       </header>
 
-      <MobileNavigation open={mobileOpen} onClose={closeMobile} pathname={pathname} />
+      <MobileNavigation
+        open={mobileOpen}
+        onClose={closeMobile}
+        pathname={pathname}
+        locale={locale}
+      />
     </>
   );
 }

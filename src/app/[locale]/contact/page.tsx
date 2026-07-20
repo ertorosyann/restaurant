@@ -8,7 +8,7 @@ import { ButtonLink } from "@/components/shared/ButtonLink";
 import { PageHero } from "@/components/shared/PageHero";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { siteContent } from "@/content/site";
+import { getSiteContent } from "@/content/site";
 import {
   getDirectionsUrl,
   getEmailHref,
@@ -16,15 +16,26 @@ import {
 } from "@/config/restaurant";
 import { siteImages } from "@/data/images";
 import { buildPageMetadata } from "@/lib/seo";
+import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: "Contact | Zentrum Café Restaurant Ramsau am Dachstein",
-  description:
-    "Contact Zentrum Café Restaurant in Ramsau am Dachstein: telephone, email, address, opening hours and directions. We look forward to your visit in the Dachstein region.",
-  path: "/contact",
-});
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function ContactPage() {
+async function resolveLocale({ params }: PageProps): Promise<Locale> {
+  const { locale } = await params;
+  return isLocale(locale) ? locale : defaultLocale;
+}
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const locale = await resolveLocale(props);
+  const { meta } = getSiteContent(locale);
+  return buildPageMetadata({ ...meta.contact, path: "/contact", locale });
+}
+
+export default async function ContactPage(props: PageProps) {
+  const locale = await resolveLocale(props);
+  const siteContent = getSiteContent(locale);
   const content = siteContent.contact;
 
   return (
@@ -37,7 +48,7 @@ export default function ContactPage() {
       />
 
       <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ name: siteContent.nav.contact }]} />
+        <Breadcrumbs locale={locale} items={[{ name: siteContent.nav.contact }]} />
       </div>
 
       {/* ---------- Prominent quick actions ---------- */}
@@ -66,10 +77,10 @@ export default function ContactPage() {
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <div className="grid items-start gap-8 lg:grid-cols-2">
           <Reveal>
-            <ContactDetails />
+            <ContactDetails locale={locale} />
           </Reveal>
           <Reveal delay={110}>
-            <ContactForm />
+            <ContactForm locale={locale} />
           </Reveal>
         </div>
       </section>
@@ -85,7 +96,7 @@ export default function ContactPage() {
         </Reveal>
         <Reveal delay={110}>
           <div className="mt-10">
-            <MapSection />
+            <MapSection locale={locale} />
           </div>
         </Reveal>
       </section>

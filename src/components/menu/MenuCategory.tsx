@@ -1,16 +1,18 @@
 import { MenuItem } from "@/components/menu/MenuItem";
 import { Reveal } from "@/components/shared/Reveal";
 import type { MenuCategoryData } from "@/data/menu";
+import type { Locale } from "@/i18n/config";
 
 interface MenuCategoryProps {
   category: MenuCategoryData;
+  locale: Locale;
 }
 
 /**
  * One menu section, anchored for the category navigation
- * (e.g. /menu#breakfast).
+ * (e.g. /de/menu#breakfast).
  */
-export function MenuCategory({ category }: MenuCategoryProps) {
+export function MenuCategory({ category, locale }: MenuCategoryProps) {
   return (
     <section id={category.id} aria-labelledby={`${category.id}-heading`}>
       <Reveal>
@@ -36,7 +38,7 @@ export function MenuCategory({ category }: MenuCategoryProps) {
       <div className="mt-8 grid gap-x-14 gap-y-8 md:grid-cols-2">
         {category.items.map((item, index) => (
           <Reveal key={item.name} delay={(index % 2) * 80}>
-            <MenuItem item={item} />
+            <MenuItem item={item} locale={locale} />
           </Reveal>
         ))}
       </div>

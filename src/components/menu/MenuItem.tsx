@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { dietaryLabelText, type MenuItemData } from "@/data/menu";
+import { getDietaryLabelText, type MenuItemData } from "@/data/menu";
+import type { Locale } from "@/i18n/config";
 
 interface MenuItemProps {
   item: MenuItemData;
+  locale: Locale;
 }
 
 /**
@@ -10,7 +12,8 @@ interface MenuItemProps {
  * labels. Featured dishes may show a small photo — the menu itself
  * stays deliberately lightweight and readable.
  */
-export function MenuItem({ item }: MenuItemProps) {
+export function MenuItem({ item, locale }: MenuItemProps) {
+  const dietaryLabelText = getDietaryLabelText(locale);
   return (
     <article className="flex gap-4">
       {item.image && (
