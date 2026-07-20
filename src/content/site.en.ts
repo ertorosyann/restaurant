@@ -84,7 +84,7 @@ export const siteContentEn: SiteContent = {
     socialNote: "Social media profiles coming soon.",
     copyright: "Zentrum Café Restaurant. All rights reserved.",
     placeholderImagesNote:
-      "Website photography consists of placeholder images and will be replaced with photos of the restaurant.",
+      "Some website photos are still placeholder images and will gradually be replaced with photos of the restaurant.",
   },
 
   home: {

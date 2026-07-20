@@ -1,16 +1,15 @@
 /**
- * PLACEHOLDER IMAGE REGISTRY
- * ==========================
- * ⚠️  EVERY image on this website is a temporary, royalty-free placeholder
- * from Unsplash. They show generic food, coffee, interiors and Alpine
- * scenery — they do NOT show Zentrum Café Restaurant, its team or its
- * actual dishes, and must all be replaced with real photography of the
- * restaurant before the final launch.
+ * IMAGE REGISTRY
+ * ==============
+ * Real photos of Zentrum Café Restaurant live in /public/images (web-
+ * optimized copies of the originals in /public/resturant). Slots whose
+ * `src` still points at Unsplash are ⚠️ temporary placeholders showing
+ * generic food, coffee and interiors — replace them with real photography
+ * as it becomes available.
  *
- * HOW TO REPLACE:
- * 1. Put the real photos in the /public folder (e.g. /public/images/hero.jpg)
- *    or on your image CDN.
- * 2. Swap the `src` values below (e.g. src: "/images/hero.jpg").
+ * HOW TO REPLACE A PLACEHOLDER:
+ * 1. Put the real photo in /public/images (ideally ≤ 2400px wide JPEG).
+ * 2. Swap the `src` value below (e.g. src: "/images/kitchen.jpg").
  * 3. Update the `alt` text to describe the real photo.
  *
  * Because every component reads its images from this file, no component
@@ -29,8 +28,8 @@ export const siteImages = {
   /* ---------------- Hero & page headers ---------------- */
 
   homeHero: {
-    src: unsplash("photo-1414235077428-338989a2e8c0", 2000),
-    alt: "Elegantly set restaurant tables glowing in warm evening light (placeholder image)",
+    src: "/images/terrace.jpg",
+    alt: "Sunny terrace of Zentrum Café Restaurant with wooden tables under green umbrellas and alpine scenery",
   },
   aboutHero: {
     src: unsplash("photo-1517248135467-4c7edcad34c4", 2000),
@@ -41,8 +40,8 @@ export const siteImages = {
     alt: "Beautifully plated dishes arranged on a rustic wooden table (placeholder image)",
   },
   contactHero: {
-    src: unsplash("photo-1521017432531-fbd92d768814", 2000),
-    alt: "Inviting café terrace with warm lights and comfortable seating (placeholder image)",
+    src: "/images/exterior.jpg",
+    alt: "Street view of Zentrum Café Restaurant with blooming flower beds in front of the shaded terrace",
   },
 
   /* ---------------- Food & drink ---------------- */
@@ -99,8 +98,8 @@ export const siteImages = {
     alt: "Restaurant dining room with softly lit tables ready for guests (placeholder image)",
   },
   tableSetting: {
-    src: unsplash("photo-1414235077428-338989a2e8c0", 1400),
-    alt: "Fine table setting with glassware in warm evening light (placeholder image)",
+    src: "/images/terrace.jpg",
+    alt: "Wooden benches and tables on the terrace of Zentrum Café Restaurant on a sunny day",
   },
   kitchen: {
     src: unsplash("photo-1556910103-1c02745aae4d", 1400),
@@ -126,16 +125,14 @@ export const siteImages = {
 export type SiteImageKey = keyof typeof siteImages;
 
 /**
- * Social sharing (Open Graph) preview image.
- * ⚠️ Placeholder — replace with a real 1200×630 photo of the restaurant,
- * e.g. put it at /public/og-image.jpg and change this to its absolute URL.
- * While the src points at Unsplash, structured data omits it automatically
- * (see StructuredData.tsx) so a stock photo is never indexed as the
- * restaurant itself.
+ * Social sharing (Open Graph) preview image — a real photo of the
+ * restaurant's terrace, cropped to the recommended 1200×630. Because it
+ * no longer points at Unsplash, it is also published in the schema.org
+ * structured data automatically (see StructuredData.tsx).
  */
 export const ogImage = {
-  src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&h=630&q=80",
-  alt: "Elegantly set restaurant tables in warm evening light (placeholder image)",
+  src: "/images/og-image.jpg",
+  alt: "Sunny terrace of Zentrum Café Restaurant with wooden tables under green umbrellas",
   width: 1200,
   height: 630,
 };

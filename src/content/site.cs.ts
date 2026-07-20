@@ -84,7 +84,7 @@ export const siteContentCs: SiteContent = {
     socialNote: "Profily na sociálních sítích již brzy.",
     copyright: "Zentrum Café Restaurant. Všechna práva vyhrazena.",
     placeholderImagesNote:
-      "Fotografie na tomto webu jsou pouze ilustrační a budou nahrazeny snímky restaurace.",
+      "Některé fotografie na tomto webu jsou zatím ilustrační a postupně je nahradíme snímky restaurace.",
   },
 
   home: {

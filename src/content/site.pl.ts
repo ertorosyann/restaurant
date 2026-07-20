@@ -84,7 +84,7 @@ export const siteContentPl: SiteContent = {
     socialNote: "Profile w mediach społecznościowych już wkrótce.",
     copyright: "Zentrum Café Restaurant. Wszelkie prawa zastrzeżone.",
     placeholderImagesNote:
-      "Zdjęcia na tej stronie mają charakter poglądowy i zostaną zastąpione fotografiami restauracji.",
+      "Część zdjęć na tej stronie ma jeszcze charakter poglądowy – stopniowo zastąpimy je fotografiami restauracji.",
   },
 
   home: {

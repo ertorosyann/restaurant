@@ -50,7 +50,10 @@ export function StructuredData({ locale }: StructuredDataProps) {
      the restaurant itself. Swap ogImage (src/data/images.ts) to a real
      photo and it appears here automatically. */
   if (!ogImage.src.includes("unsplash")) {
-    data.image = ogImage.src;
+    /* JSON-LD needs an absolute URL — local paths are prefixed with the origin. */
+    data.image = ogImage.src.startsWith("http")
+      ? ogImage.src
+      : `${siteUrl}${ogImage.src}`;
   }
 
   if (!isPlaceholder(restaurantConfig.phone)) {
