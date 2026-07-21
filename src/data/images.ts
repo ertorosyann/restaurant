@@ -1,15 +1,15 @@
 /**
  * IMAGE REGISTRY
  * ==============
- * Real photos of Zentrum Café Restaurant live in /public/images (web-
- * optimized copies of the originals in /public/resturant). Slots whose
+ * Real photos of Zentrum Café Restaurant live in /public/resturant
+ * (restaurant/terrace shots) and /public/manu (dishes). Slots whose
  * `src` still points at Unsplash are ⚠️ temporary placeholders showing
  * generic food, coffee and interiors — replace them with real photography
  * as it becomes available.
  *
  * HOW TO REPLACE A PLACEHOLDER:
- * 1. Put the real photo in /public/images (ideally ≤ 2400px wide JPEG).
- * 2. Swap the `src` value below (e.g. src: "/images/kitchen.jpg").
+ * 1. Put the real photo in /public/resturant (ideally ≤ 2400px wide JPEG).
+ * 2. Swap the `src` value below (e.g. src: "/resturant/kitchen.jpg").
  * 3. Update the `alt` text to describe the real photo.
  *
  * Because every component reads its images from this file, no component
@@ -28,7 +28,7 @@ export const siteImages = {
   /* ---------------- Hero & page headers ---------------- */
 
   homeHero: {
-    src: "/images/terrace.jpg",
+    src: "/resturant/img-2.jpeg",
     alt: "Sunny terrace of Zentrum Café Restaurant with wooden tables under green umbrellas and alpine scenery",
   },
   aboutHero: {
@@ -40,7 +40,7 @@ export const siteImages = {
     alt: "Beautifully plated dishes arranged on a rustic wooden table (placeholder image)",
   },
   contactHero: {
-    src: "/images/exterior.jpg",
+    src: "/resturant/img-1.jpeg",
     alt: "Street view of Zentrum Café Restaurant with blooming flower beds in front of the shaded terrace",
   },
 
@@ -114,7 +114,7 @@ export const siteImages = {
     alt: "Restaurant dining room with softly lit tables ready for guests (placeholder image)",
   },
   tableSetting: {
-    src: "/images/terrace.jpg",
+    src: "/resturant/img-2.jpeg",
     alt: "Wooden benches and tables on the terrace of Zentrum Café Restaurant on a sunny day",
   },
   kitchen: {
@@ -142,13 +142,13 @@ export type SiteImageKey = keyof typeof siteImages;
 
 /**
  * Social sharing (Open Graph) preview image — a real photo of the
- * restaurant's terrace, cropped to the recommended 1200×630. Because it
- * no longer points at Unsplash, it is also published in the schema.org
- * structured data automatically (see StructuredData.tsx).
+ * restaurant's terrace. Because it no longer points at Unsplash, it is
+ * also published in the schema.org structured data automatically
+ * (see StructuredData.tsx).
  */
 export const ogImage = {
-  src: "/images/og-image.jpg",
+  src: "/resturant/img-2.jpeg",
   alt: "Sunny terrace of Zentrum Café Restaurant with wooden tables under green umbrellas",
-  width: 1200,
-  height: 630,
+  width: 2000,
+  height: 1505,
 };
