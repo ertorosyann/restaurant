@@ -46,6 +46,22 @@ export const siteImages = {
 
   /* ---------------- Food & drink ---------------- */
 
+  /* Real photos of dishes served at Zentrum Café Restaurant.
+     They live in /public/manu — reference them from there, do not move
+     or rename the files. */
+  dishGrilledCheeseSalad: {
+    src: "/manu/img-1.jpg",
+    alt: "Grilled cheese wedge on a fresh leaf salad with tomatoes, arugula, seeds and a cranberry dip at Zentrum Café Restaurant",
+  },
+  canapePlatters: {
+    src: "/manu/img-2.jpg",
+    alt: "Festive platters of homemade canapés with salami, cheese, spreads, cucumber and cherry tomatoes at Zentrum Café Restaurant",
+  },
+  flammkuchen: {
+    src: "/manu/img-3.jpg",
+    alt: "Crisp oven-baked tarte flambée topped with colourful peppers, zucchini and herbs at Zentrum Café Restaurant",
+  },
+
   featuredDishOne: {
     src: unsplash("photo-1546069901-ba9599a7e63c", 1200),
     alt: "Colourful, freshly prepared dish served in a ceramic bowl (placeholder image)",

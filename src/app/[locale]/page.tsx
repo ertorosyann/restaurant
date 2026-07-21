@@ -187,16 +187,13 @@ export default async function HomePage(props: PageProps) {
           <Gallery
             className="mt-14"
             images={[
-              siteImages.interiorTwo,
-              siteImages.coffeeAlt,
-              siteImages.pastry,
-              siteImages.salad,
-              siteImages.dessertAlt,
+              siteImages.tableSetting,
+              siteImages.canapePlatters,
+              siteImages.flammkuchen,
+              siteImages.dishGrilledCheeseSalad,
+              siteImages.contactHero,
             ]}
           />
-          <p className="mt-6 text-center text-xs text-charcoal-500">
-            {siteContent.common.placeholderNotice}
-          </p>
         </div>
       </section>
 

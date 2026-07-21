@@ -306,8 +306,6 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 7.90",
         labels: ["vegetarian", "local-specialty"],
-        featured: true,
-        image: siteImages.featuredDishThree,
       },
       {
         name: {
@@ -394,6 +392,8 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 14.50",
         labels: ["vegetarian", "gluten-free"],
+        featured: true,
+        image: siteImages.dishGrilledCheeseSalad,
       },
       {
         name: {
