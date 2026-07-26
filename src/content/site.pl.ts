@@ -126,6 +126,15 @@ export const siteContentPl: SiteContent = {
       description:
         "Ciepłe drewno, miękkie światło i cichy gwar dobrych rozmów – tak wygląda atmosfera, która na Państwa czeka.",
     },
+    videoTour: {
+      eyebrow: "Wirtualny spacer",
+      title: "Zajrzyj do Zentrum",
+      description:
+        "Zapraszamy na krótki spacer po naszej kawiarni i restauracji w Ramsau am Dachstein.",
+      videoFallback: "Twoja przeglądarka nie może odtworzyć tego wideo.",
+      musicCredit:
+        "Muzyka: „Bossa Antigua” – Kevin MacLeod (incompetech.com), licencja CC BY 4.0.",
+    },
     location: {
       eyebrow: "Nasz dom",
       title: "W sercu regionu Dachstein",

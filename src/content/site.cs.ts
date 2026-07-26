@@ -126,6 +126,15 @@ export const siteContentCs: SiteContent = {
       description:
         "Teplé dřevo, měkké světlo a tichý šum dobrých rozhovorů – nahlédněte do atmosféry, která vás u nás čeká.",
     },
+    videoTour: {
+      eyebrow: "Prohlídka",
+      title: "Nahlédněte k nám",
+      description:
+        "Vydejte se s námi na krátkou prohlídku naší kavárny a restaurace v Ramsau am Dachstein.",
+      videoFallback: "Váš prohlížeč bohužel nedokáže toto video přehrát.",
+      musicCredit:
+        "Hudba: „Bossa Antigua“ – Kevin MacLeod (incompetech.com), licence CC BY 4.0.",
+    },
     location: {
       eyebrow: "Náš domov",
       title: "V srdci regionu Dachstein",

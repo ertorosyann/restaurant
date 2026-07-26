@@ -130,6 +130,15 @@ export const siteContentDe = {
       description:
         "Warmes Holz, sanftes Licht und das leise Summen guter Gespräche – Eindrücke der Atmosphäre, die Sie erwartet.",
     },
+    videoTour: {
+      eyebrow: "Rundgang",
+      title: "Ein Blick ins Zentrum",
+      description:
+        "Begleiten Sie uns auf einen kurzen Rundgang durch unser Café-Restaurant in Ramsau am Dachstein.",
+      videoFallback: "Ihr Browser kann dieses Video leider nicht abspielen.",
+      musicCredit:
+        "Musik: „Bossa Antigua“ von Kevin MacLeod (incompetech.com), lizenziert unter CC BY 4.0.",
+    },
     location: {
       eyebrow: "Unser Zuhause",
       title: "Im Herzen der Dachstein-Region",

@@ -28,14 +28,13 @@ export const restaurantConfig = {
     pl: "Austria",
   } as LocalizedText,
 
-  /** Real telephone number, e.g. "+43 3687 000000" */
-  phone: "[PHONE_NUMBER]",
+  phone: "+43 664 2519009",
   /** Real email address, e.g. "info@zentrum-cafe.at" */
   email: "[EMAIL_ADDRESS]",
 
   address: {
-    street: "[STREET_ADDRESS]",
-    postalCode: "[POSTAL_CODE]",
+    street: "Ramsau 350",
+    postalCode: "8972",
     city: "Ramsau am Dachstein",
     country: {
       de: "Österreich",
@@ -92,37 +91,62 @@ export const restaurantConfig = {
 
   /**
    * Opening hours as displayed to visitors.
-   * Replace "[OPENING_HOURS]" with e.g. "8:00 – 22:00".
-   * Day labels carry one entry per website language.
+   * Day labels and hours carry one entry per website language
+   * (hours may be a plain string when they need no translation).
    */
   openingHours: [
     {
       days: {
-        de: "Montag – Freitag",
-        cs: "Pondělí – pátek",
-        en: "Monday – Friday",
-        pl: "Poniedziałek – piątek",
+        de: "Montag",
+        cs: "Pondělí",
+        en: "Monday",
+        pl: "Poniedziałek",
       } as LocalizedText,
-      hours: "[OPENING_HOURS]",
+      hours: {
+        de: "Ruhetag",
+        cs: "Zavřeno",
+        en: "Closed",
+        pl: "Nieczynne",
+      } as LocalizedText,
     },
     {
       days: {
-        de: "Samstag – Sonntag",
-        cs: "Sobota – neděle",
-        en: "Saturday – Sunday",
-        pl: "Sobota – niedziela",
+        de: "Dienstag",
+        cs: "Úterý",
+        en: "Tuesday",
+        pl: "Wtorek",
       } as LocalizedText,
-      hours: "[OPENING_HOURS]",
+      hours: "11:00 – 19:00" as LocalizedText,
+    },
+    {
+      days: {
+        de: "Mittwoch – Samstag",
+        cs: "Středa – sobota",
+        en: "Wednesday – Saturday",
+        pl: "Środa – sobota",
+      } as LocalizedText,
+      hours: "10:00 – 19:00" as LocalizedText,
+    },
+    {
+      days: {
+        de: "Sonntag",
+        cs: "Neděle",
+        en: "Sunday",
+        pl: "Niedziela",
+      } as LocalizedText,
+      hours: "11:00 – 19:00" as LocalizedText,
     },
   ],
 
   /**
-   * Machine-readable opening hours for JSON-LD structured data,
-   * e.g. ["Mo-Fr 08:00-22:00", "Sa-Su 09:00-22:00"].
-   * Leave empty until the real hours are confirmed — empty entries are
-   * excluded from structured data.
+   * Machine-readable opening hours for JSON-LD structured data.
+   * Closed days (Monday) are simply omitted.
    */
-  structuredOpeningHours: [] as string[],
+  structuredOpeningHours: [
+    "Tu 11:00-19:00",
+    "We-Sa 10:00-19:00",
+    "Su 11:00-19:00",
+  ] as string[],
 };
 
 export type RestaurantConfig = typeof restaurantConfig;

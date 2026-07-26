@@ -37,7 +37,7 @@ export function OpeningHours({ locale, tone = "light", className = "" }: Opening
                 isDark ? "text-copper-300" : "text-copper-700"
               }`}
             >
-              {entry.hours}
+              {localize(entry.hours, locale)}
             </dd>
           </div>
         );

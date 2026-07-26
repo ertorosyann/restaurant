@@ -70,7 +70,7 @@ export default async function AboutPage(props: PageProps) {
         eyebrow={content.cuisine.eyebrow}
         title={content.cuisine.title}
         paragraphs={content.cuisine.paragraphs}
-        image={siteImages.featuredDishTwo}
+        image={siteImages.dishWienerSchnitzel}
       />
 
       {/* ---------- Quality ingredients ---------- */}

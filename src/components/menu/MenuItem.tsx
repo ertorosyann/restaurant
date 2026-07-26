@@ -40,9 +40,11 @@ export function MenuItem({ item, locale }: MenuItemProps) {
             {item.price}
           </p>
         </div>
-        <p className="mt-1.5 text-sm leading-relaxed text-charcoal-600">
-          {item.description}
-        </p>
+        {item.description && (
+          <p className="mt-1.5 text-sm leading-relaxed text-charcoal-600">
+            {item.description}
+          </p>
+        )}
         {item.labels && item.labels.length > 0 && (
           <ul className="mt-2.5 flex flex-wrap gap-1.5">
             {item.labels.map((label) => (

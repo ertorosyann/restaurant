@@ -61,14 +61,14 @@ export const siteImages = {
     src: "/manu/img-3.jpg",
     alt: "Crisp oven-baked tarte flambée topped with colourful peppers, zucchini and herbs at Zentrum Café Restaurant",
   },
+  dishWienerSchnitzel: {
+    src: "/manu/img-4.jpeg",
+    alt: "Golden Wiener Schnitzel with roast potatoes, fries, lemon and cranberries served on a decorated table at Zentrum Café Restaurant",
+  },
 
   featuredDishOne: {
     src: unsplash("photo-1546069901-ba9599a7e63c", 1200),
     alt: "Colourful, freshly prepared dish served in a ceramic bowl (placeholder image)",
-  },
-  featuredDishTwo: {
-    src: unsplash("photo-1467003909585-2f8a72700288", 1200),
-    alt: "Refined plated main course garnished with fresh herbs (placeholder image)",
   },
   featuredDishThree: {
     src: unsplash("photo-1547592166-23ac45744acd", 1200),
@@ -106,8 +106,8 @@ export const siteImages = {
   /* ---------------- Interior & atmosphere ---------------- */
 
   interiorOne: {
-    src: unsplash("photo-1554118811-1e0d58224f24", 1400),
-    alt: "Cozy café interior with warm wood and inviting seating (placeholder image)",
+    src: "/resturant/img-3.jpeg",
+    alt: "Bright dining room of Zentrum Café Restaurant with plush grey armchairs, round wooden tables and the bar beneath timber beams",
   },
   interiorTwo: {
     src: unsplash("photo-1517248135467-4c7edcad34c4", 1400),

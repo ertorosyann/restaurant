@@ -41,10 +41,12 @@ export function FeaturedDishCard({ item, locale }: FeaturedDishCardProps) {
           </ul>
         )}
         <h3 className="font-display text-xl text-charcoal-900">{item.name}</h3>
-        <p className="mt-2.5 flex-1 text-sm leading-relaxed text-charcoal-600">
-          {item.description}
-        </p>
-        <p className="mt-5 font-display text-lg text-copper-700">{item.price}</p>
+        {item.description && (
+          <p className="mt-2.5 text-sm leading-relaxed text-charcoal-600">
+            {item.description}
+          </p>
+        )}
+        <p className="mt-auto pt-5 font-display text-lg text-copper-700">{item.price}</p>
       </div>
     </article>
   );

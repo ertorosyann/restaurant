@@ -126,6 +126,15 @@ export const siteContentEn: SiteContent = {
       description:
         "Warm wood, soft light and the quiet hum of good conversation — impressions of the atmosphere that awaits you.",
     },
+    videoTour: {
+      eyebrow: "A Look Inside",
+      title: "Step inside the Zentrum",
+      description:
+        "Join us for a short tour of our café restaurant in Ramsau am Dachstein.",
+      videoFallback: "Unfortunately, your browser cannot play this video.",
+      musicCredit:
+        "Music: “Bossa Antigua” by Kevin MacLeod (incompetech.com), licensed under CC BY 4.0.",
+    },
     location: {
       eyebrow: "Our Home",
       title: "In the heart of the Dachstein region",

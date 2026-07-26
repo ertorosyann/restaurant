@@ -191,9 +191,38 @@ export default async function HomePage(props: PageProps) {
               siteImages.canapePlatters,
               siteImages.flammkuchen,
               siteImages.dishGrilledCheeseSalad,
-              siteImages.contactHero,
+              siteImages.dishWienerSchnitzel,
             ]}
           />
+        </div>
+      </section>
+
+      {/* ---------- Video tour ---------- */}
+      <section className="px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <Reveal>
+            <SectionHeading
+              eyebrow={content.videoTour.eyebrow}
+              title={content.videoTour.title}
+              description={content.videoTour.description}
+              align="center"
+            />
+          </Reveal>
+          <Reveal className="mt-14">
+            <video
+              className="aspect-video w-full rounded-lg bg-charcoal-900 object-cover shadow-lifted"
+              controls
+              playsInline
+              preload="none"
+              poster="/videos/restaurant-tour-poster.jpg"
+            >
+              <source src="/videos/restaurant-tour.mp4" type="video/mp4" />
+              {content.videoTour.videoFallback}
+            </video>
+            <p className="mt-4 text-center text-xs text-charcoal-500">
+              {content.videoTour.musicCredit}
+            </p>
+          </Reveal>
         </div>
       </section>
 
