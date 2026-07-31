@@ -9,7 +9,7 @@ import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { SplitSection } from "@/components/shared/SplitSection";
 import { getSiteContent } from "@/content/site";
-import { siteImages } from "@/data/images";
+import { eventRoomSlides, siteImages } from "@/data/images";
 import { buildPageMetadata } from "@/lib/seo";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 
@@ -123,12 +123,13 @@ export default async function AboutPage(props: PageProps) {
         imageFirst
       />
 
-      {/* ---------- Team ---------- */}
+      {/* ---------- Events & celebrations ---------- */}
       <SplitSection
         eyebrow={content.team.eyebrow}
         title={content.team.title}
         paragraphs={content.team.paragraphs}
-        image={siteImages.kitchen}
+        image={siteImages.tableSetting1}
+        images={eventRoomSlides}
         imageAspect="landscape"
         tinted
       />
@@ -147,11 +148,11 @@ export default async function AboutPage(props: PageProps) {
           <Gallery
             className="mt-14"
             images={[
-              siteImages.breakfast,
-              siteImages.pastry,
-              siteImages.coffeeAlt,
-              siteImages.dessertAlt,
-              siteImages.salad,
+              siteImages.moments1,
+              siteImages.dishTunaCiabatta,
+              siteImages.coffee,
+              siteImages.dishBelgianWaffles,
+              siteImages.putenstreifensalat,
             ]}
           />
           <p className="mt-6 text-center text-xs text-charcoal-500">
@@ -164,8 +165,8 @@ export default async function AboutPage(props: PageProps) {
       <section className="relative overflow-hidden bg-charcoal-950">
         <div className="absolute inset-0">
           <Image
-            src={siteImages.alpineValley.src}
-            alt={siteImages.alpineValley.alt}
+            src={siteImages.moments4.src}
+            alt={siteImages.moments4.alt}
             fill
             sizes="100vw"
             className="object-cover"

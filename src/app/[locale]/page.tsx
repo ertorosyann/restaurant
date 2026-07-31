@@ -141,8 +141,8 @@ export default async function HomePage(props: PageProps) {
               </div>
               <div className="relative mt-10 aspect-[3/4] overflow-hidden rounded-lg shadow-soft">
                 <Image
-                  src={siteImages.dessert.src}
-                  alt={siteImages.dessert.alt}
+                  src={siteImages.dishBelgianWaffles.src}
+                  alt={siteImages.dishBelgianWaffles.alt}
                   fill
                   sizes="(min-width: 1216px) 262px, (min-width: 1024px) 22vw, 45vw"
                   className="object-cover"
@@ -187,11 +187,11 @@ export default async function HomePage(props: PageProps) {
           <Gallery
             className="mt-14"
             images={[
-              siteImages.tableSetting,
-              siteImages.canapePlatters,
-              siteImages.flammkuchen,
+              siteImages.tableSetting1,
+              siteImages.moments,
               siteImages.dishGrilledCheeseSalad,
-              siteImages.dishWienerSchnitzel,
+              siteImages.dishPizzaMargherita,
+              siteImages.moments1,
             ]}
           />
         </div>
@@ -230,7 +230,7 @@ export default async function HomePage(props: PageProps) {
       <LocationSection locale={locale} />
 
       {/* ---------- Food philosophy ---------- */}
-      <section className="px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      {/* <section className="px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <SectionHeading
@@ -259,7 +259,7 @@ export default async function HomePage(props: PageProps) {
             </div>
           </Reveal>
         </div>
-      </section>
+      </section> */}
 
       {/* ---------- Opening hours & visit ---------- */}
       <section className="bg-cream-100 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">

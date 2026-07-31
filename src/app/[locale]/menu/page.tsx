@@ -50,11 +50,6 @@ export default async function MenuPage(props: PageProps) {
       <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6 lg:px-8">
         <Breadcrumbs locale={locale} items={[{ name: siteContent.nav.menu }]} />
 
-        {/* Example-menu notice — remove once the real menu is entered. */}
-        <p className="mt-6 rounded-md border border-copper-400/40 bg-copper-100/50 px-4 py-3 text-sm leading-relaxed text-charcoal-700">
-          {content.exampleNotice}
-        </p>
-
         {/* Dietary label legend */}
         <div className="mt-6 flex flex-wrap items-center gap-2">
           <span className="text-xs font-medium uppercase tracking-[0.18em] text-charcoal-500">

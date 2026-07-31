@@ -30,7 +30,7 @@ export const restaurantConfig = {
 
   phone: "+43 664 2519009",
   /** Real email address, e.g. "info@zentrum-cafe.at" */
-  email: "[EMAIL_ADDRESS]",
+  email: "vazramsau@gmail.com",
 
   address: {
     street: "Ramsau 350",

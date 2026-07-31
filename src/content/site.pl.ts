@@ -83,8 +83,6 @@ export const siteContentPl: SiteContent = {
     hoursTitle: "Godziny otwarcia",
     socialNote: "Profile w mediach społecznościowych już wkrótce.",
     copyright: "Zentrum Café Restaurant. Wszelkie prawa zastrzeżone.",
-    placeholderImagesNote:
-      "Część zdjęć na tej stronie ma jeszcze charakter poglądowy – stopniowo zastąpimy je fotografiami restauracji.",
   },
 
   home: {
@@ -237,15 +235,11 @@ export const siteContentPl: SiteContent = {
       ],
     },
     team: {
-      eyebrow: "Ludzie tworzący Zentrum",
-      title: "Zespół, który kocha to, co robi",
-      /*
-       * ⚠️ Tekst zastępczy — docelowo należy tu przedstawić szefa kuchni
-       * i zespół: nazwiska, zdjęcia i kilka osobistych słów.
-       */
+      eyebrow: "Przyjęcia i wydarzenia",
+      title: "Sala na przyjęcia dla maksymalnie 250 gości",
       paragraphs: [
-        "Za każdą dobrą restauracją stoi zespół, któremu naprawdę zależy – w kuchni, za ekspresem do kawy i przy Państwa stole.",
-        "[Tutaj należy przedstawić szefa kuchni i zespół Zentrum Café Restaurant – ich drogę zawodową, pasję oraz zdjęcie prawdziwych ludzi, którzy tworzą to miejsce.]",
+        "Od kameralnych spotkań rodzinnych po huczne wesela – Zentrum Café Restaurant oferuje salę mieszczącą do 250 gości, idealną na wesela i wyjątkowe okazje.",
+        "Ślub, urodziny, chrzciny czy impreza firmowa – nasz zespół zaplanuje z Państwem każdy szczegół, od menu po dekorację stołów, aby mogli Państwo po prostu cieszyć się swoim wyjątkowym dniem.",
       ],
     },
     gallery: {
@@ -276,8 +270,6 @@ export const siteContentPl: SiteContent = {
       description:
         "Od austriackich klasyków przez dania sezonowe po domowe wypieki i starannie przygotowywaną kawę – zapraszamy do odkrycia tego, co oferuje nasza kuchnia.",
     },
-    exampleNotice:
-      "Przykładowe menu w celach poglądowych – prezentowane dania i ceny są treścią zastępczą i zostaną zastąpione aktualną ofertą restauracji.",
     dietaryLegendTitle: "Oznaczenia",
     categoriesAriaLabel: "Kategorie menu",
     cta: {

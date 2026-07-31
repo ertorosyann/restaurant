@@ -83,7 +83,8 @@ export function getDietaryLabelText(locale: Locale): Record<DietaryLabel, string
 interface MenuItemSource {
   name: LocalizedText;
   description?: LocalizedText;
-  price: string;
+  /** Optional — seasonal items (e.g. ice cream) can be listed without one. */
+  price?: string;
   labels?: DietaryLabel[];
   featured?: boolean;
   image?: SiteImage;
@@ -101,7 +102,7 @@ interface MenuCategorySource {
 export interface MenuItemData {
   name: string;
   description?: string;
-  price: string;
+  price?: string;
   labels?: DietaryLabel[];
   featured?: boolean;
   image?: SiteImage;
@@ -128,6 +129,7 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 6.50",
         labels: ["local-specialty"],
+        image: siteImages.dishFrittatensuppe,
       },
       {
         name: {
@@ -147,6 +149,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Zupa gulaszowa z chlebem",
         },
         price: "€ 8.70",
+        image: siteImages.gulaschsuppe,
       },
     ],
   },
@@ -163,6 +166,7 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 7.00",
         labels: ["vegetarian"],
+        image: siteImages.dishMixedSalad,
       },
       {
         name: {
@@ -172,6 +176,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Sałatka z paskami indyka i chlebem",
         },
         price: "€ 15.50",
+        image: siteImages.putenstreifensalat,
       },
     ],
   },
@@ -192,6 +197,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Tost z szynką i serem z miską sałatki",
         },
         price: "€ 9.50",
+        image: siteImages.hamandcheese
       },
       {
         name: {
@@ -201,6 +207,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Holzfällerbrot – chleb „drwala”",
         },
         price: "€ 9.20",
+        image: siteImages.dishLumberjackBread,
       },
       {
         name: {
@@ -210,6 +217,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Tuńczyk na pieczywie ciabatta z sałatką",
         },
         price: "€ 10.50",
+        image: siteImages.dishTunaCiabatta,
       },
       {
         name: {
@@ -220,6 +228,7 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 9.00",
         labels: ["vegetarian"],
+        image: siteImages.dishTomatoMozzarellaBread,
       },
       {
         name: {
@@ -229,16 +238,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Parówki frankfurterki z chlebem, musztardą i chrzanem",
         },
         price: "€ 8.00",
-      },
-      {
-        name: {
-          de: "Käsekrainer mit Pommes",
-          cs: "Käsekrainer – klobása se sýrem, s hranolky",
-          en: "Käsekrainer – cheese-filled sausage with fries",
-          pl: "Käsekrainer – kiełbasa z serem, z frytkami",
-        },
-        price: "€ 14.00",
-        labels: ["local-specialty"],
+        image: siteImages.dishFrankfurter,
       },
     ],
   },
@@ -253,12 +253,24 @@ const menuSource: MenuCategorySource[] = [
     items: [
       {
         name: {
+          de: "Käsekrainer mit Pommes",
+          cs: "Käsekrainer – klobása se sýrem, s hranolky",
+          en: "Käsekrainer – cheese-filled sausage with fries",
+          pl: "Käsekrainer – kiełbasa z serem, z frytkami",
+        },
+        price: "€ 14.00",
+        labels: ["local-specialty"],
+        image: siteImages.dishKaesekrainer,
+      },
+      {
+        name: {
           de: "Spaghetti Bolognese mit frischem Parmesan",
           cs: "Spaghetti Bolognese s čerstvým parmazánem",
           en: "Spaghetti Bolognese with fresh parmesan",
           pl: "Spaghetti Bolognese ze świeżym parmezanem",
         },
         price: "€ 14.50",
+        image: siteImages.dishSpaghettiBolognese,
       },
       {
         name: {
@@ -280,6 +292,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Cordon bleu z ziemniakami i borówkami",
         },
         price: "€ 17.90",
+        image: siteImages.dishCordonBleu,
       },
       {
         name: {
@@ -302,6 +315,7 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 14.50",
         labels: ["vegetarian"],
+        image: siteImages.vegetablerisotto
       },
       {
         name: {
@@ -311,6 +325,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Risotto z owocami morza",
         },
         price: "€ 18.50",
+        image: siteImages.dishSeafoodRisotto,
       },
       {
         name: {
@@ -337,6 +352,7 @@ const menuSource: MenuCategorySource[] = [
         name: "Pizza Margharitha",
         price: "€ 11.50",
         labels: ["vegetarian"],
+        image: siteImages.dishPizzaMargherita,
       },
       {
         name: {
@@ -372,6 +388,7 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 7.50",
         labels: ["vegetarian", "local-specialty"],
+        image: siteImages.apfel
       },
       {
         name: {
@@ -382,6 +399,7 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 9.50",
         labels: ["vegetarian"],
+        image: siteImages.dishBelgianWaffles,
       },
       {
         name: {
@@ -392,6 +410,54 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 14.80",
         labels: ["vegetarian", "local-specialty"],
+        image: siteImages.dishKaiserschmarren,
+      },
+    ],
+  },
+  {
+    id: "ice-cream",
+    title: {
+      de: "Eisbecher",
+      cs: "Zmrzlinové poháry",
+      en: "Ice Cream Sundaes",
+      pl: "Puchary lodowe",
+    },
+    note: {
+      de: "Nur im Sommer erhältlich – fragen Sie unser Team nach dem aktuellen Angebot.",
+      cs: "K dispozici pouze v létě – na aktuální nabídku se zeptejte naší obsluhy.",
+      en: "Available in summer only — ask our team for the current selection.",
+      pl: "Dostępne tylko latem – o aktualną ofertę zapytaj naszą obsługę.",
+    },
+    items: [
+      {
+        name: {
+          de: "Bananensplit",
+          cs: "Banánový pohár (banana split)",
+          en: "Banana split",
+          pl: "Deser bananowy (banana split)",
+        },
+        labels: ["vegetarian"],
+        image: siteImages.iceBananaSplit,
+      },
+      {
+        name: {
+          de: "Früchteeisbecher",
+          cs: "Ovocný zmrzlinový pohár",
+          en: "Fruit sundae",
+          pl: "Puchar lodowy z owocami",
+        },
+        labels: ["vegetarian"],
+        image: siteImages.iceFruitSundae,
+      },
+      {
+        name: {
+          de: "Krokantbecher",
+          cs: "Zmrzlinový pohár s krokantem",
+          en: "Krokant sundae with brittle",
+          pl: "Puchar lodowy z krokantem",
+        },
+        labels: ["vegetarian"],
+        image: siteImages.iceKrokant,
       },
     ],
   },

@@ -83,8 +83,6 @@ export const siteContentCs: SiteContent = {
     hoursTitle: "Otevírací doba",
     socialNote: "Profily na sociálních sítích již brzy.",
     copyright: "Zentrum Café Restaurant. Všechna práva vyhrazena.",
-    placeholderImagesNote:
-      "Některé fotografie na tomto webu jsou zatím ilustrační a postupně je nahradíme snímky restaurace.",
   },
 
   home: {
@@ -237,15 +235,11 @@ export const siteContentCs: SiteContent = {
       ],
     },
     team: {
-      eyebrow: "Lidé, kteří tvoří Zentrum",
-      title: "Tým, který miluje to, co dělá",
-      /*
-       * ⚠️ Zástupný text — zde později představte šéfkuchaře a tým se
-       * jmény, fotografiemi a několika osobními slovy.
-       */
+      eyebrow: "Oslavy a události",
+      title: "Prostor pro akce až pro 250 hostů",
       paragraphs: [
-        "Za každou dobrou restaurací stojí tým, kterému na výsledku záleží – v kuchyni, za kávovarem i u vašeho stolu.",
-        "[Zde představte šéfkuchaře a tým Zentrum Café Restaurant – jejich cestu, jejich nadšení a fotografii skutečných lidí, kteří tomuto místu dávají tvář.]",
+        "Od komorní rodinné oslavy po velkou svatbu – Zentrum Café Restaurant nabízí prostor pro akce až pro 250 hostů, ideální pro svatby a výjimečné příležitosti.",
+        "Ať už jde o svatbu, narozeniny, křtiny nebo firemní večírek, náš tým s vámi naplánuje každý detail – od menu po výzdobu stolů – abyste si svůj výjimečný den mohli naplno užít.",
       ],
     },
     gallery: {
@@ -276,8 +270,6 @@ export const siteContentCs: SiteContent = {
       description:
         "Od rakouské klasiky přes sezonní pokrmy až po domácí moučníky a pečlivě připravovanou kávu – objevte, co naše kuchyně nabízí.",
     },
-    exampleNotice:
-      "Ukázkový jídelní lístek pro ilustraci – uvedené pokrmy a ceny jsou zástupné a budou nahrazeny aktuální nabídkou restaurace.",
     dietaryLegendTitle: "Vysvětlivky",
     categoriesAriaLabel: "Kategorie jídelního lístku",
     cta: {

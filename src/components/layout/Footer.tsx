@@ -117,7 +117,6 @@ export function Footer({ locale }: FooterProps) {
             © <CurrentYear initialYear={new Date().getFullYear()} />{" "}
             {content.footer.copyright}
           </p>
-          <p className="mt-1.5">{content.footer.placeholderImagesNote}</p>
         </div>
       </div>
     </footer>

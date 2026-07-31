@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { ButtonLink } from "@/components/shared/ButtonLink";
+import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { getSiteContent } from "@/content/site";
-import { siteImages } from "@/data/images";
+import { homeHeroSlides } from "@/data/images";
 import { localeHref, type Locale } from "@/i18n/config";
 
 interface HeroProps {
@@ -19,17 +19,7 @@ export function Hero({ locale }: HeroProps) {
 
   return (
     <section className="relative flex min-h-svh items-center justify-center overflow-hidden bg-charcoal-950">
-      <div className="absolute inset-0 overflow-hidden">
-        <Image
-          src={siteImages.homeHero.src}
-          alt={siteImages.homeHero.alt}
-          fill
-          priority
-          quality={85}
-          sizes="100vw"
-          className="object-cover motion-safe:animate-slow-zoom"
-        />
-      </div>
+      <HeroCarousel slides={homeHeroSlides} />
       {/* Legibility overlays */}
       <div
         aria-hidden="true"

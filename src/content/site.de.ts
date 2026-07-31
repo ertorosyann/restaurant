@@ -87,8 +87,6 @@ export const siteContentDe = {
     hoursTitle: "Öffnungszeiten",
     socialNote: "Social-Media-Profile folgen in Kürze.",
     copyright: "Zentrum Café Restaurant. Alle Rechte vorbehalten.",
-    placeholderImagesNote:
-      "Einzelne Fotos auf dieser Website sind noch Platzhalter und werden nach und nach durch Aufnahmen des Restaurants ersetzt.",
   },
 
   home: {
@@ -241,15 +239,11 @@ export const siteContentDe = {
       ],
     },
     team: {
-      eyebrow: "Die Menschen hinter dem Zentrum",
-      title: "Ein Team, das liebt, was es tut",
-      /*
-       * ⚠️ Platzhalter — hier später Küchenchef und Team mit Namen, Fotos
-       * und ein paar persönlichen Worten vorstellen.
-       */
+      eyebrow: "Feiern & Veranstaltungen",
+      title: "Eventlocation für bis zu 250 Gäste",
       paragraphs: [
-        "Hinter jedem guten Restaurant steht ein Team, dem es nicht egal ist – in der Küche, hinter der Kaffeemaschine und an Ihrem Tisch.",
-        "[Hier Küchenchef und Team des Zentrum Café Restaurants vorstellen – ihr Werdegang, ihre Leidenschaft und ein Foto der echten Menschen, die diesen Ort ausmachen.]",
+        "Von der intimen Familienfeier bis zur großen Hochzeit – das Zentrum Café Restaurant bietet eine Eventlocation mit Platz für bis zu 250 Gäste, perfekt für Hochzeiten und besondere Anlässe.",
+        "Ob Hochzeit, Geburtstag, Taufe oder Firmenfeier: Unser Team plant jedes Detail gemeinsam mit Ihnen – vom Menü bis zur Tischdekoration –, damit Sie Ihren besonderen Tag einfach genießen können.",
       ],
     },
     gallery: {
@@ -280,8 +274,6 @@ export const siteContentDe = {
       description:
         "Von österreichischen Klassikern über saisonale Gerichte bis zu hausgemachten Mehlspeisen und sorgfältig zubereitetem Kaffee – entdecken Sie, was unsere Küche zu bieten hat.",
     },
-    exampleNotice:
-      "Beispielkarte zur Veranschaulichung – die gezeigten Gerichte und Preise sind Platzhalter und werden durch das aktuelle Angebot des Restaurants ersetzt.",
     dietaryLegendTitle: "Kennzeichnung",
     categoriesAriaLabel: "Speisekarten-Kategorien",
     cta: {

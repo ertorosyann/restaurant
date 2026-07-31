@@ -31,18 +31,23 @@ export const siteImages = {
     src: "/resturant/img-2.jpeg",
     alt: "Sunny terrace of Zentrum Café Restaurant with wooden tables under green umbrellas and alpine scenery",
   },
+  homeHero1: {
+    src: "/resturant/resturant.jpeg",
+    alt: "Sunny terrace of Zentrum Café Restaurant with wooden tables under green umbrellas and alpine scenery",
+  },
   aboutHero: {
-    src: unsplash("photo-1517248135467-4c7edcad34c4", 2000),
+    src: '/resturant/event-place.jpeg',
     alt: "Warmly lit restaurant dining room with wooden tables and soft lighting (placeholder image)",
   },
   menuHero: {
-    src: unsplash("photo-1544025162-d76694265947", 2000),
+    src: '/resturant/event-place3.jpeg',
     alt: "Beautifully plated dishes arranged on a rustic wooden table (placeholder image)",
   },
   contactHero: {
-    src: "/resturant/img-1.jpeg",
+    src: "/resturant/img-2.jpeg",
     alt: "Street view of Zentrum Café Restaurant with blooming flower beds in front of the shaded terrace",
   },
+
 
   /* ---------------- Food & drink ---------------- */
 
@@ -50,7 +55,7 @@ export const siteImages = {
      They live in /public/manu — reference them from there, do not move
      or rename the files. */
   dishGrilledCheeseSalad: {
-    src: "/manu/img-1.jpg",
+    src: "/manu/Grilled-camembert.jpg",
     alt: "Grilled cheese wedge on a fresh leaf salad with tomatoes, arugula, seeds and a cranberry dip at Zentrum Café Restaurant",
   },
   canapePlatters: {
@@ -58,64 +63,123 @@ export const siteImages = {
     alt: "Festive platters of homemade canapés with salami, cheese, spreads, cucumber and cherry tomatoes at Zentrum Café Restaurant",
   },
   flammkuchen: {
-    src: "/manu/img-3.jpg",
+    src: "/manu/Flammkuchen.jpg",
     alt: "Crisp oven-baked tarte flambée topped with colourful peppers, zucchini and herbs at Zentrum Café Restaurant",
   },
   dishWienerSchnitzel: {
-    src: "/manu/img-4.jpeg",
+    src: "/manu/wiener-schnitzel.jpeg",
     alt: "Golden Wiener Schnitzel with roast potatoes, fries, lemon and cranberries served on a decorated table at Zentrum Café Restaurant",
   },
-
-  featuredDishOne: {
-    src: unsplash("photo-1546069901-ba9599a7e63c", 1200),
-    alt: "Colourful, freshly prepared dish served in a ceramic bowl (placeholder image)",
+  apfel: {
+    src: '/manu/Apfel.jpeg',
+    alt: 'Apfel'
   },
-  featuredDishThree: {
-    src: unsplash("photo-1547592166-23ac45744acd", 1200),
-    alt: "Steaming bowl of homemade soup with fresh garnish (placeholder image)",
+  vegetablerisotto: {
+    src: '/manu/Vegetable-risotto.jpeg',
+    alt: 'Vegetable-risotto',
+  },
+  hamandcheese: {
+    src: '/manu/Ham-and-cheese.jpeg',  
+    alt: 'Ham-and-cheese'
+  },
+  putenstreifensalat: {
+    src: '/manu/Putenstreifensalat.jpeg',
+    alt: 'Putenstreifensalat'
+  },
+  gulaschsuppe: {
+    src: '/manu/Gulaschsuppe.jpeg',
+    alt: 'Gulaschsuppe'
+  },
+  dishFrittatensuppe: {
+    src: "/manu/frittatensuppe.jpeg",
+    alt: "Clear broth with thin pancake strips and fresh chives at Zentrum Café Restaurant",
+  },
+  dishMixedSalad: {
+    src: "/manu/gemischte-salat.jpeg",
+    alt: "Fresh mixed salad with crisp leaves, tomatoes and house dressing at Zentrum Café Restaurant",
+  },
+  dishLumberjackBread: {
+    src: "/manu/lumberjack_bread.jpeg",
+    alt: "Hearty Holzfällerbrot — rustic open bread topped with savoury garnish at Zentrum Café Restaurant",
+  },
+  dishTunaCiabatta: {
+    src: "/manu/Thunfisch-auf-Ciabatta-Brot.jpeg",
+    alt: "Tuna on toasted ciabatta bread served with a fresh side salad at Zentrum Café Restaurant",
+  },
+  dishTomatoMozzarellaBread: {
+    src: "/manu/Tomaten-Mozzarella-Brot.jpeg",
+    alt: "Toasted bread topped with tomatoes, melted mozzarella and herbs at Zentrum Café Restaurant",
+  },
+  dishFrankfurter: {
+    src: "/manu/frankfur-sausages.jpeg",
+    alt: "Frankfurter sausages with bread, mustard and horseradish at Zentrum Café Restaurant",
+  },
+  dishKaesekrainer: {
+    src: "/manu/käsekrainer.jpeg",
+    alt: "Grilled Käsekrainer cheese sausage served with golden fries at Zentrum Café Restaurant",
+  },
+  dishSpaghettiBolognese: {
+    src: "/manu/spaghetti-Bolognese.jpeg",
+    alt: "Spaghetti Bolognese topped with freshly grated parmesan at Zentrum Café Restaurant",
+  },
+  dishCordonBleu: {
+    src: "/manu/cordon-potatoes.jpeg",
+    alt: "Golden Cordon bleu with roast potatoes and cranberries at Zentrum Café Restaurant",
+  },
+  dishSeafoodRisotto: {
+    src: "/manu/seafood-risotto.jpeg",
+    alt: "Creamy risotto with seafood and fresh herbs at Zentrum Café Restaurant",
+  },
+  dishPizzaMargherita: {
+    src: "/manu/pzz-margarita.jpeg",
+    alt: "Classic Pizza Margherita with tomato sauce, mozzarella and basil at Zentrum Café Restaurant",
+  },
+  dishBelgianWaffles: {
+    src: "/manu/belgian-waffles-chocolate.jpeg",
+    alt: "Belgian waffles with ice cream and warm chocolate sauce at Zentrum Café Restaurant",
+  },
+  dishKaiserschmarren: {
+    src: "/manu/kaiserschmarren.jpeg",
+    alt: "Fluffy shredded Kaiserschmarren pancake dusted with icing sugar, served with apple sauce at Zentrum Café Restaurant",
+  },
+  iceBananaSplit: {
+    src: "/manu/ice-Bananensplit.jpeg",
+    alt: "Banana split sundae with ice cream, whipped cream and chocolate sauce at Zentrum Café Restaurant",
+  },
+  iceFruitSundae: {
+    src: "/manu/ice-früchteeisbecher.jpeg",
+    alt: "Ice cream sundae topped with fresh fruit and whipped cream at Zentrum Café Restaurant",
+  },
+  iceKrokant: {
+    src: "/manu/ice-Krokant.jpeg",
+    alt: "Krokant ice cream sundae with caramel brittle and whipped cream at Zentrum Café Restaurant",
   },
   coffee: {
-    src: unsplash("photo-1509042239860-f550ce710b93", 1200),
+    src: '/manu/coffee1.png',
     alt: "Freshly brewed cappuccino with delicate latte art (placeholder image)",
-  },
-  coffeeAlt: {
-    src: unsplash("photo-1495474472287-4d71bcdd2085", 1200),
-    alt: "Cup of coffee on a wooden café table beside coffee beans (placeholder image)",
-  },
-  dessert: {
-    src: unsplash("photo-1578985545062-69928b1d9587", 1200),
-    alt: "Slice of rich layered chocolate cake on an elegant plate (placeholder image)",
-  },
-  dessertAlt: {
-    src: unsplash("photo-1551024506-0bccd828d307", 1200),
-    alt: "Delicate dessert with fresh berries served on fine tableware (placeholder image)",
-  },
-  pastry: {
-    src: unsplash("photo-1509440159596-0249088772ff", 1200),
-    alt: "Golden, freshly baked pastries arranged on a bakery counter (placeholder image)",
-  },
-  breakfast: {
-    src: unsplash("photo-1533089860892-a7c6f0a88666", 1200),
-    alt: "Generous breakfast spread with pancakes, fruit and coffee (placeholder image)",
-  },
-  salad: {
-    src: unsplash("photo-1512621776951-a57141f2eefd", 1200),
-    alt: "Fresh, vibrant salad bowl with seasonal vegetables (placeholder image)",
   },
 
   /* ---------------- Interior & atmosphere ---------------- */
 
   interiorOne: {
-    src: "/resturant/img-3.jpeg",
+    src: "/resturant/event-place3.jpeg",
     alt: "Bright dining room of Zentrum Café Restaurant with plush grey armchairs, round wooden tables and the bar beneath timber beams",
-  },
-  interiorTwo: {
-    src: unsplash("photo-1517248135467-4c7edcad34c4", 1400),
-    alt: "Restaurant dining room with softly lit tables ready for guests (placeholder image)",
   },
   tableSetting: {
     src: "/resturant/img-2.jpeg",
     alt: "Wooden benches and tables on the terrace of Zentrum Café Restaurant on a sunny day",
+  },
+  tableSetting1: {
+    src: "/resturant/event-place.jpeg",
+    alt: "Wooden benches and tables on the terrace of Zentrum Café Restaurant on a sunny day",
+  },
+  tableSetting3: {
+    src: "/resturant/event-place3.jpeg",
+    alt: "Wooden benches and tables on the terrace of Zentrum Café Restaurant on a sunny day",
+  },
+  eventsRoom: {
+    src: "/resturant/events.jpeg",
+    alt: "Festively set event room at Zentrum Café Restaurant, ready for a celebration",
   },
   kitchen: {
     src: unsplash("photo-1556910103-1c02745aae4d", 1400),
@@ -125,20 +189,55 @@ export const siteImages = {
   /* ---------------- Alpine scenery ---------------- */
 
   mountains: {
-    src: unsplash("photo-1506905925346-21bda4d32df4", 1800),
+    src: '/resturant/moments3.png',
     alt: "Majestic Alpine mountain peaks rising above the valley (placeholder image)",
   },
-  alpineValley: {
-    src: unsplash("photo-1458668383970-8ddd3927deed", 1600),
-    alt: "Green Alpine valley surrounded by dramatic mountain slopes (placeholder image)",
+  moments: {
+    src: "/resturant/moments.png",
+    alt: "Lunch with a glass of sparkling wine on the terrace of Zentrum Café Restaurant",
   },
-  mountainsWinter: {
-    src: unsplash("photo-1519681393784-d120267933ba", 1600),
-    alt: "Snow-covered mountain range beneath a starry night sky (placeholder image)",
+  moments1: {
+    src: "/manu/aperol-spritz2.png",
+    alt: "Aperol Spritz served on the sunny terrace of Zentrum Café Restaurant",
+  },
+  moments2: {
+    src: "/resturant/moments0.png",
+    alt: "Zentrum Café Restaurant terrace with green umbrellas beneath the Dachstein mountains",
+  },
+  moments3: {
+    src: "/resturant/moments.png",
+    alt: "Lunch with a glass of sparkling wine on the terrace of Zentrum Café Restaurant",
+  },
+  moments4: {
+    src: "/resturant/moments4.png",
+    alt: "Guests enjoying a moment at Zentrum Café Restaurant",
   },
 } satisfies Record<string, SiteImage>;
 
 export type SiteImageKey = keyof typeof siteImages;
+
+/**
+ * Slides for the auto-playing home hero carousel, in display order —
+ * the first entry is what visitors see on page load.
+ */
+export const homeHeroSlides: SiteImage[] = [
+  siteImages.moments2, 
+  siteImages.moments1, 
+  siteImages.homeHero1, // resturant.jpeg
+  siteImages.moments3, 
+  siteImages.contactHero, // img-1.jpeg
+  siteImages.homeHero, // img-2.jpeg
+];
+
+/**
+ * Photos of the event rooms — shown as a carousel in the events
+ * section of the About page.
+ */
+export const eventRoomSlides: SiteImage[] = [
+  siteImages.tableSetting1, // event-place.jpeg
+  siteImages.tableSetting3, // event-place3.jpeg
+  siteImages.eventsRoom, // events.jpeg
+];
 
 /**
  * Social sharing (Open Graph) preview image — a real photo of the

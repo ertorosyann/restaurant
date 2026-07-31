@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { SplitImageCarousel } from "@/components/shared/SplitImageCarousel";
 import type { SiteImage } from "@/data/images";
 
 interface SplitSectionProps {
@@ -9,6 +10,8 @@ interface SplitSectionProps {
   title: string;
   paragraphs: readonly string[];
   image: SiteImage;
+  /** Extra photos: with 2+ the image slot becomes an auto-playing carousel. */
+  images?: SiteImage[];
   /** Places the image on the left on large screens. */
   imageFirst?: boolean;
   /** Portrait (4/5) or landscape (4/3) image framing. */
@@ -27,11 +30,13 @@ export function SplitSection({
   title,
   paragraphs,
   image,
+  images,
   imageFirst = false,
   imageAspect = "portrait",
   tinted = false,
   children,
 }: SplitSectionProps) {
+  const slides = images && images.length > 1 ? images : null;
   return (
     <section
       className={`px-4 py-20 sm:px-6 sm:py-28 lg:px-8 ${tinted ? "bg-cream-100" : ""}`}
@@ -49,17 +54,24 @@ export function SplitSection({
 
         <Reveal delay={120} className={imageFirst ? "order-2 lg:order-1" : ""}>
           <div
-            className={`relative mx-auto max-w-md overflow-hidden rounded-lg shadow-lifted lg:max-w-none ${
-              imageAspect === "portrait" ? "aspect-[4/5]" : "aspect-[4/3]"
-            }`}
+            className={`relative overflow-hidden shadow-lifted lg:max-w-none ${
+              slides
+                ? // Carousel: full-bleed on phones, framed from sm upwards.
+                  "-mx-4 rounded-none sm:mx-auto sm:max-w-md sm:rounded-lg"
+                : "mx-auto max-w-md rounded-lg"
+            } ${imageAspect === "portrait" ? "aspect-[4/5]" : "aspect-[4/3]"}`}
           >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              sizes="(min-width: 1216px) 536px, (min-width: 1024px) 45vw, (min-width: 640px) 60vw, 100vw"
-              className="object-cover"
-            />
+            {slides ? (
+              <SplitImageCarousel slides={slides} />
+            ) : (
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(min-width: 1216px) 536px, (min-width: 1024px) 45vw, (min-width: 640px) 60vw, 100vw"
+                className="object-cover"
+              />
+            )}
           </div>
         </Reveal>
       </div>

@@ -83,8 +83,6 @@ export const siteContentEn: SiteContent = {
     hoursTitle: "Opening Hours",
     socialNote: "Social media profiles coming soon.",
     copyright: "Zentrum Café Restaurant. All rights reserved.",
-    placeholderImagesNote:
-      "Some website photos are still placeholder images and will gradually be replaced with photos of the restaurant.",
   },
 
   home: {
@@ -236,15 +234,11 @@ export const siteContentEn: SiteContent = {
       ],
     },
     team: {
-      eyebrow: "The People Behind Zentrum",
-      title: "A team that loves what it does",
-      /*
-       * ⚠️ Placeholder — introduce the real chef and team here with names,
-       * photos and a few personal words once available.
-       */
+      eyebrow: "Celebrations & Events",
+      title: "An event venue for up to 250 guests",
       paragraphs: [
-        "Behind every good restaurant stands a team that cares — in the kitchen, behind the coffee machine and at your table.",
-        "[Introduce the chef and team of Zentrum Café Restaurant here — their background, their passion, and a photo of the real people who make this place what it is.]",
+        "From intimate family gatherings to grand wedding receptions — Zentrum Café Restaurant offers an event venue with space for up to 250 guests, perfect for weddings and special occasions.",
+        "Whether it's a wedding, birthday, christening or company celebration, our team plans every detail together with you — from the menu to the table decoration — so you can simply enjoy your special day.",
       ],
     },
     gallery: {
@@ -275,8 +269,6 @@ export const siteContentEn: SiteContent = {
       description:
         "From Austrian classics to seasonal dishes, homemade desserts and carefully prepared coffee — discover what our kitchen has to offer.",
     },
-    exampleNotice:
-      "Example menu for illustration — dishes and prices shown are placeholders and will be replaced with the restaurant's current offering.",
     dietaryLegendTitle: "Labels",
     categoriesAriaLabel: "Menu categories",
     cta: {
