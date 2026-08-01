@@ -44,7 +44,8 @@ export const siteImages = {
     alt: "Beautifully plated dishes arranged on a rustic wooden table (placeholder image)",
   },
   contactHero: {
-    src: "/resturant/img-2.jpeg",
+    // src: "/resturant/img-2.jpeg",
+    src: "/resturant/resturant-home.jpeg",
     alt: "Street view of Zentrum Café Restaurant with blooming flower beds in front of the shaded terrace",
   },
 
@@ -155,8 +156,12 @@ export const siteImages = {
     alt: "Krokant ice cream sundae with caramel brittle and whipped cream at Zentrum Café Restaurant",
   },
   coffee: {
-    src: '/manu/coffee1.png',
+    src: '/manu/coffee1.jpeg',
     alt: "Freshly brewed cappuccino with delicate latte art (placeholder image)",
+  },
+  dishGemueseCreamSuppe: {
+    src: '/manu/Brokkoli-Zucchini-Cremesuppe.jpeg',
+    alt: 'Gemuese-Cream-Suppe',
   },
 
   /* ---------------- Interior & atmosphere ---------------- */
@@ -185,6 +190,10 @@ export const siteImages = {
     src: unsplash("photo-1556910103-1c02745aae4d", 1400),
     alt: "Chef carefully preparing a dish in a professional kitchen (placeholder image)",
   },
+  homeHero2: {
+    src: "/resturant/resturant-home2.jpeg",
+    alt: "Zentrum Café Restaurant terrace with green umbrellas beneath the Dachstein mountains",
+  },
 
   /* ---------------- Alpine scenery ---------------- */
 
@@ -197,11 +206,12 @@ export const siteImages = {
     alt: "Lunch with a glass of sparkling wine on the terrace of Zentrum Café Restaurant",
   },
   moments1: {
-    src: "/manu/aperol-spritz2.png",
+    // src: "/manu/aperol-spritz2.png",
+    src: "/manu/hugo-and-aperol.png",
     alt: "Aperol Spritz served on the sunny terrace of Zentrum Café Restaurant",
   },
   moments2: {
-    src: "/resturant/moments0.png",
+    src: "/resturant/resturant-home.jpeg",
     alt: "Zentrum Café Restaurant terrace with green umbrellas beneath the Dachstein mountains",
   },
   moments3: {
@@ -223,9 +233,9 @@ export type SiteImageKey = keyof typeof siteImages;
 export const homeHeroSlides: SiteImage[] = [
   siteImages.moments2, 
   siteImages.moments1, 
-  siteImages.homeHero1, // resturant.jpeg
+  siteImages.homeHero2,
+  // siteImages.homeHero1, // resturant.jpeg
   siteImages.moments3, 
-  siteImages.contactHero, // img-1.jpeg
   siteImages.homeHero, // img-2.jpeg
 ];
 

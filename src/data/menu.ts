@@ -139,7 +139,8 @@ const menuSource: MenuCategorySource[] = [
           pl: "Krem z warzyw z grzankami",
         },
         price: "€ 7.50",
-        labels: ["vegetarian"],
+        labels: ["vegetarian", "local-specialty"],
+        image: siteImages.dishGemueseCreamSuppe,
       },
       {
         name: {
@@ -270,7 +271,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Spaghetti Bolognese ze świeżym parmezanem",
         },
         price: "€ 14.50",
-        image: siteImages.dishSpaghettiBolognese,
+        image: siteImages.dishSeafoodRisotto,
       },
       {
         name: {
@@ -324,8 +325,8 @@ const menuSource: MenuCategorySource[] = [
           en: "Risotto with seafood",
           pl: "Risotto z owocami morza",
         },
-        price: "€ 18.50",
-        image: siteImages.dishSeafoodRisotto,
+        price: "€ 18.50",    
+        image: siteImages.dishSpaghettiBolognese,
       },
       {
         name: {

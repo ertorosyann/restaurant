@@ -30,7 +30,8 @@ export function CallToAction({
         <div className="relative overflow-hidden rounded-xl bg-pine-900 px-6 py-16 text-center sm:px-12 sm:py-20">
           {/* Photo backdrop with a dark pine overlay to keep the text readable */}
           <Image
-            src="/resturant/moments0.png"
+            // src="/resturant/moments0.png"
+            src="/resturant/resturant-home.jpeg"
             alt=""
             aria-hidden="true"
             fill
