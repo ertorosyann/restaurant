@@ -16,6 +16,7 @@ const closeLabel: LocalizedText = {
   cs: "Zavřít",
   en: "Close",
   pl: "Zamknij",
+  hu: "Bezárás",
 };
 
 const viewPhotoLabel: LocalizedText = {
@@ -23,6 +24,7 @@ const viewPhotoLabel: LocalizedText = {
   cs: "Zobrazit fotografii",
   en: "View photo",
   pl: "Zobacz zdjęcie",
+  hu: "Fotó megtekintése",
 };
 
 /**

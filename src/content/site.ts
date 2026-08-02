@@ -8,6 +8,7 @@
  *   site.cs.ts — Čeština
  *   site.en.ts — English
  *   site.pl.ts — Polski
+ *   site.hu.ts — Magyar
  *
  * Every file follows exactly the same structure (`SiteContent`), enforced
  * by TypeScript. Components receive the right language via
@@ -20,6 +21,7 @@ import { siteContentDe } from "./site.de";
 import { siteContentCs } from "./site.cs";
 import { siteContentEn } from "./site.en";
 import { siteContentPl } from "./site.pl";
+import { siteContentHu } from "./site.hu";
 
 /** The shape every language file must follow — derived from the German copy. */
 export type SiteContent = typeof siteContentDe;
@@ -29,6 +31,7 @@ const contentByLocale: Record<Locale, SiteContent> = {
   cs: siteContentCs,
   en: siteContentEn,
   pl: siteContentPl,
+  hu: siteContentHu,
 };
 
 export function getSiteContent(locale: Locale): SiteContent {

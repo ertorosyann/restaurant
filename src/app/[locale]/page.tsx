@@ -188,7 +188,7 @@ export default async function HomePage(props: PageProps) {
             className="mt-14"
             images={[
               siteImages.tableSetting1,
-              siteImages.moments,
+              siteImages.eventroom,
               siteImages.dishGrilledCheeseSalad,
               siteImages.dishPizzaMargherita,
               siteImages.moments1,

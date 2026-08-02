@@ -128,8 +128,7 @@ export default async function AboutPage(props: PageProps) {
         eyebrow={content.team.eyebrow}
         title={content.team.title}
         paragraphs={content.team.paragraphs}
-        image={siteImages.tableSetting1}
-        images={eventRoomSlides}
+        image={siteImages.eventroom}
         imageAspect="landscape"
         tinted
       />

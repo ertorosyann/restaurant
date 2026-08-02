@@ -135,6 +135,10 @@ export const siteImages = {
     src: "/manu/pzz-margarita.jpeg",
     alt: "Classic Pizza Margherita with tomato sauce, mozzarella and basil at Zentrum Café Restaurant",
   },
+  dishBauernPizza: {
+    src: "/manu/Bauern-Pizza.jpeg",
+    alt: "Bauern Pizza with tomato sauce, mozzarella and basil at Zentrum Café Restaurant",
+  },
   dishBelgianWaffles: {
     src: "/manu/belgian-waffles-chocolate.jpeg",
     alt: "Belgian waffles with ice cream and warm chocolate sauce at Zentrum Café Restaurant",
@@ -154,6 +158,10 @@ export const siteImages = {
   iceKrokant: {
     src: "/manu/ice-Krokant.jpeg",
     alt: "Krokant ice cream sundae with caramel brittle and whipped cream at Zentrum Café Restaurant",
+  },
+  iceEiskaffee: {
+    src: "/manu/ice-Eiskaffee.jpeg",
+    alt: "Eiskaffee with ice cream, whipped cream and chocolate sauce at Zentrum Café Restaurant",
   },
   coffee: {
     src: '/manu/coffee1.jpeg',
@@ -222,6 +230,10 @@ export const siteImages = {
     src: "/resturant/moments4.png",
     alt: "Guests enjoying a moment at Zentrum Café Restaurant",
   },
+  eventroom: {
+    src: "/resturant/events-room.jpeg",
+    alt: "Event place at Zentrum Café Restaurant",
+  },
 } satisfies Record<string, SiteImage>;
 
 export type SiteImageKey = keyof typeof siteImages;
@@ -234,9 +246,8 @@ export const homeHeroSlides: SiteImage[] = [
   siteImages.moments2, 
   siteImages.moments1, 
   siteImages.homeHero2,
-  // siteImages.homeHero1, // resturant.jpeg
-  siteImages.moments3, 
-  siteImages.homeHero, // img-2.jpeg
+  siteImages.eventroom,
+  siteImages.homeHero, 
 ];
 
 /**
@@ -244,9 +255,7 @@ export const homeHeroSlides: SiteImage[] = [
  * section of the About page.
  */
 export const eventRoomSlides: SiteImage[] = [
-  siteImages.tableSetting1, // event-place.jpeg
-  siteImages.tableSetting3, // event-place3.jpeg
-  siteImages.eventsRoom, // events.jpeg
+  siteImages.eventroom, // event-place.jpeg
 ];
 
 /**

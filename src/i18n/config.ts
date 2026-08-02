@@ -1,8 +1,8 @@
 /**
  * INTERNATIONALIZATION — Zentrum Café Restaurant
  * ===============================================
- * The website is served in four languages under locale-prefixed routes
- * (/de, /cs, /en, /pl). German is the main language: visitors landing on
+ * The website is served in five languages under locale-prefixed routes
+ * (/de, /cs, /en, /pl, /hu). German is the main language: visitors landing on
  * "/" are redirected by src/proxy.ts to their preferred language, falling
  * back to German.
  *
@@ -14,7 +14,7 @@
  *   fill in the new language across src/data/menu.ts.
  */
 
-export const locales = ["de", "cs", "en", "pl"] as const;
+export const locales = ["de", "cs", "en", "pl", "hu"] as const;
 
 export type Locale = (typeof locales)[number];
 
@@ -27,6 +27,7 @@ export const localeNames: Record<Locale, string> = {
   cs: "Čeština",
   en: "English",
   pl: "Polski",
+  hu: "Magyar",
 };
 
 /** Open Graph locale codes per language. */
@@ -35,6 +36,7 @@ export const ogLocales: Record<Locale, string> = {
   cs: "cs_CZ",
   en: "en_GB",
   pl: "pl_PL",
+  hu: "hu_HU",
 };
 
 export function isLocale(value: string): value is Locale {
