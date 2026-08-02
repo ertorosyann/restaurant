@@ -336,6 +336,7 @@ const menuSource: MenuCategorySource[] = [
           pl: "Panierowany dorsz polarny", hu: "Rántott csendes-óceáni sarki tőkehal",
         },
         price: "€ 18.80",
+        image: siteImages.dishPacificPolarCod,
       },
       {
         name: {
@@ -380,6 +381,7 @@ const menuSource: MenuCategorySource[] = [
         },
         price: "€ 5.00",
         labels: ["vegetarian"],
+        image: siteImages.dishHauskuchen,
       },
       {
         name: {

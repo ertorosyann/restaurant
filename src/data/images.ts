@@ -55,6 +55,14 @@ export const siteImages = {
   /* Real photos of dishes served at Zentrum Café Restaurant.
      They live in /public/manu — reference them from there, do not move
      or rename the files. */
+  dishHauskuchen: {
+    src: "/manu/hauskuchen.jpeg",
+    alt: "Hauskuchen with whipped cream at Zentrum Café Restaurant",
+  },
+  dishPacificPolarCod: {
+    src: "/manu/pazifischer-polardorsch-paniert.jpeg",
+    alt: "Pacific Polar Cod with potatoes, vegetables and a lemon sauce at Zentrum Café Restaurant",
+  },
   dishGrilledCheeseSalad: {
     src: "/manu/Grilled-camembert.jpg",
     alt: "Grilled cheese wedge on a fresh leaf salad with tomatoes, arugula, seeds and a cranberry dip at Zentrum Café Restaurant",
@@ -166,6 +174,10 @@ export const siteImages = {
   coffee: {
     src: '/manu/coffee1.jpeg',
     alt: "Freshly brewed cappuccino with delicate latte art (placeholder image)",
+  },
+  latteMacchiato: {
+    src: "/manu/latte-Macchiato.jpeg",
+    alt: "Layered latte macchiato in a tall glass at Zentrum Café Restaurant",
   },
   dishGemueseCreamSuppe: {
     src: '/manu/Brokkoli-Zucchini-Cremesuppe.jpeg',

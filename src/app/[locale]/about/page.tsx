@@ -65,64 +65,6 @@ export default async function AboutPage(props: PageProps) {
         tinted
       />
 
-      {/* ---------- Cuisine & hospitality ---------- */}
-      <SplitSection
-        eyebrow={content.cuisine.eyebrow}
-        title={content.cuisine.title}
-        paragraphs={content.cuisine.paragraphs}
-        image={siteImages.dishWienerSchnitzel}
-      />
-
-      {/* ---------- Quality ingredients ---------- */}
-      <section className="bg-pine-900 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <SectionHeading
-              eyebrow={content.ingredients.eyebrow}
-              title={content.ingredients.title}
-              tone="dark"
-              align="center"
-            />
-          </Reveal>
-          <Reveal delay={80}>
-            <div className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-cream-100/85 sm:text-lg">
-              {content.ingredients.paragraphs.map((paragraph) => (
-                <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-              ))}
-            </div>
-          </Reveal>
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {content.ingredients.points.map((point, index) => (
-              <Reveal key={point.title} delay={index * 110}>
-                <div className="h-full rounded-lg border border-cream-50/12 bg-pine-800/60 p-7 sm:p-8">
-                  <span
-                    aria-hidden="true"
-                    className="font-display text-3xl text-copper-300"
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-4 font-display text-xl text-cream-50">
-                    {point.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-cream-100/75">
-                    {point.text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- Coffee & dessert experience ---------- */}
-      <SplitSection
-        eyebrow={content.coffee.eyebrow}
-        title={content.coffee.title}
-        paragraphs={content.coffee.paragraphs}
-        image={siteImages.coffee}
-        imageFirst
-      />
-
       {/* ---------- Events & celebrations ---------- */}
       <SplitSection
         eyebrow={content.team.eyebrow}
@@ -131,6 +73,24 @@ export default async function AboutPage(props: PageProps) {
         image={siteImages.eventroom}
         imageAspect="landscape"
         tinted
+      />
+
+      {/* ---------- Cuisine & hospitality ---------- */}
+      <SplitSection
+        eyebrow={content.cuisine.eyebrow}
+        title={content.cuisine.title}
+        paragraphs={content.cuisine.paragraphs}
+        image={siteImages.dishWienerSchnitzel}
+      />
+
+      {/* ---------- Coffee & dessert experience ---------- */}
+      <SplitSection
+        eyebrow={content.coffee.eyebrow}
+        title={content.coffee.title}
+        paragraphs={content.coffee.paragraphs}
+        image={siteImages.coffee}
+        images={[siteImages.coffee, siteImages.latteMacchiato]}
+        imageFirst
       />
 
       {/* ---------- Interior gallery ---------- */}
@@ -193,6 +153,47 @@ export default async function AboutPage(props: PageProps) {
           </Reveal>
         </div>
       </section>
+
+      {/* ---------- Quality ingredients ----------
+      <section className="bg-white px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <SectionHeading
+              eyebrow={content.ingredients.eyebrow}
+              title={content.ingredients.title}
+              tone="dark"
+              align="center"
+            />
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-cream-100/85 sm:text-lg">
+              {content.ingredients.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+              ))}
+            </div>
+          </Reveal>
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {content.ingredients.points.map((point, index) => (
+              <Reveal key={point.title} delay={index * 110}>
+                <div className="h-full rounded-lg border border-cream-50/12 bg-pine-800/60 p-7 sm:p-8">
+                  <span
+                    aria-hidden="true"
+                    className="font-display text-3xl text-copper-300"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-4 font-display text-xl text-cream-50">
+                    {point.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-cream-100/75">
+                    {point.text}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section> */}
 
       {/* ---------- Final call-to-action ---------- */}
       <div className="pt-20">
