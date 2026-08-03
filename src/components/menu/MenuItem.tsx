@@ -51,7 +51,7 @@ export function MenuItem({ item, locale }: MenuItemProps) {
       )}
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline gap-3">
-          <h3 className="font-display text-lg leading-snug text-charcoal-900">
+          <h3 className="font-display text-xl leading-snug text-charcoal-950 sm:text-[1.375rem]">
             {item.name}
           </h3>
           {item.price && (
@@ -60,7 +60,7 @@ export function MenuItem({ item, locale }: MenuItemProps) {
                 aria-hidden="true"
                 className="min-w-4 flex-1 border-b border-dotted border-charcoal-900/25"
               />
-              <p className="whitespace-nowrap font-display text-lg text-copper-700">
+              <p className="whitespace-nowrap font-display text-xl text-copper-800 sm:text-[1.375rem]">
                 {item.price}
               </p>
             </>
