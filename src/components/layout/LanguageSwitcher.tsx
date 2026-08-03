@@ -30,6 +30,62 @@ export function switchLocalePath(pathname: string, locale: Locale): string {
   return pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
 }
 
+/**
+ * Tiny inline-SVG country flags (Austria for German, UK for English).
+ * Drawn by hand instead of emoji so they render identically on every
+ * platform — Windows browsers show plain letters for emoji flags.
+ */
+function FlagIcon({ locale }: { locale: Locale }) {
+  const common = {
+    viewBox: "0 0 24 16",
+    className: "h-3.5 w-[1.3125rem] shrink-0 rounded-[2px] ring-1 ring-charcoal-950/10",
+    "aria-hidden": true,
+  } as const;
+
+  switch (locale) {
+    case "de": // Austria
+      return (
+        <svg {...common}>
+          <rect width="24" height="16" fill="#ed2939" />
+          <rect y="5.33" width="24" height="5.34" fill="#fff" />
+        </svg>
+      );
+    case "cs": // Czechia
+      return (
+        <svg {...common}>
+          <rect width="24" height="8" fill="#fff" />
+          <rect y="8" width="24" height="8" fill="#d7141a" />
+          <path d="M0 0l12 8-12 8z" fill="#11457e" />
+        </svg>
+      );
+    case "en": // United Kingdom (simplified)
+      return (
+        <svg {...common}>
+          <rect width="24" height="16" fill="#012169" />
+          <path d="M0 0l24 16M24 0L0 16" stroke="#fff" strokeWidth="3.2" />
+          <path d="M0 0l24 16M24 0L0 16" stroke="#c8102e" strokeWidth="1.3" />
+          <path d="M12 0v16M0 8h24" stroke="#fff" strokeWidth="5.3" />
+          <path d="M12 0v16M0 8h24" stroke="#c8102e" strokeWidth="3.2" />
+        </svg>
+      );
+    case "pl": // Poland
+      return (
+        <svg {...common}>
+          <rect width="24" height="8" fill="#fff" />
+          <rect y="8" width="24" height="8" fill="#dc143c" />
+        </svg>
+      );
+    case "hu": // Hungary
+      return (
+        <svg {...common}>
+          <rect width="24" height="16" fill="#fff" />
+          <rect width="24" height="5.33" fill="#cd2a3e" />
+          <rect y="10.67" width="24" height="5.33" fill="#436f4d" />
+        </svg>
+      );
+  }
+}
+
 interface LanguageSwitcherProps {
   locale: Locale;
   /** True while the header floats transparently over the page hero. */
@@ -94,21 +150,7 @@ export function LanguageSwitcher({ locale, overHero }: LanguageSwitcherProps) {
             : "text-charcoal-700 hover:bg-charcoal-900/5 hover:text-charcoal-950"
         }`}
       >
-        {/* Globe icon — the universal "language" affordance */}
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={1.6}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-[1.15rem] w-[1.15rem]"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M2 12h20" />
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
-        </svg>
+        <FlagIcon locale={locale} />
         {locale.toUpperCase()}
         <svg
           viewBox="0 0 24 24"
@@ -149,7 +191,10 @@ export function LanguageSwitcher({ locale, overHero }: LanguageSwitcherProps) {
                       : "text-charcoal-800 hover:bg-charcoal-900/5"
                   }`}
                 >
-                  {localeNames[entry]}
+                  <span className="flex items-center gap-2.5">
+                    <FlagIcon locale={entry} />
+                    {localeNames[entry]}
+                  </span>
                   {isActive && (
                     <svg
                       viewBox="0 0 24 24"
