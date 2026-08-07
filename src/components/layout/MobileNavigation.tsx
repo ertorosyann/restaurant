@@ -10,7 +10,6 @@ import {
 import { getSiteContent } from "@/content/site";
 import {
   restaurantConfig,
-  getEmailHref,
   getPhoneHref,
   getDirectionsUrl,
 } from "@/config/restaurant";
@@ -164,24 +163,15 @@ export function MobileNavigation({ open, onClose, pathname, locale }: MobileNavi
             >
               {content.common.callNow}
             </a>
-            <div className="grid grid-cols-2 gap-3">
-              <a
-                href={getEmailHref()}
-                onClick={onClose}
-                className="flex min-h-12 items-center justify-center rounded-md border border-cream-50/30 px-4 text-center text-sm font-medium uppercase tracking-[0.1em] text-cream-50 transition-colors hover:bg-white/10"
-              >
-                {content.common.sendEmail}
-              </a>
-              <a
-                href={getDirectionsUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={onClose}
-                className="flex min-h-12 items-center justify-center rounded-md border border-cream-50/30 px-4 text-center text-sm font-medium uppercase tracking-[0.1em] text-cream-50 transition-colors hover:bg-white/10"
-              >
-                {content.common.getDirections}
-              </a>
-            </div>
+            <a
+              href={getDirectionsUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
+              className="flex min-h-12 items-center justify-center rounded-md border border-cream-50/30 px-4 text-center text-sm font-medium uppercase tracking-[0.1em] text-cream-50 transition-colors hover:bg-white/10"
+            >
+              {content.common.getDirections}
+            </a>
           </div>
 
           <div className="flex items-center justify-between gap-4">

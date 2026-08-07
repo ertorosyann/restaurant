@@ -131,13 +131,10 @@ export function FloatingContactButton({ locale }: FloatingContactButtonProps) {
         <div
           id="floating-contact-panel"
           role="dialog"
-          aria-label={siteContent.floatingContact.title}
+          aria-label={siteContent.floatingContact.open}
           className="absolute bottom-[4.25rem] right-0 w-[calc(100vw-2.5rem)] max-w-72 overflow-hidden rounded-lg border border-charcoal-900/10 bg-cream-50 shadow-lifted motion-safe:animate-float-in"
         >
-          <div className="flex items-center justify-between border-b border-charcoal-900/10 bg-cream-100 px-4 py-3">
-            <p className="font-display text-base text-charcoal-900">
-              {siteContent.floatingContact.title}
-            </p>
+          <div className="flex items-center justify-end border-b border-charcoal-900/10 bg-cream-100 px-4 py-1">
             <button
               type="button"
               onClick={() => close()}

@@ -218,28 +218,20 @@ export const siteImages = {
   /* ---------------- Alpine scenery ---------------- */
 
   mountains: {
-    src: '/resturant/moments3.png',
+    src: '/resturant/moments3.jpeg',
     alt: "Majestic Alpine mountain peaks rising above the valley (placeholder image)",
-  },
-  moments: {
-    src: "/resturant/moments.png",
-    alt: "Lunch with a glass of sparkling wine on the terrace of Zentrum Café Restaurant",
   },
   moments1: {
     // src: "/manu/aperol-spritz2.png",
-    src: "/manu/hugo-and-aperol.png",
+    src: "/manu/hugo-and-aperol.jpeg",
     alt: "Aperol Spritz served on the sunny terrace of Zentrum Café Restaurant",
   },
   moments2: {
     src: "/resturant/resturant-home.jpeg",
     alt: "Zentrum Café Restaurant terrace with green umbrellas beneath the Dachstein mountains",
   },
-  moments3: {
-    src: "/resturant/moments.png",
-    alt: "Lunch with a glass of sparkling wine on the terrace of Zentrum Café Restaurant",
-  },
   moments4: {
-    src: "/resturant/moments4.png",
+    src: "/resturant/moments4.jpeg",
     alt: "Guests enjoying a moment at Zentrum Café Restaurant",
   },
   eventroom: {

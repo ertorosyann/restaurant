@@ -44,7 +44,6 @@ export const siteContentHu: SiteContent = {
     viewMenu: "Étlap megtekintése",
     contactUs: "Kapcsolat",
     callNow: "Hívjon most",
-    sendEmail: "E-mail írása",
     getDirections: "Útvonaltervezés",
     openingHours: "Nyitvatartás",
     followUs: "Kövessen minket",
@@ -71,7 +70,6 @@ export const siteContentHu: SiteContent = {
   floatingContact: {
     open: "Kapcsolatfelvételi lehetőségek",
     close: "Kapcsolatfelvételi lehetőségek bezárása",
-    title: "Miben segíthetünk?",
     call: "A Zentrum Café Restaurant hívása",
     email: "E-mail írása",
     directions: "Útvonaltervezés",
@@ -295,27 +293,6 @@ export const siteContentHu: SiteContent = {
         "A térképet a Google Maps csak akkor tölti be, ha Ön meg szeretné tekinteni.",
       iframeTitle:
         "Térkép a Zentrum Café Restaurant helyével Ramsau am Dachsteinben",
-    },
-    form: {
-      title: "Írjon nekünk",
-      description:
-        "Használja az űrlapot foglalásokhoz és általános kérdésekhez – a lehető leghamarabb jelentkezünk.",
-      nameLabel: "Név",
-      namePlaceholder: "Az Ön neve",
-      emailLabel: "E-mail",
-      emailPlaceholder: "on@pelda.hu",
-      phoneLabel: "Telefon (nem kötelező)",
-      phonePlaceholder: "+43 …",
-      messageLabel: "Üzenet",
-      messagePlaceholder: "Miben segíthetünk?",
-      submit: "Üzenet küldése",
-      submitting: "Küldés folyamatban…",
-      successTitle: "Köszönjük az üzenetét!",
-      successText:
-        "Ez a demóűrlap még nem küld e-maileket. Amint csatlakoztatunk egy e-mail-szolgáltatást, az üzenetek közvetlenül az étteremhez érkeznek. Sürgős esetben kérjük, hívjon minket.",
-      errorRequired: "Kérjük, töltse ki ezt a mezőt.",
-      errorEmail: "Kérjük, adjon meg egy érvényes e-mail-címet.",
-      demoNotice: "Demóűrlap – még nincs e-mail-szolgáltatáshoz csatlakoztatva.",
     },
   },
 

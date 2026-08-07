@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { Reveal } from "@/components/shared/Reveal";
 import { getSiteContent } from "@/content/site";
-import { getEmailHref, getPhoneHref } from "@/config/restaurant";
+import { getPhoneHref } from "@/config/restaurant";
 import { localeHref, type Locale } from "@/i18n/config";
 
 interface CallToActionProps {
@@ -58,9 +58,6 @@ export function CallToAction({
             <div className="mt-9 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
               <ButtonLink href={getPhoneHref()} variant="copper">
                 {siteContent.common.callNow}
-              </ButtonLink>
-              <ButtonLink href={getEmailHref()} variant="light-outline">
-                {siteContent.common.sendEmail}
               </ButtonLink>
               {showMenuLink && (
                 <ButtonLink href={localeHref(locale, "/menu")} variant="light-outline">

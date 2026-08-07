@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { ContactDetails } from "@/components/contact/ContactDetails";
-import { ContactForm } from "@/components/contact/ContactForm";
 import { MapSection } from "@/components/contact/MapSection";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { ButtonLink } from "@/components/shared/ButtonLink";
@@ -11,7 +10,6 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { getSiteContent } from "@/content/site";
 import {
   getDirectionsUrl,
-  getEmailHref,
   getPhoneHref,
 } from "@/config/restaurant";
 import { siteImages } from "@/data/images";
@@ -54,12 +52,9 @@ export default async function ContactPage(props: PageProps) {
       {/* ---------- Prominent quick actions ---------- */}
       <section className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="grid gap-3.5 sm:grid-cols-3">
+          <div className="grid gap-3.5 sm:grid-cols-2">
             <ButtonLink href={getPhoneHref()} variant="primary" className="w-full">
               {siteContent.common.callNow}
-            </ButtonLink>
-            <ButtonLink href={getEmailHref()} variant="outline" className="w-full">
-              {siteContent.common.sendEmail}
             </ButtonLink>
             <ButtonLink
               href={getDirectionsUrl()}
@@ -73,16 +68,11 @@ export default async function ContactPage(props: PageProps) {
         </Reveal>
       </section>
 
-      {/* ---------- Details & form ---------- */}
+      {/* ---------- Details ---------- */}
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-        <div className="grid items-start gap-8 lg:grid-cols-2">
-          <Reveal>
-            <ContactDetails locale={locale} />
-          </Reveal>
-          <Reveal delay={110}>
-            <ContactForm locale={locale} />
-          </Reveal>
-        </div>
+        <Reveal>
+          <ContactDetails locale={locale} />
+        </Reveal>
       </section>
 
       {/* ---------- Map ---------- */}

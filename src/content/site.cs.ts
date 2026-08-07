@@ -44,7 +44,6 @@ export const siteContentCs: SiteContent = {
     viewMenu: "Prohlédnout jídelní lístek",
     contactUs: "Kontakt",
     callNow: "Zavolat",
-    sendEmail: "Napsat e-mail",
     getDirections: "Naplánovat trasu",
     openingHours: "Otevírací doba",
     followUs: "Sledujte nás",
@@ -71,7 +70,6 @@ export const siteContentCs: SiteContent = {
   floatingContact: {
     open: "Možnosti kontaktu",
     close: "Zavřít možnosti kontaktu",
-    title: "Jak vám můžeme pomoci?",
     call: "Zavolat do Zentrum Café Restaurant",
     email: "Napsat e-mail",
     directions: "Naplánovat trasu",
@@ -300,27 +298,6 @@ export const siteContentCs: SiteContent = {
         "Mapa se z Google Maps načte teprve tehdy, když si ji budete chtít zobrazit.",
       iframeTitle:
         "Mapa s polohou Zentrum Café Restaurant v Ramsau am Dachstein",
-    },
-    form: {
-      title: "Napište nám",
-      description:
-        "Formulář využijte pro rezervace i obecné dotazy – ozveme se vám co nejdříve.",
-      nameLabel: "Jméno",
-      namePlaceholder: "Vaše jméno",
-      emailLabel: "E-mail",
-      emailPlaceholder: "vas@email.cz",
-      phoneLabel: "Telefon (nepovinné)",
-      phonePlaceholder: "+43 …",
-      messageLabel: "Zpráva",
-      messagePlaceholder: "Jak vám můžeme pomoci?",
-      submit: "Odeslat zprávu",
-      submitting: "Odesílá se…",
-      successTitle: "Děkujeme za vaši zprávu!",
-      successText:
-        "Tento ukázkový formulář zatím e-maily neodesílá. Jakmile bude připojena e-mailová služba, budou zprávy doručovány přímo restauraci. V naléhavých případech nám prosím zavolejte.",
-      errorRequired: "Vyplňte prosím toto pole.",
-      errorEmail: "Zadejte prosím platnou e-mailovou adresu.",
-      demoNotice: "Ukázkový formulář – zatím není propojen s e-mailovou službou.",
     },
   },
 

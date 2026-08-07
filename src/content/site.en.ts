@@ -44,7 +44,6 @@ export const siteContentEn: SiteContent = {
     viewMenu: "View Menu",
     contactUs: "Contact Us",
     callNow: "Call Now",
-    sendEmail: "Send Email",
     getDirections: "Get Directions",
     openingHours: "Opening Hours",
     followUs: "Follow Us",
@@ -71,7 +70,6 @@ export const siteContentEn: SiteContent = {
   floatingContact: {
     open: "Contact options",
     close: "Close contact options",
-    title: "How can we help?",
     call: "Call Zentrum Café Restaurant",
     email: "Send Email",
     directions: "Get Directions",
@@ -299,27 +297,6 @@ export const siteContentEn: SiteContent = {
         "The map is loaded from Google Maps only after you choose to view it.",
       iframeTitle:
         "Map showing the location of Zentrum Café Restaurant in Ramsau am Dachstein",
-    },
-    form: {
-      title: "Send us a message",
-      description:
-        "Use the form for reservations and general questions — we will get back to you as soon as possible.",
-      nameLabel: "Name",
-      namePlaceholder: "Your name",
-      emailLabel: "Email",
-      emailPlaceholder: "you@example.com",
-      phoneLabel: "Phone (optional)",
-      phonePlaceholder: "+43 …",
-      messageLabel: "Message",
-      messagePlaceholder: "How can we help you?",
-      submit: "Send Message",
-      submitting: "Sending…",
-      successTitle: "Thank you for your message!",
-      successText:
-        "This demo form does not send emails yet. Once an email service is connected, messages will reach the restaurant directly. For urgent requests, please call us.",
-      errorRequired: "Please fill in this field.",
-      errorEmail: "Please enter a valid email address.",
-      demoNotice: "Demo form — not yet connected to an email service.",
     },
   },
 

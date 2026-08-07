@@ -44,7 +44,6 @@ export const siteContentPl: SiteContent = {
     viewMenu: "Zobacz menu",
     contactUs: "Kontakt",
     callNow: "Zadzwoń teraz",
-    sendEmail: "Napisz e-mail",
     getDirections: "Wyznacz trasę",
     openingHours: "Godziny otwarcia",
     followUs: "Obserwuj nas",
@@ -71,7 +70,6 @@ export const siteContentPl: SiteContent = {
   floatingContact: {
     open: "Opcje kontaktu",
     close: "Zamknij opcje kontaktu",
-    title: "Jak możemy pomóc?",
     call: "Zadzwoń do Zentrum Café Restaurant",
     email: "Napisz e-mail",
     directions: "Wyznacz trasę",
@@ -300,27 +298,6 @@ export const siteContentPl: SiteContent = {
         "Mapa zostanie pobrana z Google Maps dopiero wtedy, gdy zechcą ją Państwo wyświetlić.",
       iframeTitle:
         "Mapa z lokalizacją Zentrum Café Restaurant w Ramsau am Dachstein",
-    },
-    form: {
-      title: "Napisz do nas",
-      description:
-        "Formularz służy do rezerwacji i pytań ogólnych – odpowiemy tak szybko, jak to możliwe.",
-      nameLabel: "Imię i nazwisko",
-      namePlaceholder: "Państwa imię i nazwisko",
-      emailLabel: "E-mail",
-      emailPlaceholder: "ty@przyklad.pl",
-      phoneLabel: "Telefon (opcjonalnie)",
-      phonePlaceholder: "+43 …",
-      messageLabel: "Wiadomość",
-      messagePlaceholder: "Jak możemy Państwu pomóc?",
-      submit: "Wyślij wiadomość",
-      submitting: "Wysyłanie…",
-      successTitle: "Dziękujemy za wiadomość!",
-      successText:
-        "Ten formularz demonstracyjny nie wysyła jeszcze e-maili. Gdy tylko zostanie podłączona usługa pocztowa, wiadomości będą trafiać bezpośrednio do restauracji. W pilnych sprawach prosimy o telefon.",
-      errorRequired: "Prosimy wypełnić to pole.",
-      errorEmail: "Prosimy podać prawidłowy adres e-mail.",
-      demoNotice: "Formularz demonstracyjny – jeszcze niepołączony z usługą pocztową.",
     },
   },
 

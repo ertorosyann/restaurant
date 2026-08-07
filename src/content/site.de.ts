@@ -48,7 +48,6 @@ export const siteContentDe = {
     viewMenu: "Speisekarte ansehen",
     contactUs: "Kontakt",
     callNow: "Jetzt anrufen",
-    sendEmail: "E-Mail schreiben",
     getDirections: "Route planen",
     openingHours: "Öffnungszeiten",
     followUs: "Folgen Sie uns",
@@ -75,7 +74,6 @@ export const siteContentDe = {
   floatingContact: {
     open: "Kontaktmöglichkeiten",
     close: "Kontaktmöglichkeiten schließen",
-    title: "Wie können wir helfen?",
     call: "Zentrum Café Restaurant anrufen",
     email: "E-Mail schreiben",
     directions: "Route planen",
@@ -304,27 +302,6 @@ export const siteContentDe = {
         "Die Karte wird erst von Google Maps geladen, wenn Sie sie ansehen möchten.",
       iframeTitle:
         "Karte mit dem Standort des Zentrum Café Restaurants in Ramsau am Dachstein",
-    },
-    form: {
-      title: "Schreiben Sie uns",
-      description:
-        "Nutzen Sie das Formular für Reservierungen und allgemeine Anfragen – wir melden uns so schnell wie möglich.",
-      nameLabel: "Name",
-      namePlaceholder: "Ihr Name",
-      emailLabel: "E-Mail",
-      emailPlaceholder: "sie@beispiel.at",
-      phoneLabel: "Telefon (optional)",
-      phonePlaceholder: "+43 …",
-      messageLabel: "Nachricht",
-      messagePlaceholder: "Wie können wir Ihnen helfen?",
-      submit: "Nachricht senden",
-      submitting: "Wird gesendet…",
-      successTitle: "Vielen Dank für Ihre Nachricht!",
-      successText:
-        "Dieses Demo-Formular versendet noch keine E-Mails. Sobald ein E-Mail-Dienst angebunden ist, erreichen die Nachrichten das Restaurant direkt. In dringenden Fällen rufen Sie uns bitte an.",
-      errorRequired: "Bitte füllen Sie dieses Feld aus.",
-      errorEmail: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-      demoNotice: "Demo-Formular – noch nicht mit einem E-Mail-Dienst verbunden.",
     },
   },
 
