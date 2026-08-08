@@ -41,6 +41,7 @@ export const restaurantConfig = {
       cs: "Rakousko",
       en: "Austria",
       pl: "Austria",
+      hu: "Ausztria",
     } as LocalizedText,
   },
 
@@ -50,7 +51,7 @@ export const restaurantConfig = {
    * Until it is set, the reserved example domain below is used so that
    * builds and metadata remain valid.
    */
-  domain: "[DOMAIN]",
+  domain: "zentrum-ramsau.at",
 
   /**
    * A Google Maps link to the restaurant, e.g. a "share" link from
@@ -58,7 +59,7 @@ export const restaurantConfig = {
    * a generic Google Maps directions search for the restaurant name and
    * town is used as a sensible fallback.
    */
-  mapUrl: "[GOOGLE_MAPS_URL]",
+  mapUrl: "https://maps.app.goo.gl/pixD2aU7NjynEGGSA",
 
   /**
    * Geographic coordinates for local SEO (schema.org "geo").
@@ -66,14 +67,14 @@ export const restaurantConfig = {
    * Left as placeholders they are excluded from structured data.
    */
   geo: {
-    latitude: "[LATITUDE]",
-    longitude: "[LONGITUDE]",
+    latitude: "47.420148476313",
+    longitude: "13.65255277044387",
   },
 
   cuisineTypes: ["Austrian", "European", "Café"],
 
   /** Schema.org price range, e.g. "€€" */
-  priceRange: "[PRICE_RANGE]",
+  priceRange: "€€",
 
   /**
    * SOCIAL MEDIA LINKS
