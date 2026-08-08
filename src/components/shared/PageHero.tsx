@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BlurUpImage } from "@/components/shared/BlurUpImage";
 import type { SiteImage } from "@/data/images";
 
 interface PageHeroProps {
@@ -17,10 +17,9 @@ export function PageHero({ image, eyebrow, title, description }: PageHeroProps) 
   return (
     <section className="relative flex min-h-[52svh] items-end overflow-hidden bg-charcoal-950 sm:min-h-[56svh]">
       <div className="absolute inset-0 overflow-hidden">
-        <Image
+        <BlurUpImage
           src={image.src}
           alt={image.alt}
-          fill
           priority
           quality={85}
           sizes="100vw"

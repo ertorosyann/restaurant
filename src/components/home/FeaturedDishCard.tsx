@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BlurUpImage } from "@/components/shared/BlurUpImage";
 import { getDietaryLabelText, type MenuItemData } from "@/data/menu";
 import type { Locale } from "@/i18n/config";
 
@@ -18,10 +18,9 @@ export function FeaturedDishCard({ item, locale }: FeaturedDishCardProps) {
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-charcoal-900/8 bg-white shadow-soft transition-all duration-300 hover:shadow-lifted motion-safe:hover:-translate-y-1.5">
       {item.image && (
         <div className="relative aspect-[4/3] overflow-hidden">
-          <Image
+          <BlurUpImage
             src={item.image.src}
             alt={item.image.alt}
-            fill
             sizes="(min-width: 1216px) 368px, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
             className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-105"
           />

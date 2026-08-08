@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
+import { BlurUpImage } from "@/components/shared/BlurUpImage";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { SplitImageCarousel } from "@/components/shared/SplitImageCarousel";
@@ -64,10 +64,9 @@ export function SplitSection({
             {slides ? (
               <SplitImageCarousel slides={slides} />
             ) : (
-              <Image
+              <BlurUpImage
                 src={image.src}
                 alt={image.alt}
-                fill
                 sizes="(min-width: 1216px) 536px, (min-width: 1024px) 45vw, (min-width: 640px) 60vw, 100vw"
                 className="object-cover"
               />

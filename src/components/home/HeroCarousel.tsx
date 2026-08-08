@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import { BlurUpImage } from "@/components/shared/BlurUpImage";
 import type { SiteImage } from "@/data/images";
 
 /** Time each slide stays on screen before the next one swipes in. */
@@ -56,14 +56,13 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
                     "translate-x-full transition-none"
             }`}
           >
-            <Image
+            <BlurUpImage
               src={slide.src}
               alt={isActive ? slide.alt : ""}
-              fill
               priority={index === 0}
               // Every slide is full-screen above the fold — load them all
               // immediately so no swipe reveals a still-loading image.
-              loading={index === 0 ? undefined : "eager"}
+              loading="eager"
               quality={85}
               sizes="100vw"
               className="object-cover motion-safe:animate-slow-zoom"

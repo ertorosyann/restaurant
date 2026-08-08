@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import { BlurUpImage } from "@/components/shared/BlurUpImage";
 import type { SiteImage } from "@/data/images";
 
 /** Time each photo stays on screen before the next one fades in. */
@@ -38,10 +38,9 @@ export function SplitImageCarousel({ slides }: SplitImageCarouselProps) {
             index === active ? "opacity-100" : "opacity-0"
           }`}
         >
-          <Image
+          <BlurUpImage
             src={slide.src}
             alt={index === active ? slide.alt : ""}
-            fill
             sizes="(min-width: 1216px) 536px, (min-width: 1024px) 45vw, (min-width: 640px) 60vw, 100vw"
             className="object-cover"
           />
