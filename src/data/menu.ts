@@ -442,6 +442,7 @@ const menuSource: MenuCategorySource[] = [
         },
         labels: ["vegetarian"],
         image: siteImages.iceBananaSplit,
+        price: "€ 8.50",
       },
       {
         name: {
@@ -452,6 +453,7 @@ const menuSource: MenuCategorySource[] = [
         },
         labels: ["vegetarian"],
         image: siteImages.iceFruitSundae,
+        price: "€ 8.50",
       },
       {
         name: {
@@ -462,6 +464,7 @@ const menuSource: MenuCategorySource[] = [
         },
         labels: ["vegetarian"],
         image: siteImages.iceKrokant,
+        price: "€ 8.50",
       },
       {
         name: {
@@ -472,6 +475,7 @@ const menuSource: MenuCategorySource[] = [
         },
         labels: ["vegetarian"],
         image: siteImages.iceEiskaffee,
+        price: "€ 7.30",
       }
     ],
   },
