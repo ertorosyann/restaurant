@@ -167,6 +167,10 @@ export const siteImages = {
     src: "/manu/ice-Krokant.jpeg",
     alt: "Krokant ice cream sundae with caramel brittle and whipped cream at Zentrum Café Restaurant",
   },
+  iceHeisseLiebe: {
+    src: "/manu/Heibe Liebe.jpeg",
+    alt: "Heiße Liebe sundae — vanilla ice cream with warm raspberries and whipped cream at Zentrum Café Restaurant",
+  },
   iceEiskaffee: {
     src: "/manu/ice-Eiskaffee.jpeg",
     alt: "Eiskaffee with ice cream, whipped cream and chocolate sauce at Zentrum Café Restaurant",

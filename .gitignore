@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 originals/
+
+# Runtime data written by the /changetimes admin page
+/data/opening-hours.json

@@ -6,6 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      // Hidden admin page for editing opening hours.
+      disallow: ["/changetimes", "/*/changetimes"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

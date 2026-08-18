@@ -17,6 +17,8 @@ const closeLabel: LocalizedText = {
   en: "Close",
   pl: "Zamknij",
   hu: "Bezárás",
+  hr: "Zatvori",
+  ru: "Закрыть",
 };
 
 const viewPhotoLabel: LocalizedText = {
@@ -25,6 +27,8 @@ const viewPhotoLabel: LocalizedText = {
   en: "View photo",
   pl: "Zobacz zdjęcie",
   hu: "Fotó megtekintése",
+  hr: "Pogledaj fotografiju",
+  ru: "Посмотреть фото",
 };
 
 /**
@@ -60,7 +64,13 @@ export function MenuItem({ item, locale }: MenuItemProps) {
                 aria-hidden="true"
                 className="min-w-4 flex-1 border-b border-dotted border-charcoal-900/25"
               />
-              <p className="whitespace-nowrap font-display text-xl text-copper-800 sm:text-[1.375rem]">
+              <p
+                className={`font-display text-xl text-copper-800 sm:text-[1.375rem] ${
+                  // Multi-size prices ("0,3 l 4,20 € / 0,5 l 5,40 €") may
+                  // wrap on narrow screens; single prices never should.
+                  item.price.includes("/") ? "text-right" : "whitespace-nowrap"
+                }`}
+              >
                 {item.price}
               </p>
             </>

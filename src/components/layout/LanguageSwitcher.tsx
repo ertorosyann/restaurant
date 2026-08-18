@@ -83,6 +83,30 @@ function FlagIcon({ locale }: { locale: Locale }) {
           <rect y="10.67" width="24" height="5.33" fill="#436f4d" />
         </svg>
       );
+    case "hr": // Croatia (simplified checkerboard crest)
+      return (
+        <svg {...common}>
+          <rect width="24" height="16" fill="#fff" />
+          <rect width="24" height="5.33" fill="#ff0000" />
+          <rect y="10.67" width="24" height="5.33" fill="#171796" />
+          <g>
+            <rect x="9.6" y="5.9" width="4.8" height="4.4" fill="#fff" />
+            <rect x="9.6" y="5.9" width="1.6" height="1.47" fill="#ff0000" />
+            <rect x="12.8" y="5.9" width="1.6" height="1.47" fill="#ff0000" />
+            <rect x="11.2" y="7.37" width="1.6" height="1.47" fill="#ff0000" />
+            <rect x="9.6" y="8.84" width="1.6" height="1.46" fill="#ff0000" />
+            <rect x="12.8" y="8.84" width="1.6" height="1.46" fill="#ff0000" />
+          </g>
+        </svg>
+      );
+    case "ru": // Russia
+      return (
+        <svg {...common}>
+          <rect width="24" height="16" fill="#fff" />
+          <rect y="5.33" width="24" height="5.34" fill="#0039a6" />
+          <rect y="10.67" width="24" height="5.33" fill="#d52b1e" />
+        </svg>
+      );
   }
 }
 

@@ -47,8 +47,12 @@ export function Header({ locale }: HeaderProps) {
     toggleRef.current?.focus();
   };
 
+  /* Pages without a photographic hero start on a light background, so the
+     header must use its solid style from the very top there. */
+  const hasHero = !pathname?.includes("/changetimes");
+
   /* While the mobile overlay (dark green) is open, keep light text. */
-  const overHero = !scrolled || mobileOpen;
+  const overHero = (!scrolled && hasHero) || mobileOpen;
 
   return (
     <>
