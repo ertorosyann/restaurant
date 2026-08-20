@@ -453,7 +453,7 @@ const menuSource: MenuCategorySource[] = [
         },
         labels: ["vegetarian"],
         image: siteImages.iceFruitSundae,
-        price: "€ 8.50",
+        price: "€ 9.00",
       },
       {
         name: {
