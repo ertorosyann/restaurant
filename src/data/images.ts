@@ -175,6 +175,22 @@ export const siteImages = {
     src: "/manu/ice-Eiskaffee.jpeg",
     alt: "Eiskaffee with ice cream, whipped cream and chocolate sauce at Zentrum Café Restaurant",
   },
+  iceLeckeresDuett: {
+    src: "/manu/Leckeres-Duet.jpeg",
+    alt: "Leckeres Duett — two scoops of ice cream with whipped cream at Zentrum Café Restaurant",
+  },
+  iceSoloEis: {
+    src: "/manu/Solo-Eis.jpeg",
+    alt: "A single scoop of ice cream at Zentrum Café Restaurant",
+  },
+  iceGemischtesEis: {
+    src: "/manu/Gemischtes-Eis.jpeg",
+    alt: "Mixed ice cream with assorted scoops at Zentrum Café Restaurant",
+  },
+  iceCoupeDanemark: {
+    src: "/manu/Coupe-Danemark.jpeg",
+    alt: "Coupe Danemark — vanilla ice cream with hot chocolate sauce and whipped cream at Zentrum Café Restaurant",
+  },
   coffee: {
     src: '/manu/coffee1.jpeg',
     alt: "Freshly brewed cappuccino with delicate latte art (placeholder image)",
