@@ -268,6 +268,11 @@ export const siteContentEn: SiteContent = {
         "From Austrian classics to seasonal dishes, homemade desserts and carefully prepared coffee — discover what our kitchen has to offer.",
     },
     dietaryLegendTitle: "Labels",
+    allergenLegend: {
+      title: "Allergen information",
+      note:
+        "The letters next to a dish mark the allergens it contains. If you have questions or intolerances, our team is happy to help.",
+    },
     categoriesAriaLabel: "Menu categories",
     cta: {
       title: "Questions about the menu?",

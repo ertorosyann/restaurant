@@ -264,6 +264,11 @@ export const siteContentHu: SiteContent = {
         "Az osztrák klasszikusoktól a szezonális ételeken át a házi süteményekig és a gondosan készített kávéig – fedezze fel, mit kínál konyhánk.",
     },
     dietaryLegendTitle: "Jelölések",
+    allergenLegend: {
+      title: "Allergéninformáció",
+      note:
+        "Az ételek melletti betűk a bennük található allergéneket jelölik. Kérdés vagy ételérzékenység esetén csapatunk szívesen segít.",
+    },
     categoriesAriaLabel: "Étlap-kategóriák",
     cta: {
       title: "Kérdése van az étlappal kapcsolatban?",

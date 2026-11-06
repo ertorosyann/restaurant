@@ -1,4 +1,5 @@
 import { BlurUpImage } from "@/components/shared/BlurUpImage";
+import { AllergenCodes } from "@/components/menu/AllergenCodes";
 import { getDietaryLabelText, type MenuItemData } from "@/data/menu";
 import type { Locale } from "@/i18n/config";
 
@@ -39,7 +40,10 @@ export function FeaturedDishCard({ item, locale }: FeaturedDishCardProps) {
             ))}
           </ul>
         )}
-        <h3 className="font-display text-xl text-charcoal-900">{item.name}</h3>
+        <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1.5">
+          <h3 className="font-display text-xl text-charcoal-900">{item.name}</h3>
+          {item.allergens && <AllergenCodes allergens={item.allergens} locale={locale} />}
+        </div>
         {item.description && (
           <p className="mt-2.5 text-sm leading-relaxed text-charcoal-600">
             {item.description}

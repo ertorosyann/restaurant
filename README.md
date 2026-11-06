@@ -70,6 +70,10 @@ The current menu is an **example with placeholder dishes and prices**.
 - `price` is a display string — write it exactly as it should appear.
 - Optional `labels`: `vegetarian`, `vegan`, `gluten-free`, `spicy`,
   `local-specialty`, `chefs-choice`.
+- Optional `allergens`: the letter codes printed on the card (`A`, `B`, `C`,
+  `D`, `E`, `F`, `G`, `H`, `L`, `M`, `N`, `O`, `P`, `R`). They render as small
+  badges next to the dish and are explained in the legend at the bottom of
+  the menu page.
 - Set `featured: true` + an `image` to show a dish with a photo on the home
   page.
 

@@ -269,6 +269,11 @@ export const siteContentPl: SiteContent = {
         "Od austriackich klasyków przez dania sezonowe po domowe wypieki i starannie przygotowywaną kawę – zapraszamy do odkrycia tego, co oferuje nasza kuchnia.",
     },
     dietaryLegendTitle: "Oznaczenia",
+    allergenLegend: {
+      title: "Informacja o alergenach",
+      note:
+        "Litery obok potraw oznaczają zawarte alergeny. W razie pytań lub nietolerancji nasz zespół chętnie pomoże.",
+    },
     categoriesAriaLabel: "Kategorie menu",
     cta: {
       title: "Pytania dotyczące menu?",

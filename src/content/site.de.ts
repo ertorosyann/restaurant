@@ -273,6 +273,11 @@ export const siteContentDe = {
         "Von österreichischen Klassikern über saisonale Gerichte bis zu hausgemachten Mehlspeisen und sorgfältig zubereitetem Kaffee – entdecken Sie, was unsere Küche zu bieten hat.",
     },
     dietaryLegendTitle: "Kennzeichnung",
+    allergenLegend: {
+      title: "Allergeninformation",
+      note:
+        "Die Buchstaben neben den Gerichten kennzeichnen enthaltene Allergene. Bei Fragen oder Unverträglichkeiten hilft unser Team gerne weiter.",
+    },
     categoriesAriaLabel: "Speisekarten-Kategorien",
     cta: {
       title: "Fragen zur Speisekarte?",

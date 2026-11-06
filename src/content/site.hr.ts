@@ -264,6 +264,11 @@ export const siteContentHr: SiteContent = {
         "Od austrijskih klasika preko sezonskih jela do domaćih kolača i pažljivo pripremljene kave — otkrijte što naša kuhinja nudi.",
     },
     dietaryLegendTitle: "Oznake",
+    allergenLegend: {
+      title: "Informacije o alergenima",
+      note:
+        "Slova pored jela označavaju alergene koje sadrže. U slučaju pitanja ili intolerancija naš tim rado će pomoći.",
+    },
     categoriesAriaLabel: "Kategorije jelovnika",
     cta: {
       title: "Pitanja o jelovniku?",

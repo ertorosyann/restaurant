@@ -15,6 +15,9 @@
  * - Reorder categories by reordering this array — the menu page and its
  *   category navigation follow this order automatically.
  * - Add dietary labels from the `DietaryLabel` list to any dish.
+ * - Add `allergens` codes (A, B, C … R, see `AllergenCode`) to a dish —
+ *   they are shown as small badges next to its name and explained in the
+ *   legend at the bottom of the menu page.
  * - Set `featured: true` (and optionally an `image`) to highlight a dish
  *   with a photo — used on the home page and at the top of the menu.
  *
@@ -79,6 +82,40 @@ export function getDietaryLabelText(locale: Locale): Record<DietaryLabel, string
   ) as Record<DietaryLabel, string>;
 }
 
+/**
+ * Allergen codes as printed on the menu card (Austrian/EU labelling).
+ * Codes are the same in every language — only their names are translated.
+ */
+export type AllergenCode =
+  | "A" | "B" | "C" | "D" | "E" | "F" | "G"
+  | "H" | "L" | "M" | "N" | "O" | "P" | "R";
+
+const allergenNames: Record<AllergenCode, LocalizedText> = {
+  A: { de: "Glutenhaltiges Getreide", cs: "Obiloviny obsahující lepek", en: "Cereals containing gluten", pl: "Zboża zawierające gluten", hu: "Glutént tartalmazó gabonafélék", hr: "Žitarice koje sadrže gluten", ru: "Злаки, содержащие глютен" },
+  B: { de: "Krebstiere", cs: "Korýši", en: "Crustaceans", pl: "Skorupiaki", hu: "Rákfélék", hr: "Rakovi", ru: "Ракообразные" },
+  C: { de: "Ei", cs: "Vejce", en: "Egg", pl: "Jaja", hu: "Tojás", hr: "Jaja", ru: "Яйца" },
+  D: { de: "Fisch", cs: "Ryby", en: "Fish", pl: "Ryby", hu: "Hal", hr: "Riba", ru: "Рыба" },
+  E: { de: "Erdnuss", cs: "Arašídy", en: "Peanuts", pl: "Orzeszki ziemne", hu: "Földimogyoró", hr: "Kikiriki", ru: "Арахис" },
+  F: { de: "Soja", cs: "Sója", en: "Soy", pl: "Soja", hu: "Szója", hr: "Soja", ru: "Соя" },
+  G: { de: "Milch oder Laktose", cs: "Mléko nebo laktóza", en: "Milk or lactose", pl: "Mleko lub laktoza", hu: "Tej vagy laktóz", hr: "Mlijeko ili laktoza", ru: "Молоко или лактоза" },
+  H: { de: "Schalenfrüchte", cs: "Skořápkové plody", en: "Tree nuts", pl: "Orzechy", hu: "Diófélék", hr: "Orašasti plodovi", ru: "Орехи" },
+  L: { de: "Sellerie", cs: "Celer", en: "Celery", pl: "Seler", hu: "Zeller", hr: "Celer", ru: "Сельдерей" },
+  M: { de: "Senf", cs: "Hořčice", en: "Mustard", pl: "Gorczyca", hu: "Mustár", hr: "Gorušica", ru: "Горчица" },
+  N: { de: "Sesam", cs: "Sezam", en: "Sesame", pl: "Sezam", hu: "Szezám", hr: "Sezam", ru: "Кунжут" },
+  O: { de: "Sulfite", cs: "Siřičitany", en: "Sulphites", pl: "Siarczyny", hu: "Szulfitok", hr: "Sulfiti", ru: "Сульфиты" },
+  P: { de: "Lupinen", cs: "Vlčí bob", en: "Lupin", pl: "Łubin", hu: "Csillagfürt", hr: "Lupina", ru: "Люпин" },
+  R: { de: "Weichtiere", cs: "Měkkýši", en: "Molluscs", pl: "Mięczaki", hu: "Puhatestűek", hr: "Mekušci", ru: "Моллюски" },
+};
+
+/** All codes in the order the legend lists them. */
+export const allergenCodes = Object.keys(allergenNames) as AllergenCode[];
+
+export function getAllergenNames(locale: Locale): Record<AllergenCode, string> {
+  return Object.fromEntries(
+    Object.entries(allergenNames).map(([key, value]) => [key, localize(value, locale)])
+  ) as Record<AllergenCode, string>;
+}
+
 /** A dish as authored — text fields may carry per-language variants. */
 interface MenuItemSource {
   name: LocalizedText;
@@ -86,6 +123,8 @@ interface MenuItemSource {
   /** Optional — seasonal items (e.g. ice cream) can be listed without one. */
   price?: string;
   labels?: DietaryLabel[];
+  /** Allergen codes as printed on the card (see `AllergenCode`). */
+  allergens?: AllergenCode[];
   featured?: boolean;
   image?: SiteImage;
 }
@@ -104,6 +143,8 @@ export interface MenuItemData {
   description?: string;
   price?: string;
   labels?: DietaryLabel[];
+  /** Allergen codes as printed on the card (see `AllergenCode`). */
+  allergens?: AllergenCode[];
   featured?: boolean;
   image?: SiteImage;
 }
@@ -127,18 +168,26 @@ const menuSource: MenuCategorySource[] = [
           en: "Frittatensuppe – clear broth with pancake strips",
           pl: "Frittatensuppe – bulion z kluskami naleśnikowymi", hr: "Frittatensuppe – bistra juha s rezancima od palačinki", ru: "Фриттатензуппе — бульон с блинной лапшой", hu: "Frittatensuppe – erőleves palacsintametélttel",
         },
-        price: "€ 6.50",
+        price: "€ 6.70",
+        allergens: ["C", "G", "L"],
         labels: ["local-specialty"],
         image: siteImages.dishFrittatensuppe,
       },
       {
         name: {
-          de: "Gemüsecremesuppe mit Croutons",
-          cs: "Krémová zeleninová polévka s krutony",
-          en: "Cream of vegetable soup with croutons",
-          pl: "Krem z warzyw z grzankami", hr: "Krem juha od povrća s krutonima", ru: "Овощной крем-суп с гренками", hu: "Zöldségkrémleves krutonnal",
+          de: "Gemüsecremesuppe",
+          cs: "Krémová zeleninová polévka",
+          en: "Cream of vegetable soup",
+          pl: "Krem z warzyw", hr: "Krem juha od povrća", ru: "Овощной крем-суп", hu: "Zöldségkrémleves",
         },
-        price: "€ 7.50",
+        description: {
+          de: "Brokkoli, Zucchini und Croutons",
+          cs: "Brokolice, cuketa a krutony",
+          en: "Broccoli, courgette and croutons",
+          pl: "Brokuły, cukinia i grzanki", hr: "Brokula, tikvice i krutoni", ru: "Брокколи, цукини и гренки", hu: "Brokkoli, cukkini és kruton",
+        },
+        price: "€ 7.70",
+        allergens: ["G", "L"],
         labels: ["vegetarian", "local-specialty"],
         image: siteImages.dishGemueseCreamSuppe,
       },
@@ -149,7 +198,8 @@ const menuSource: MenuCategorySource[] = [
           en: "Goulash soup with bread",
           pl: "Zupa gulaszowa z chlebem", hr: "Gulaš juha s kruhom", ru: "Суп-гуляш с хлебом", hu: "Gulyásleves kenyérrel",
         },
-        price: "€ 8.70",
+        price: "€ 9.00",
+        allergens: ["A", "G", "L"],
         image: siteImages.gulaschsuppe,
       },
     ],
@@ -165,18 +215,32 @@ const menuSource: MenuCategorySource[] = [
           en: "Mixed salad",
           pl: "Sałatka mieszana", hr: "Miješana salata", ru: "Смешанный салат", hu: "Vegyes saláta",
         },
+        description: {
+          de: "Mit Hausdressing und frischem Salat",
+          cs: "S domácím dresinkem a čerstvým salátem",
+          en: "With house dressing and fresh salad",
+          pl: "Z sosem domowym i świeżą sałatą", hr: "S kućnim dresingom i svježom salatom", ru: "С домашней заправкой и свежим салатом", hu: "Házi öntettel és friss salátával",
+        },
         price: "€ 7.00",
+        allergens: ["M", "N"],
         labels: ["vegetarian"],
         image: siteImages.dishMixedSalad,
       },
       {
         name: {
-          de: "Putenstreifensalat mit Brot",
-          cs: "Salát s krůtími nudličkami a chlebem",
-          en: "Turkey strip salad with bread",
-          pl: "Sałatka z paskami indyka i chlebem", hr: "Salata s trakicama puretine i kruhom", ru: "Салат с полосками индейки и хлебом", hu: "Saláta pulykacsíkokkal, kenyérrel",
+          de: "Putenstreifensalat",
+          cs: "Salát s krůtími nudličkami",
+          en: "Turkey strip salad",
+          pl: "Sałatka z paskami indyka", hr: "Salata s trakicama puretine", ru: "Салат с полосками индейки", hu: "Saláta pulykacsíkokkal",
         },
-        price: "€ 15.50",
+        description: {
+          de: "Mit frischem Buntsalat, Hausdressing und Brot",
+          cs: "S čerstvým míchaným salátem, domácím dresinkem a chlebem",
+          en: "With fresh mixed salad, house dressing and bread",
+          pl: "Ze świeżą sałatą mieszaną, sosem domowym i chlebem", hr: "Sa svježom miješanom salatom, kućnim dresingom i kruhom", ru: "Со свежим салатным миксом, домашней заправкой и хлебом", hu: "Friss vegyes salátával, házi öntettel és kenyérrel",
+        },
+        price: "€ 15.90",
+        allergens: ["A", "M", "N"],
         image: siteImages.putenstreifensalat,
       },
     ],
@@ -192,12 +256,19 @@ const menuSource: MenuCategorySource[] = [
     items: [
       {
         name: {
-          de: "Schinken-Käse Toast mit Salatschüssel",
-          cs: "Toast se šunkou a sýrem a miskou salátu",
-          en: "Ham and cheese toast with a salad bowl",
-          pl: "Tost z szynką i serem z miską sałatki", hr: "Tost sa šunkom i sirom uz zdjelu salate", ru: "Тост с ветчиной и сыром с миской салата", hu: "Sonkás-sajtos melegszendvics salátástállal",
+          de: "Schinken-Käse Toast",
+          cs: "Toast se šunkou a sýrem",
+          en: "Ham and cheese toast",
+          pl: "Tost z szynką i serem", hr: "Tost sa šunkom i sirom", ru: "Тост с ветчиной и сыром", hu: "Sonkás-sajtos melegszendvics",
         },
-        price: "€ 9.50",
+        description: {
+          de: "Mit Butter gestrichen und bunter Salatschüssel",
+          cs: "Namazaný máslem, s miskou míchaného salátu",
+          en: "Buttered, with a bowl of mixed salad",
+          pl: "Posmarowany masłem, z miską sałatki mieszanej", hr: "Namazan maslacem, uz zdjelu miješane salate", ru: "С маслом, с миской салатного микса", hu: "Vajjal megkenve, vegyes salátástállal",
+        },
+        price: "€ 9.90",
+        allergens: ["A", "G", "M", "N"],
         image: siteImages.hamandcheese
       },
       {
@@ -207,7 +278,14 @@ const menuSource: MenuCategorySource[] = [
           en: "Holzfällerbrot – hearty lumberjack bread",
           pl: "Holzfällerbrot – chleb „drwala”", hr: "Holzfällerbrot – „drvosječin” kruh", ru: "Хольцфеллерброт — сытный «хлеб дровосека»", hu: "Holzfällerbrot – „favágókenyér”",
         },
-        price: "€ 9.20",
+        description: {
+          de: "Schwarzbrot, Speck, Käse, Zwiebeln, Schnittlauch",
+          cs: "Tmavý chléb, slanina, sýr, cibule, pažitka",
+          en: "Dark rye bread, bacon, cheese, onions, chives",
+          pl: "Ciemny chleb, boczek, ser, cebula, szczypiorek", hr: "Crni kruh, slanina, sir, luk, vlasac", ru: "Чёрный хлеб, шпик, сыр, лук, зелёный лук", hu: "Fekete kenyér, szalonna, sajt, hagyma, metélőhagyma",
+        },
+        price: "€ 9.50",
+        allergens: ["A", "G"],
         image: siteImages.dishLumberjackBread,
       },
       {
@@ -217,7 +295,13 @@ const menuSource: MenuCategorySource[] = [
           en: "Tuna on ciabatta bread with salad",
           pl: "Tuńczyk na pieczywie ciabatta z sałatką", hr: "Tuna na ciabatta kruhu sa salatom", ru: "Тунец на чиабатте с салатом", hu: "Tonhal ciabatta kenyéren, salátával",
         },
-        price: "€ 10.50",
+        description: {
+          de: "Tomatensauce, Thunfisch, Mozzarella, Zwiebeln",
+          cs: "Rajčatová omáčka, tuňák, mozzarella, cibule",
+          en: "Tomato sauce, tuna, mozzarella, onions",
+          pl: "Sos pomidorowy, tuńczyk, mozzarella, cebula", hr: "Umak od rajčice, tuna, mozzarella, luk", ru: "Томатный соус, тунец, моцарелла, лук", hu: "Paradicsomszósz, tonhal, mozzarella, hagyma",
+        },
+        price: "€ 10.80",
         image: siteImages.dishTunaCiabatta,
       },
       {
@@ -227,18 +311,31 @@ const menuSource: MenuCategorySource[] = [
           en: "Tomato and mozzarella bread",
           pl: "Pieczywo z pomidorami i mozzarellą", hr: "Kruh s rajčicom i mozzarellom", ru: "Хлеб с томатами и моцареллой", hu: "Paradicsomos-mozzarellás kenyér",
         },
-        price: "€ 9.00",
+        description: {
+          de: "Mit handgemachtem Weizenbrot, Basilikumbutter",
+          cs: "S ručně dělaným pšeničným chlebem a bazalkovým máslem",
+          en: "With handmade wheat bread and basil butter",
+          pl: "Z ręcznie robionym chlebem pszennym i masłem bazyliowym", hr: "S ručno rađenim pšeničnim kruhom i maslacem od bosiljka", ru: "С домашним пшеничным хлебом и базиликовым маслом", hu: "Kézzel készített búzakenyérrel és bazsalikomos vajjal",
+        },
+        price: "€ 9.30",
         labels: ["vegetarian"],
         image: siteImages.dishTomatoMozzarellaBread,
       },
       {
         name: {
-          de: "Frankfurter mit Brot, Senf und Kren",
-          cs: "Frankfurtské párky s chlebem, hořčicí a křenem",
-          en: "Frankfurter sausages with bread, mustard and horseradish",
-          pl: "Parówki frankfurterki z chlebem, musztardą i chrzanem", hr: "Hrenovke s kruhom, senfom i hrenom", ru: "Франкфуртские сосиски с хлебом, горчицей и хреном", hu: "Frankfurti virsli kenyérrel, mustárral és tormával",
+          de: "Frankfurter",
+          cs: "Frankfurtské párky",
+          en: "Frankfurter sausages",
+          pl: "Parówki frankfurterki", hr: "Hrenovke", ru: "Франкфуртские сосиски", hu: "Frankfurti virsli",
+        },
+        description: {
+          de: "Mit Brot, Senf, Kren",
+          cs: "S chlebem, hořčicí a křenem",
+          en: "With bread, mustard and horseradish",
+          pl: "Z chlebem, musztardą i chrzanem", hr: "S kruhom, senfom i hrenom", ru: "С хлебом, горчицей и хреном", hu: "Kenyérrel, mustárral és tormával",
         },
         price: "€ 8.00",
+        allergens: ["A", "L", "M"],
         image: siteImages.dishFrankfurter,
       },
     ],
@@ -259,50 +356,95 @@ const menuSource: MenuCategorySource[] = [
           en: "Käsekrainer – cheese-filled sausage with fries",
           pl: "Käsekrainer – kiełbasa z serem, z frytkami", hr: "Käsekrainer – kobasica sa sirom i pomfrit", ru: "Кезекрайнер — колбаска с сыром и картофелем фри", hu: "Käsekrainer – sajttal töltött kolbász, hasábburgonyával",
         },
-        price: "€ 14.00",
+        description: {
+          de: "Mit Ketchup und Senf",
+          cs: "S kečupem a hořčicí",
+          en: "With ketchup and mustard",
+          pl: "Z ketchupem i musztardą", hr: "S kečapom i senfom", ru: "С кетчупом и горчицей", hu: "Ketchuppal és mustárral",
+        },
+        price: "€ 14.30",
+        allergens: ["G"],
         labels: ["local-specialty"],
         image: siteImages.dishKaesekrainer,
       },
       {
-        name: {
-          de: "Spaghetti Bolognese mit frischem Parmesan",
-          cs: "Spaghetti Bolognese s čerstvým parmazánem",
-          en: "Spaghetti Bolognese with fresh parmesan",
-          pl: "Spaghetti Bolognese ze świeżym parmezanem", hr: "Špageti bolognese sa svježim parmezanom", ru: "Спагетти болоньезе со свежим пармезаном", hu: "Spaghetti Bolognese frissen reszelt parmezánnal",
+        name: "Spaghetti Bolognese",
+        description: {
+          de: "Mit frischem Parmesan",
+          cs: "S čerstvým parmazánem",
+          en: "With fresh parmesan",
+          pl: "Ze świeżym parmezanem", hr: "Sa svježim parmezanom", ru: "Со свежим пармезаном", hu: "Frissen reszelt parmezánnal",
         },
-        price: "€ 14.50",
+        price: "€ 14.90",
+        allergens: ["A", "C", "G", "L", "O"],
         image: siteImages.dishSeafoodRisotto,
       },
       {
         name: {
-          de: "Wiener Schnitzel mit Pommes und Preiselbeeren",
-          cs: "Vídeňský řízek s hranolky a brusinkami",
-          en: "Wiener Schnitzel with fries and cranberries",
-          pl: "Sznycel wiedeński z frytkami i borówkami", hr: "Bečki odrezak s pomfritom i brusnicama", ru: "Венский шницель с картофелем фри и брусникой", hu: "Bécsi szelet hasábburgonyával és vörösáfonyával",
+          de: "Wiener Schnitzel (XL)",
+          cs: "Vídeňský řízek (XL)",
+          en: "Wiener Schnitzel (XL)",
+          pl: "Sznycel wiedeński (XL)", hr: "Bečki odrezak (XL)", ru: "Венский шницель (XL)", hu: "Bécsi szelet (XL)",
         },
-        price: "€ 16.50",
+        description: {
+          de: "Vom Schwein mit Pommes und Preiselbeeren",
+          cs: "Vepřový, s hranolky a brusinkami",
+          en: "Pork, with fries and cranberries",
+          pl: "Wieprzowy, z frytkami i borówkami", hr: "Svinjski, s pomfritom i brusnicama", ru: "Из свинины, с картофелем фри и брусникой", hu: "Sertésből, hasábburgonyával és vörösáfonyával",
+        },
+        price: "€ 17.50",
+        allergens: ["A", "C", "G"],
         labels: ["local-specialty"],
         featured: true,
         image: siteImages.dishWienerSchnitzel,
       },
       {
         name: {
-          de: "Cordon bleu mit Kartoffeln und Preiselbeeren",
-          cs: "Cordon bleu s bramborami a brusinkami",
-          en: "Cordon bleu with potatoes and cranberries",
-          pl: "Cordon bleu z ziemniakami i borówkami", hr: "Cordon bleu s krumpirom i brusnicama", ru: "Кордон блю с картофелем и брусникой", hu: "Cordon bleu burgonyával és vörösáfonyával",
+          de: "Cordon bleu mit Kartoffeln",
+          cs: "Cordon bleu s bramborami",
+          en: "Cordon bleu with potatoes",
+          pl: "Cordon bleu z ziemniakami", hr: "Cordon bleu s krumpirom", ru: "Кордон блю с картофелем", hu: "Cordon bleu burgonyával",
         },
-        price: "€ 17.90",
+        description: {
+          de: "Von Puten mit Preiselbeeren",
+          cs: "Krůtí, s brusinkami",
+          en: "Turkey, with cranberries",
+          pl: "Z indyka, z borówkami", hr: "Pureći, s brusnicama", ru: "Из индейки, с брусникой", hu: "Pulykából, vörösáfonyával",
+        },
+        price: "€ 18.50",
         image: siteImages.dishCordonBleu,
       },
       {
         name: {
-          de: "Gegrillter Camembert mit Salat und Preiselbeeren",
-          cs: "Grilovaný camembert se salátem a brusinkami",
-          en: "Grilled camembert with salad and cranberries",
-          pl: "Grillowany camembert z sałatką i borówkami", hr: "Camembert s roštilja sa salatom i brusnicama", ru: "Камамбер на гриле с салатом и брусникой", hu: "Grillezett camembert salátával és vörösáfonyával",
+          de: "Hirschragout mit Spätzle",
+          cs: "Jelení ragú se špeclemi",
+          en: "Venison ragout with Spätzle",
+          pl: "Ragout z jelenia ze szpeclami", hr: "Ragu od jelena sa špeclama", ru: "Рагу из оленины со шпецле", hu: "Szarvasragu nokedlivel",
         },
-        price: "€ 15.50",
+        description: {
+          de: "Mit Preiselbeeren",
+          cs: "S brusinkami",
+          en: "With cranberries",
+          pl: "Z borówkami", hr: "S brusnicama", ru: "С брусникой", hu: "Vörösáfonyával",
+        },
+        price: "€ 19.90",
+        labels: ["local-specialty"],
+      },
+      {
+        name: {
+          de: "Gegrillter Camembert",
+          cs: "Grilovaný camembert",
+          en: "Grilled camembert",
+          pl: "Grillowany camembert", hr: "Camembert s roštilja", ru: "Камамбер на гриле", hu: "Grillezett camembert",
+        },
+        description: {
+          de: "Mit buntem Salat und Preiselbeeren",
+          cs: "S míchaným salátem a brusinkami",
+          en: "With mixed salad and cranberries",
+          pl: "Z sałatką mieszaną i borówkami", hr: "S miješanom salatom i brusnicama", ru: "С салатным миксом и брусникой", hu: "Vegyes salátával és vörösáfonyával",
+        },
+        price: "€ 15.90",
+        allergens: ["A", "C", "G", "M"],
         labels: ["vegetarian"],
         featured: true,
         image: siteImages.dishGrilledCheeseSalad,
@@ -314,7 +456,13 @@ const menuSource: MenuCategorySource[] = [
           en: "Vegetable risotto",
           pl: "Risotto warzywne", hr: "Rižoto od povrća", ru: "Овощное ризотто", hu: "Zöldséges rizottó",
         },
-        price: "€ 14.50",
+        description: {
+          de: "Frisch gegrilltes Gemüse, Basmatireis und Parmesan",
+          cs: "Čerstvě grilovaná zelenina, rýže basmati a parmazán",
+          en: "Freshly grilled vegetables, basmati rice and parmesan",
+          pl: "Świeżo grillowane warzywa, ryż basmati i parmezan", hr: "Svježe grilano povrće, basmati riža i parmezan", ru: "Свежие овощи гриль, рис басмати и пармезан", hu: "Frissen grillezett zöldségek, basmati rizs és parmezán",
+        },
+        price: "€ 15.00",
         labels: ["vegetarian"],
         image: siteImages.vegetablerisotto
       },
@@ -325,7 +473,8 @@ const menuSource: MenuCategorySource[] = [
           en: "Risotto with seafood",
           pl: "Risotto z owocami morza", hr: "Rižoto s morskim plodovima", ru: "Ризотто с морепродуктами", hu: "Rizottó tenger gyümölcseivel",
         },
-        price: "€ 18.50",    
+        price: "€ 18.90",
+        allergens: ["A", "B", "D", "R"],
         image: siteImages.dishSpaghettiBolognese,
       },
       {
@@ -335,24 +484,53 @@ const menuSource: MenuCategorySource[] = [
           en: "Breaded Pacific polar cod",
           pl: "Panierowany dorsz polarny", hr: "Pohani pacifički polarni bakalar", ru: "Тихоокеанская сайка в панировке", hu: "Rántott csendes-óceáni sarki tőkehal",
         },
-        price: "€ 18.80",
+        description: {
+          de: "Mit Kartoffeln, Salat und Sauce Tartar",
+          cs: "S bramborami, salátem a tatarskou omáčkou",
+          en: "With potatoes, salad and tartar sauce",
+          pl: "Z ziemniakami, sałatką i sosem tatarskim", hr: "S krumpirom, salatom i tartar umakom", ru: "С картофелем, салатом и соусом тартар", hu: "Burgonyával, salátával és tartármártással",
+        },
+        price: "€ 19.20",
         image: siteImages.dishPacificPolarCod,
       },
       {
         name: {
-          de: "Flammkuchen mit Schafskäse und Grillgemüse",
-          cs: "Flammkuchen s ovčím sýrem a grilovanou zeleninou",
-          en: "Flammkuchen (tarte flambée) with sheep's cheese and grilled vegetables",
-          pl: "Flammkuchen z serem owczym i grillowanymi warzywami", hr: "Flammkuchen s ovčjim sirom i povrćem s roštilja", ru: "Фламмкухен с овечьим сыром и овощами гриль", hu: "Flammkuchen juhsajttal és grillezett zöldségekkel",
+          de: "Gegrilltes Lachsfilet",
+          cs: "Grilovaný filet z lososa",
+          en: "Grilled salmon fillet",
+          pl: "Grillowany filet z łososia", hr: "Filet lososa s roštilja", ru: "Филе лосося на гриле", hu: "Grillezett lazacfilé",
         },
-        price: "€ 15.00",
+        description: {
+          de: "Mit Champignonrahmsauce und Reis",
+          cs: "Se žampionovou smetanovou omáčkou a rýží",
+          en: "With creamy mushroom sauce and rice",
+          pl: "W sosie pieczarkowo-śmietanowym, z ryżem", hr: "S umakom od šampinjona i vrhnja te rižom", ru: "Со сливочно-грибным соусом и рисом", hu: "Gombás tejszínes mártással és rizzsel",
+        },
+        price: "€ 19.50",
+      },
+      {
+        name: {
+          de: "Flammkuchen",
+          cs: "Flammkuchen",
+          en: "Flammkuchen (tarte flambée)",
+          pl: "Flammkuchen", hr: "Flammkuchen", ru: "Фламмкухен", hu: "Flammkuchen",
+        },
+        description: {
+          de: "Mit Schafskäse und Grillgemüse",
+          cs: "S ovčím sýrem a grilovanou zeleninou",
+          en: "With sheep's cheese and grilled vegetables",
+          pl: "Z serem owczym i grillowanymi warzywami", hr: "S ovčjim sirom i povrćem s roštilja", ru: "С овечьим сыром и овощами гриль", hu: "Juhsajttal és grillezett zöldségekkel",
+        },
+        price: "€ 15.50",
+        allergens: ["A", "G"],
         labels: ["vegetarian"],
         featured: true,
         image: siteImages.flammkuchen,
       },
       {
-        name: "Pizza Margharitha",
-        price: "€ 11.50",
+        name: "Pizza Margaritha",
+        price: "€ 12.00",
+        allergens: ["A", "G"],
         labels: ["vegetarian"],
         image: siteImages.dishPizzaMargherita,
       },
@@ -363,8 +541,67 @@ const menuSource: MenuCategorySource[] = [
           en: "Farmer's pizza",
           pl: "Pizza wiejska", hr: "Seljačka pizza", ru: "Крестьянская пицца", hu: "Parasztpizza",
         },
-        price: "€ 15.50",
+        description: {
+          de: "Drei verschiedene Käsesorten, Bauernspeck, Chilisalami und rote Zwiebeln",
+          cs: "Tři druhy sýra, selská slanina, chilli salám a červená cibule",
+          en: "Three kinds of cheese, farmer's bacon, chilli salami and red onions",
+          pl: "Trzy rodzaje sera, boczek wiejski, salami chili i czerwona cebula", hr: "Tri vrste sira, seljačka slanina, chili salama i crveni luk", ru: "Три вида сыра, деревенский шпик, салями с чили и красный лук", hu: "Háromféle sajt, parasztszalonna, chilis szalámi és lilahagyma",
+        },
+        price: "€ 16.00",
+        allergens: ["A", "G"],
         image: siteImages.dishBauernPizza,
+      },
+    ],
+  },
+  {
+    id: "kids",
+    title: {
+      de: "Für unsere kleinen Gäste",
+      cs: "Pro naše malé hosty",
+      en: "For Our Little Guests",
+      pl: "Dla naszych małych gości", hr: "Za naše male goste", ru: "Для наших маленьких гостей", hu: "Kis vendégeinknek",
+    },
+    items: [
+      {
+        name: {
+          de: "Portion Pommes",
+          cs: "Porce hranolek",
+          en: "Portion of fries",
+          pl: "Porcja frytek", hr: "Porcija pomfrita", ru: "Порция картофеля фри", hu: "Egy adag hasábburgonya",
+        },
+        description: {
+          de: "Mit Ketchup",
+          cs: "S kečupem",
+          en: "With ketchup",
+          pl: "Z ketchupem", hr: "S kečapom", ru: "С кетчупом", hu: "Ketchuppal",
+        },
+        price: "€ 6.80",
+        labels: ["vegetarian"],
+      },
+      {
+        name: "Spaghetti Bolognese",
+        description: {
+          de: "Mit frischem Parmesan",
+          cs: "S čerstvým parmazánem",
+          en: "With fresh parmesan",
+          pl: "Ze świeżym parmezanem", hr: "Sa svježim parmezanom", ru: "Со свежим пармезаном", hu: "Frissen reszelt parmezánnal",
+        },
+        price: "€ 8.50",
+      },
+      {
+        name: {
+          de: "Schnitzel mit Pommes",
+          cs: "Řízek s hranolky",
+          en: "Schnitzel with fries",
+          pl: "Sznycel z frytkami", hr: "Odrezak s pomfritom", ru: "Шницель с картофелем фри", hu: "Rántott hús hasábburgonyával",
+        },
+        description: {
+          de: "Mit Ketchup",
+          cs: "S kečupem",
+          en: "With ketchup",
+          pl: "Z ketchupem", hr: "S kečapom", ru: "С кетчупом", hu: "Ketchuppal",
+        },
+        price: "€ 9.80",
       },
     ],
   },
@@ -379,16 +616,22 @@ const menuSource: MenuCategorySource[] = [
           en: "Homemade cake with whipped cream",
           pl: "Domowe ciasto z bitą śmietaną", hr: "Domaći kolač sa šlagom", ru: "Домашний пирог со взбитыми сливками", hu: "Házi sütemény tejszínhabbal",
         },
-        price: "€ 5.00",
+        price: "€ 5.50",
         labels: ["vegetarian"],
         image: siteImages.dishHauskuchen,
       },
       {
         name: {
-          de: "Apfel- oder Topfenstrudel mit Eis oder Vanillesauce",
-          cs: "Jablečný nebo tvarohový závin se zmrzlinou nebo vanilkovou omáčkou",
-          en: "Apple or curd cheese strudel with ice cream or vanilla sauce",
-          pl: "Strudel jabłkowy lub serowy z lodami lub sosem waniliowym", hr: "Štrudla od jabuka ili svježeg sira sa sladoledom ili umakom od vanilije", ru: "Штрудель с яблоками или творогом, с мороженым или ванильным соусом", hu: "Almás vagy túrós rétes fagylalttal vagy vaníliasodóval",
+          de: "Apfel- oder Topfenstrudel",
+          cs: "Jablečný nebo tvarohový závin",
+          en: "Apple or curd cheese strudel",
+          pl: "Strudel jabłkowy lub serowy", hr: "Štrudla od jabuka ili svježeg sira", ru: "Штрудель с яблоками или творогом", hu: "Almás vagy túrós rétes",
+        },
+        description: {
+          de: "Mit Eis oder Vanillesauce",
+          cs: "Se zmrzlinou nebo vanilkovou omáčkou",
+          en: "With ice cream or vanilla sauce",
+          pl: "Z lodami lub sosem waniliowym", hr: "Sa sladoledom ili umakom od vanilije", ru: "С мороженым или ванильным соусом", hu: "Fagylalttal vagy vaníliasodóval",
         },
         price: "€ 7.50",
         labels: ["vegetarian", "local-specialty"],
@@ -396,23 +639,35 @@ const menuSource: MenuCategorySource[] = [
       },
       {
         name: {
-          de: "Belgische Waffeln mit Eis und Schokosauce",
-          cs: "Belgické vafle se zmrzlinou a čokoládovou omáčkou",
-          en: "Belgian waffles with ice cream and chocolate sauce",
-          pl: "Gofry belgijskie z lodami i sosem czekoladowym", hr: "Belgijski vafli sa sladoledom i čokoladnim umakom", ru: "Бельгийские вафли с мороженым и шоколадным соусом", hu: "Belga gofri fagylalttal és csokoládészósszal",
+          de: "Belgische Waffeln",
+          cs: "Belgické vafle",
+          en: "Belgian waffles",
+          pl: "Gofry belgijskie", hr: "Belgijski vafli", ru: "Бельгийские вафли", hu: "Belga gofri",
         },
-        price: "€ 9.50",
+        description: {
+          de: "Mit Beeren, Eis und Schokosauce",
+          cs: "S lesním ovocem, zmrzlinou a čokoládovou omáčkou",
+          en: "With berries, ice cream and chocolate sauce",
+          pl: "Z owocami jagodowymi, lodami i sosem czekoladowym", hr: "S bobičastim voćem, sladoledom i čokoladnim umakom", ru: "С ягодами, мороженым и шоколадным соусом", hu: "Bogyós gyümölcsökkel, fagylalttal és csokoládészósszal",
+        },
+        price: "€ 10.00",
         labels: ["vegetarian"],
         image: siteImages.dishBelgianWaffles,
       },
       {
         name: {
-          de: "Kaiserschmarren mit Apfelmus",
-          cs: "Kaiserschmarren – trhaný lívanec s jablečným pyré",
-          en: "Kaiserschmarren – shredded pancake with apple sauce",
-          pl: "Kaiserschmarren – omlet cesarski z musem jabłkowym", hr: "Kaiserschmarren – trgane palačinke s umakom od jabuka", ru: "Кайзершмаррен — императорский омлет с яблочным пюре", hu: "Kaiserschmarren – császármorzsa almaszósszal",
+          de: "Kaiserschmarren",
+          cs: "Kaiserschmarren – trhaný lívanec",
+          en: "Kaiserschmarren – shredded pancake",
+          pl: "Kaiserschmarren – omlet cesarski", hr: "Kaiserschmarren – trgane palačinke", ru: "Кайзершмаррен — императорский омлет", hu: "Kaiserschmarren – császármorzsa",
         },
-        price: "€ 14.80",
+        description: {
+          de: "Mit Apfelmus und Vanilleeis",
+          cs: "S jablečným pyré a vanilkovou zmrzlinou",
+          en: "With apple sauce and vanilla ice cream",
+          pl: "Z musem jabłkowym i lodami waniliowymi", hr: "S umakom od jabuka i sladoledom od vanilije", ru: "С яблочным пюре и ванильным мороженым", hu: "Almaszósszal és vaníliafagylalttal",
+        },
+        price: "€ 15.50",
         labels: ["vegetarian", "local-specialty"],
         image: siteImages.dishKaiserschmarren,
       },
@@ -571,45 +826,6 @@ const menuSource: MenuCategorySource[] = [
     title: { de: "Bier", cs: "Pivo", en: "Beer", pl: "Piwo", hu: "Sörök", hr: "Pivo", ru: "Пиво" },
     items: [
       {
-        name: "Gösser (Dunkel)",
-        description: {
-          de: "Flasche · Stw. 11,8° / Alk. 4,5 %",
-          cs: "Láhev · Stw. 11,8° / alk. 4,5 %",
-          en: "Bottle · Stw. 11.8° / alc. 4.5 %",
-          pl: "Butelka · Stw. 11,8° / alk. 4,5 %",
-          hu: "Üveges · Stw. 11,8° / alk. 4,5 %",
-          hr: "Boca · Stw. 11,8° / alk. 4,5 %",
-          ru: "Бутылка · Stw. 11,8° / алк. 4,5 %",
-        },
-        price: "0,5 l — 5,50 €",
-      },
-      {
-        name: "Gösser Natur Gold",
-        description: {
-          de: "Flasche · alkoholfrei",
-          cs: "Láhev · nealkoholické",
-          en: "Bottle · non-alcoholic",
-          pl: "Butelka · bezalkoholowe",
-          hu: "Üveges · alkoholmentes",
-          hr: "Boca · bezalkoholno",
-          ru: "Бутылка · безалкогольное",
-        },
-        price: "0,5 l — 5,50 €",
-      },
-      {
-        name: "Weihenstephaner Alkoholfrei",
-        description: {
-          de: "Weizenbier, alkoholfrei · Flasche",
-          cs: "Pšeničné pivo, nealkoholické · láhev",
-          en: "Wheat beer, non-alcoholic · bottle",
-          pl: "Piwo pszeniczne, bezalkoholowe · butelka",
-          hu: "Búzasör, alkoholmentes · üveges",
-          hr: "Pšenično pivo, bezalkoholno · boca",
-          ru: "Пшеничное пиво, безалкогольное · бутылка",
-        },
-        price: "0,5 l — 5,70 €",
-      },
-      {
         name: "Schladminger Märzen",
         description: {
           de: "vom Fass · Stw. 11,7° / Alk. 5,1 %",
@@ -620,7 +836,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "Točeno · Stw. 11,7° / alk. 5,1 %",
           ru: "Разливное · Stw. 11,7° / алк. 5,1 %",
         },
-        price: "0,2 l 3,20 € / 0,3 l 4,20 € / 0,5 l 5,50 €",
+        price: "0,2 l 3,40 € / 0,3 l 4,50 € / 0,5 l 5,80 €",
       },
       {
         name: "Gösser NaturRadler",
@@ -633,7 +849,33 @@ const menuSource: MenuCategorySource[] = [
           hr: "Točeno · Stw. 8,5° / alk. 2,0 %",
           ru: "Разливное · Stw. 8,5° / алк. 2,0 %",
         },
-        price: "0,3 l 4,20 € / 0,5 l 5,40 €",
+        price: "0,3 l 4,50 € / 0,5 l 5,80 €",
+      },
+      {
+        name: "Gösser (Dunkel)",
+        description: {
+          de: "Flasche · Stw. 11,8° / Alk. 4,5 %",
+          cs: "Láhev · Stw. 11,8° / alk. 4,5 %",
+          en: "Bottle · Stw. 11.8° / alc. 4.5 %",
+          pl: "Butelka · Stw. 11,8° / alk. 4,5 %",
+          hu: "Üveges · Stw. 11,8° / alk. 4,5 %",
+          hr: "Boca · Stw. 11,8° / alk. 4,5 %",
+          ru: "Бутылка · Stw. 11,8° / алк. 4,5 %",
+        },
+        price: "0,5 l — 6,00 €",
+      },
+      {
+        name: "Gösser Natur Gold",
+        description: {
+          de: "Flasche · alkoholfrei",
+          cs: "Láhev · nealkoholické",
+          en: "Bottle · non-alcoholic",
+          pl: "Butelka · bezalkoholowe",
+          hu: "Üveges · alkoholmentes",
+          hr: "Boca · bezalkoholno",
+          ru: "Бутылка · безалкогольное",
+        },
+        price: "0,5 l — 5,80 €",
       },
       {
         name: "Weihenstephaner Hefeweissbier Hefetrüb",
@@ -646,7 +888,20 @@ const menuSource: MenuCategorySource[] = [
           hr: "Boca · Stw. 12,5° / alk. 5,0 %",
           ru: "Бутылка · Stw. 12,5° / алк. 5,0 %",
         },
-        price: "0,5 l — 5,70 €",
+        price: "0,5 l — 6,00 €",
+      },
+      {
+        name: "Weihenstephaner Alkoholfrei",
+        description: {
+          de: "Weizenbier, alkoholfrei · Flasche",
+          cs: "Pšeničné pivo, nealkoholické · láhev",
+          en: "Wheat beer, non-alcoholic · bottle",
+          pl: "Piwo pszeniczne, bezalkoholowe · butelka",
+          hu: "Búzasör, alkoholmentes · üveges",
+          hr: "Pšenično pivo, bezalkoholno · boca",
+          ru: "Пшеничное пиво, безалкогольное · бутылка",
+        },
+        price: "0,5 l — 6,00 €",
       },
     ],
   },
@@ -673,7 +928,19 @@ const menuSource: MenuCategorySource[] = [
           hr: "gazirana ili negazirana",
           ru: "газированная или негазированная",
         },
-        price: "0,33 l 3,50 € / 0,75 l 5,60 €",
+        price: "0,33 l 3,60 € / 0,75 l 5,70 €",
+      },
+      {
+        name: {
+          de: "Hauslimonade",
+          cs: "Domácí limonáda",
+          en: "House lemonade",
+          pl: "Lemoniada domowa",
+          hu: "Házi limonádé",
+          hr: "Domaća limunada",
+          ru: "Домашний лимонад",
+        },
+        price: "0,5 l — 5,70 €",
       },
       {
         name: {
@@ -685,29 +952,29 @@ const menuSource: MenuCategorySource[] = [
           hr: "Prirodno mutni sok od jabuke",
           ru: "Яблочный сок неосветлённый",
         },
-        price: "0,25 l 3,80 € / 0,5 l 5,80 €",
+        price: "0,25 l 3,90 € / 0,5 l 6,00 €",
       },
       {
         name: {
-          de: "Apfelsaft mit Wasser",
-          cs: "Jablečný džus s vodou",
-          en: "Apple juice with water",
-          pl: "Sok jabłkowy z wodą",
-          hu: "Almalé vízzel",
-          hr: "Sok od jabuke s vodom",
-          ru: "Яблочный сок с водой",
+          de: "Apfelsaft / Orangensaft mit Wasser",
+          cs: "Jablečný / pomerančový džus s vodou",
+          en: "Apple / orange juice with water",
+          pl: "Sok jabłkowy / pomarańczowy z wodą",
+          hu: "Almalé / narancslé vízzel",
+          hr: "Sok od jabuke / naranče s vodom",
+          ru: "Яблочный / апельсиновый сок с водой",
         },
-        price: "0,25 l 3,00 € / 0,5 l 4,50 €",
+        price: "0,25 l 3,10 € / 0,5 l 4,70 €",
       },
       {
         name: {
-          de: "Apfelsaft mit Soda",
-          cs: "Jablečný džus se sodovkou",
-          en: "Apple juice with soda",
-          pl: "Sok jabłkowy z wodą sodową",
-          hu: "Almalé szódával",
-          hr: "Sok od jabuke sa soda vodom",
-          ru: "Яблочный сок с содовой",
+          de: "Apfelsaft / Orangensaft mit Soda",
+          cs: "Jablečný / pomerančový džus se sodovkou",
+          en: "Apple / orange juice with soda",
+          pl: "Sok jabłkowy / pomarańczowy z wodą sodową",
+          hu: "Almalé / narancslé szódával",
+          hr: "Sok od jabuke / naranče sa soda vodom",
+          ru: "Яблочный / апельсиновый сок с содовой",
         },
         price: "0,33 l 3,50 € / 0,5 l 5,30 €",
       },
@@ -721,31 +988,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "Sok od naranče (100 % sok)",
           ru: "Апельсиновый сок (100 %)",
         },
-        price: "0,25 l 3,80 € / 0,5 l 5,80 €",
-      },
-      {
-        name: {
-          de: "Orangensaft mit Wasser",
-          cs: "Pomerančový džus s vodou",
-          en: "Orange juice with water",
-          pl: "Sok pomarańczowy z wodą",
-          hu: "Narancslé vízzel",
-          hr: "Sok od naranče s vodom",
-          ru: "Апельсиновый сок с водой",
-        },
-        price: "0,25 l 3,00 € / 0,5 l 4,50 €",
-      },
-      {
-        name: {
-          de: "Orangensaft mit Soda",
-          cs: "Pomerančový džus se sodovkou",
-          en: "Orange juice with soda",
-          pl: "Sok pomarańczowy z wodą sodową",
-          hu: "Narancslé szódával",
-          hr: "Sok od naranče sa soda vodom",
-          ru: "Апельсиновый сок с содовой",
-        },
-        price: "0,33 l 3,50 € / 0,5 l 5,30 €",
+        price: "0,25 l 3,90 € / 0,5 l 6,00 €",
       },
       {
         name: {
@@ -793,7 +1036,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "Voćni sok sa soda vodom",
           ru: "Фруктовый сок с содовой",
         },
-        price: "0,33 l 4,20 € / 0,5 l 5,40 €",
+        price: "0,33 l 4,20 € / 0,5 l 5,50 €",
       },
       {
         name: {
@@ -805,7 +1048,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "Voćni sok s vodom",
           ru: "Фруктовый сок с водой",
         },
-        price: "0,33 l 4,00 € / 0,5 l 4,90 €",
+        price: "0,33 l 4,00 € / 0,5 l 5,00 €",
       },
     ],
   },
@@ -821,11 +1064,11 @@ const menuSource: MenuCategorySource[] = [
       ru: "Прохладительные напитки",
     },
     items: [
-      { name: "Coca-Cola", price: "0,3 l 3,50 € / 0,5 l 5,30 €" },
-      { name: "Fanta / Sprite", price: "0,3 l 3,50 € / 0,5 l 5,30 €" },
-      { name: "Almdudler", price: "0,3 l 3,50 € / 0,5 l 5,30 €" },
-      { name: "Coca-Cola Zero", price: "0,33 l — 3,90 €" },
-      { name: "Red Bull", price: "0,2 l — 4,30 €" },
+      { name: "Coca-Cola", price: "0,3 l 3,60 € / 0,5 l 5,40 €" },
+      { name: "Fanta / Sprite", price: "0,3 l 3,60 € / 0,5 l 5,40 €" },
+      { name: "Almdudler", price: "0,3 l 3,60 € / 0,5 l 5,40 €" },
+      { name: "Coca-Cola Zero", price: "0,33 l — 4,10 €" },
+      { name: "Red Bull", price: "0,2 l — 4,50 €" },
       {
         name: {
           de: "Eistee Pfirsich",
@@ -836,10 +1079,9 @@ const menuSource: MenuCategorySource[] = [
           hr: "Ledeni čaj od breskve",
           ru: "Холодный чай персиковый",
         },
-        price: "0,33 l — 3,90 €",
+        price: "0,33 l — 4,10 €",
       },
-      { name: "Bitter Lemon", price: "0,2 l — 3,80 €" },
-      { name: "Tonic Water", price: "0,2 l — 3,80 €" },
+      { name: "Bitter Lemon / Tonic", price: "0,2 l — 4,00 €" },
     ],
   },
   {
@@ -864,7 +1106,16 @@ const menuSource: MenuCategorySource[] = [
           hr: "Bijelo vino – Grüner Veltliner",
           ru: "Белое вино — Грюнер Вельтлинер",
         },
-        price: "1/8 l — 3,70 €",
+        description: {
+          de: "Mit einem Glas Wasser",
+          cs: "Se sklenicí vody",
+          en: "Served with a glass of water",
+          pl: "Ze szklanką wody",
+          hu: "Egy pohár vízzel",
+          hr: "S čašom vode",
+          ru: "Со стаканом воды",
+        },
+        price: "1/8 l — 4,00 €",
       },
       {
         name: {
@@ -876,7 +1127,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "Gemišt od Grüner Veltlinera",
           ru: "Шпритцер из Грюнер Вельтлинер",
         },
-        price: "1/4 l — 4,20 €",
+        price: "1/4 l — 4,40 €",
       },
       {
         name: {
@@ -888,7 +1139,16 @@ const menuSource: MenuCategorySource[] = [
           hr: "Crno vino – Zweigelt",
           ru: "Красное вино — Цвайгельт",
         },
-        price: "1/8 l — 3,70 €",
+        description: {
+          de: "Mit einem Glas Wasser",
+          cs: "Se sklenicí vody",
+          en: "Served with a glass of water",
+          pl: "Ze szklanką wody",
+          hu: "Egy pohár vízzel",
+          hr: "S čašom vode",
+          ru: "Со стаканом воды",
+        },
+        price: "1/8 l — 4,00 €",
       },
       {
         name: {
@@ -912,9 +1172,9 @@ const menuSource: MenuCategorySource[] = [
           hr: "Aperol Spritz",
           ru: "Апероль-шприц",
         },
-        price: "6,80 €",
+        price: "7,40 €",
       },
-      { name: "Hugo", price: "6,80 €" },
+      { name: "Hugo", price: "7,40 €" },
     ],
   },
   {
@@ -939,7 +1199,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "Espresso / s mlijekom",
           ru: "Эспрессо / с молоком",
         },
-        price: "3,20 € / 3,40 €",
+        price: "3,30 € / 3,50 €",
       },
       {
         name: {
@@ -951,11 +1211,11 @@ const menuSource: MenuCategorySource[] = [
           hr: "Dupli espresso / s mlijekom",
           ru: "Двойной эспрессо / с молоком",
         },
-        price: "4,50 € / 4,70 €",
+        price: "4,60 € / 4,80 €",
       },
-      { name: "Verlängerter", price: "3,70 €" },
-      { name: "Melange", price: "3,90 €" },
-      { name: "Cappuccino", price: "4,10 €" },
+      { name: "Verlängerter", price: "3,80 €" },
+      { name: "Melange", price: "4,00 €" },
+      { name: "Cappuccino", price: "4,20 €" },
       {
         name: {
           de: "Milchkaffee",
@@ -966,10 +1226,23 @@ const menuSource: MenuCategorySource[] = [
           hr: "Kava s mlijekom",
           ru: "Кофе с молоком",
         },
-        price: "4,50 €",
+        price: "4,60 €",
       },
-      { name: "Latte Macchiato", price: "4,60 €" },
-      { name: "Haferl Kaffee", price: "5,00 €" },
+      { name: "Latte Macchiato", price: "4,70 €" },
+      { name: "Häferl Kaffee", price: "5,00 €" },
+      {
+        name: "Affogato al Caffè",
+        description: {
+          de: "Espresso & kaltes Vanilleeis",
+          cs: "Espresso a studená vanilková zmrzlina",
+          en: "Espresso & cold vanilla ice cream",
+          pl: "Espresso i zimne lody waniliowe",
+          hu: "Espresso és hideg vaníliafagylalt",
+          hr: "Espresso i hladni sladoled od vanilije",
+          ru: "Эспрессо и холодное ванильное мороженое",
+        },
+        price: "5,80 €",
+      },
       {
         name: {
           de: "Kakao / mit Schlag",
@@ -980,7 +1253,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "Kakao / sa šlagom",
           ru: "Какао / со взбитыми сливками",
         },
-        price: "4,30 € / 4,60 €",
+        price: "4,40 € / 4,70 €",
       },
       {
         name: {
@@ -992,7 +1265,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "Kakao s rumom",
           ru: "Какао с ромом",
         },
-        price: "6,30 €",
+        price: "6,40 €",
       },
       {
         name: {
@@ -1013,7 +1286,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "zeleni, crni, voćni, biljni, metvica",
           ru: "зелёный, чёрный, фруктовый, травяной, мятный",
         },
-        price: "3,70 € / 3,90 €",
+        price: "3,80 € / 4,00 €",
       },
       {
         name: {
@@ -1037,7 +1310,7 @@ const menuSource: MenuCategorySource[] = [
           hr: "Topla limunada",
           ru: "Горячий лимон",
         },
-        price: "3,00 €",
+        price: "3,20 €",
       },
       {
         name: {
@@ -1049,9 +1322,18 @@ const menuSource: MenuCategorySource[] = [
           hr: "Kuhano vino",
           ru: "Глинтвейн",
         },
+        description: {
+          de: "Mit Schuss Amaretto",
+          cs: "S kapkou amaretta",
+          en: "With a shot of Amaretto",
+          pl: "Z dodatkiem amaretto",
+          hu: "Egy adag amarettóval",
+          hr: "S malo amaretta",
+          ru: "С добавлением амаретто",
+        },
         price: "5,50 €",
       },
-      { name: "Jagertee", price: "6,80 €" },
+      { name: "Jagertee", price: "6,90 €" },
     ],
   },
 ];

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { AllergenCodes } from "@/components/menu/AllergenCodes";
 import { getDietaryLabelText, type MenuItemData } from "@/data/menu";
 import { localize, type Locale, type LocalizedText } from "@/i18n/config";
 
@@ -58,6 +59,9 @@ export function MenuItem({ item, locale }: MenuItemProps) {
           <h3 className="font-display text-xl leading-snug text-charcoal-950 sm:text-[1.375rem]">
             {item.name}
           </h3>
+          {item.allergens && (
+            <AllergenCodes allergens={item.allergens} locale={locale} className="hidden translate-y-[-0.125rem] sm:inline-flex sm:shrink-0" />
+          )}
           {item.price && (
             <>
               <span
@@ -76,6 +80,9 @@ export function MenuItem({ item, locale }: MenuItemProps) {
             </>
           )}
         </div>
+        {item.allergens && (
+          <AllergenCodes allergens={item.allergens} locale={locale} className="mt-1.5 flex sm:hidden" />
+        )}
         {item.description && (
           <p className="mt-1.5 text-sm leading-relaxed text-charcoal-600">
             {item.description}
@@ -220,6 +227,9 @@ function MenuItemLightbox({ item, locale, onClose }: MenuItemLightboxProps) {
             <h3 className="font-display text-xl leading-snug text-charcoal-900 sm:text-2xl">
               {item.name}
             </h3>
+            {item.allergens && (
+              <AllergenCodes allergens={item.allergens} locale={locale} className="hidden translate-y-[-0.125rem] sm:inline-flex sm:shrink-0" />
+            )}
             {item.price && (
               <>
                 <span
@@ -232,6 +242,9 @@ function MenuItemLightbox({ item, locale, onClose }: MenuItemLightboxProps) {
               </>
             )}
           </div>
+          {item.allergens && (
+            <AllergenCodes allergens={item.allergens} locale={locale} className="mt-2 flex sm:hidden" />
+          )}
           {item.description && (
             <p className="mt-2 text-sm leading-relaxed text-charcoal-600">
               {item.description}

@@ -269,6 +269,11 @@ export const siteContentCs: SiteContent = {
         "Od rakouské klasiky přes sezonní pokrmy až po domácí moučníky a pečlivě připravovanou kávu – objevte, co naše kuchyně nabízí.",
     },
     dietaryLegendTitle: "Vysvětlivky",
+    allergenLegend: {
+      title: "Informace o alergenech",
+      note:
+        "Písmena u jednotlivých jídel označují obsažené alergeny. V případě dotazů nebo intolerancí vám náš tým rád poradí.",
+    },
     categoriesAriaLabel: "Kategorie jídelního lístku",
     cta: {
       title: "Máte otázky k jídelnímu lístku?",
